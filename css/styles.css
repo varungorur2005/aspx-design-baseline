@@ -27,17 +27,6 @@ body {
 .nav-subtitle { font-size: 13px; color: #616161; }
 .nav-right { display: flex; align-items: center; gap: 12px; }
 
-/* Global Give Feedback Button (top-right) */
-.nav-feedback-global {
-  display: flex; align-items: center; gap: 6px;
-  padding: 6px 14px; font-size: 12px; font-weight: 600;
-  font-family: inherit; color: #0078d4; background: #f0f6ff;
-  border: 1px solid #c7dbf5; border-radius: 6px;
-  cursor: pointer; transition: all 0.15s;
-}
-.nav-feedback-global:hover { background: #0078d4; color: #fff; border-color: #0078d4; }
-.nav-feedback-global:hover svg { fill: #fff; }
-
 .nav-help {
   width: 28px; height: 28px; border-radius: 50%;
   border: 1px solid #d1d1d1; background: #fff; color: #616161;
@@ -95,10 +84,11 @@ body {
 
 /* ── Opportunity Tabs Bar ── */
 .opp-tabs-bar {
-  display: flex; gap: 0;
+  display: flex; align-items: center; justify-content: space-between;
   border-bottom: 2px solid #e0e0e0;
   margin-top: 16px; margin-bottom: 20px;
 }
+.opp-tabs-left { display: flex; gap: 0; }
 .opp-tabs-bar .opp-tab {
   padding: 12px 20px; font-size: 13px; font-weight: 600;
   font-family: inherit; color: #616161; background: none;
@@ -108,6 +98,20 @@ body {
 }
 .opp-tabs-bar .opp-tab:hover { color: #242424; }
 .opp-tabs-bar .opp-tab.active { color: #0078d4; border-bottom-color: #0078d4; }
+
+/* OCV-style Give Feedback trigger (in tab bar) */
+.ocv-feedback-trigger {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px; margin-bottom: -2px;
+  font-size: 13px; font-weight: 600; font-family: inherit;
+  color: #616161; background: none;
+  border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; transition: all 0.15s;
+  white-space: nowrap;
+}
+.ocv-feedback-trigger:hover { color: #0078d4; }
+.ocv-feedback-trigger:hover svg { stroke: #0078d4; color: #0078d4; }
+.ocv-feedback-trigger.active { color: #0078d4; border-bottom-color: #0078d4; }
 
 /* ── KPI Row ── */
 .kpi-row {
@@ -406,6 +410,23 @@ body {
 }
 .ocv-section { margin-bottom: 20px; }
 .ocv-label { font-size: 13px; font-weight: 600; color: #424242; display: block; margin-bottom: 8px; }
+
+/* OCV Sentiment Rating (smiley faces) */
+.ocv-sentiment-row {
+  display: flex; align-items: center; gap: 12px;
+}
+.ocv-sentiment-btn {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 2px solid transparent; background: none;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; padding: 0;
+  opacity: 0.55;
+}
+.ocv-sentiment-btn:hover { opacity: 1; transform: scale(1.15); }
+.ocv-sentiment-btn.selected {
+  opacity: 1; transform: scale(1.15);
+  border-color: #0078d4; background: #f0f6ff;
+}
 
 /* OCV Context (auto-captured) */
 .ocv-context {

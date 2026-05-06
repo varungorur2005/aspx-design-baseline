@@ -594,6 +594,14 @@ function initOcvModal() {
   document.getElementById('ocvCancel').addEventListener('click', closeOcvModal);
   document.getElementById('ocvOverlay').addEventListener('click', closeOcvModal);
   document.getElementById('ocvSubmit').addEventListener('click', submitFeedback);
+
+  // Sentiment face buttons
+  document.querySelectorAll('.ocv-sentiment-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.ocv-sentiment-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+  });
 }
 
 function openOcvModal(reason, rowData, source) {
@@ -647,8 +655,9 @@ function openOcvModal(reason, rowData, source) {
     }).join('');
   }
 
-  // Reset textarea
+  // Reset textarea and sentiment
   document.getElementById('ocvComments').value = '';
+  document.querySelectorAll('.ocv-sentiment-btn').forEach(b => b.classList.remove('selected'));
 }
 
 function closeOcvModal() {
