@@ -110,7 +110,7 @@ body {
   white-space: nowrap;
 }
 .ocv-feedback-trigger:hover { color: #0078d4; }
-.ocv-feedback-trigger:hover svg { stroke: #0078d4; color: #0078d4; }
+.ocv-feedback-trigger:hover svg { fill: #0078d4; color: #0078d4; }
 .ocv-feedback-trigger.active { color: #0078d4; border-bottom-color: #0078d4; }
 
 /* ── KPI Row ── */
@@ -427,6 +427,10 @@ body {
   opacity: 1; transform: scale(1.15);
   border-color: #0078d4; background: #f0f6ff;
 }
+.ocv-sentiment-labels {
+  display: flex; justify-content: space-between;
+  margin-top: 6px; font-size: 11px; color: #616161;
+}
 
 /* OCV Context (auto-captured) */
 .ocv-context {
@@ -495,6 +499,11 @@ body {
   display: flex; align-items: center; gap: 8px; cursor: pointer;
 }
 .ocv-checkbox-label input { width: 16px; height: 16px; }
+.ocv-privacy-link {
+  margin-top: 10px; font-size: 11px;
+}
+.ocv-privacy-link a { color: #0078d4; text-decoration: none; }
+.ocv-privacy-link a:hover { text-decoration: underline; }
 
 /* OCV footer */
 .ocv-footer {
