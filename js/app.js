@@ -586,83 +586,115 @@ function renderCspPromosFlyout(data) {
 }
 
 // ═══════════════════════════════════════════════
-// OCV FEEDBACK MODAL
+// OCV FEEDBACK MODAL (Two-step: classify → form)
 // ═══════════════════════════════════════════════
 
 function initOcvModal() {
+  // Close buttons
   document.getElementById('ocvClose').addEventListener('click', closeOcvModal);
-  document.getElementById('ocvCancel').addEventListener('click', closeOcvModal);
+  document.getElementById('ocvClose2').addEventListener('click', closeOcvModal);
+  document.getElementById('ocvCancelStep1').addEventListener('click', closeOcvModal);
+  document.getElementById('ocvCancelStep2').addEventListener('click', closeOcvModal);
   document.getElementById('ocvOverlay').addEventListener('click', closeOcvModal);
   document.getElementById('ocvSubmit').addEventListener('click', submitFeedback);
 
-  // Sentiment face buttons
-  document.querySelectorAll('.ocv-sentiment-btn').forEach(btn => {
+  // Back button
+  document.getElementById('ocvBackBtn').addEventListener('click', () => {
+    document.getElementById('ocvStep2').classList.add('hidden');
+    document.getElementById('ocvStep1').classList.remove('hidden');
+  });
+
+  // Classification buttons
+  document.querySelectorAll('.ocv-classify-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.ocv-sentiment-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
+      const type = btn.getAttribute('data-type');
+      showOcvStep2(type);
     });
   });
 }
 
+let ocvFeedbackContext = null; // Stores context for table/flyout feedback
+
 function openOcvModal(reason, rowData, source) {
   const modal = document.getElementById('ocvModal');
   const overlay = document.getElementById('ocvOverlay');
-  const reasonBadge = document.getElementById('ocvReasonBadge');
-  const contextDetails = document.getElementById('ocvContextDetails');
-  const columnsGrid = document.getElementById('ocvColumnsGrid');
-  const columnsSection = document.getElementById('ocvColumnsSection');
 
   overlay.classList.remove('hidden');
   modal.classList.remove('hidden');
 
-  // Set reason badge
-  const reasonLabels = {
-    incorrect: 'Incorrect data',
-    missing: 'Missing data',
-    outdated: 'Outdated data',
-    mismatch: "Data doesn't match my records",
-    other: 'Other',
-    general: 'General Feedback',
-    positive: 'Positive Feedback',
-    negative: 'Needs Improvement'
-  };
-  reasonBadge.textContent = reasonLabels[reason] || reason;
-  reasonBadge.setAttribute('data-reason', reason);
+  // Store context for table/flyout sources
+  ocvFeedbackContext = { reason, rowData, source };
 
-  // Context
   if (source === 'general') {
+    // Show step 1 (classification)
+    document.getElementById('ocvStep1').classList.remove('hidden');
+    document.getElementById('ocvStep2').classList.add('hidden');
+  } else {
+    // For table/flyout feedback, go directly to step 2
+    const typeLabel = reason === 'positive' ? 'compliment' : 'problem';
+    showOcvStep2(typeLabel, rowData, source);
+  }
+}
+
+function showOcvStep2(type, rowData, source) {
+  document.getElementById('ocvStep1').classList.add('hidden');
+  document.getElementById('ocvStep2').classList.remove('hidden');
+
+  const questionLabel = document.getElementById('ocvQuestionLabel');
+  const contextSection = document.getElementById('ocvContext');
+  const contextDetails = document.getElementById('ocvContextDetails');
+  const columnsSection = document.getElementById('ocvColumnsSection');
+  const columnsGrid = document.getElementById('ocvColumnsGrid');
+
+  // Set question based on type
+  if (type === 'compliment') {
+    questionLabel.innerHTML = 'What did you like? <span class="required">*</span>';
+  } else if (type === 'problem') {
+    questionLabel.innerHTML = 'What went wrong? <span class="required">*</span>';
+  } else if (type === 'suggestion') {
+    questionLabel.innerHTML = 'What would you like to see improved? <span class="required">*</span>';
+  }
+
+  // Use stored context if not passed directly
+  const ctx = ocvFeedbackContext || {};
+  const rd = rowData || ctx.rowData;
+  const src = source || ctx.source;
+
+  // Show context for table/flyout sources
+  if (src && src !== 'general' && rd) {
+    contextSection.classList.remove('hidden');
+    const tenantName = rd['Tenant Name'] || '—';
     contextDetails.innerHTML = `
-      <div class="ctx-item"><span class="ctx-key">Source:</span><span class="ctx-val">ASPX Platform — Overall Experience</span></div>
-      <div class="ctx-item"><span class="ctx-key">Page:</span><span class="ctx-val">Growth Opportunities</span></div>
-      <div class="ctx-item"><span class="ctx-key">Tab:</span><span class="ctx-val">${currentTab.charAt(0).toUpperCase() + currentTab.slice(1)} Opportunities</span></div>
-    `;
-    columnsSection.classList.add('hidden');
-  } else if (rowData) {
-    const tenantName = rowData['Tenant Name'] || '—';
-    contextDetails.innerHTML = `
-      <div class="ctx-item"><span class="ctx-key">Source:</span><span class="ctx-val">${source === 'flyout' ? 'Flyout Panel' : 'Data Table'}</span></div>
+      <div class="ctx-item"><span class="ctx-key">Source:</span><span class="ctx-val">${src === 'flyout' ? 'Flyout Panel' : 'Data Table'}</span></div>
       <div class="ctx-item"><span class="ctx-key">Tab:</span><span class="ctx-val">${currentTab.charAt(0).toUpperCase() + currentTab.slice(1)} Opportunities</span></div>
       <div class="ctx-item"><span class="ctx-key">Tenant:</span><span class="ctx-val">${tenantName}</span></div>
     `;
 
-    // Show columns grid with pre-captured data
+    // Show columns grid
     columnsSection.classList.remove('hidden');
     const columns = oppData[currentTab].columns;
-    const displayCols = columns.slice(0, 12); // Show first 12 columns
+    const displayCols = columns.slice(0, 12);
     columnsGrid.innerHTML = displayCols.map(col => {
-      const val = rowData[col] || '—';
+      const val = rd[col] || '—';
       return `<div class="ocv-col-item"><div class="col-label">${col}</div><div class="col-value">${val}</div></div>`;
     }).join('');
+  } else {
+    contextSection.classList.add('hidden');
+    columnsSection.classList.add('hidden');
   }
 
-  // Reset textarea and sentiment
+  // Reset form
   document.getElementById('ocvComments').value = '';
-  document.querySelectorAll('.ocv-sentiment-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('input[name="ocvContact"]').forEach(r => r.checked = false);
 }
 
 function closeOcvModal() {
   document.getElementById('ocvModal').classList.add('hidden');
   document.getElementById('ocvOverlay').classList.add('hidden');
+  // Reset to step 1
+  document.getElementById('ocvStep1').classList.remove('hidden');
+  document.getElementById('ocvStep2').classList.add('hidden');
+  ocvFeedbackContext = null;
 }
 
 function submitFeedback() {

@@ -19,11 +19,19 @@
       </svg>
       <span class="nav-title">Insights</span>
       <span class="nav-separator">|</span>
-      <span class="nav-subtitle">Growth Opportunities <sup style="font-size:9px;color:#616161;">AI Business Solutions & Security</sup></span>
+      <span class="nav-subtitle">Growth Opportunities <sup style="font-size:9px;color:rgba(255,255,255,0.7);">AI Business Solutions & Security</sup></span>
     </div>
     <div class="nav-right">
-      <button class="nav-help" title="Help & readiness">?</button>
-      <div class="nav-avatar" title="Varun Gorur">VG</div>
+      <button class="nav-icon-btn" title="Notifications">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a5.5 5.5 0 0 0-5.5 5.5v3.03l-.88 1.76A1 1 0 0 0 4.5 14h11a1 1 0 0 0 .89-1.45l-.02-.03-.87-1.75V7.5A5.5 5.5 0 0 0 10 2Zm0 16a2.5 2.5 0 0 1-2.45-2h4.9A2.5 2.5 0 0 1 10 18Z"/></svg>
+      </button>
+      <button class="nav-icon-btn" id="globalFeedbackBtn" title="Give Feedback">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/><path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/></svg>
+      </button>
+      <button class="nav-icon-btn" title="Help & readiness">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm0 14.5a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13Zm0-3.5a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Zm.41-1.23a.5.5 0 0 1-.91 0V11.5c0-.28.22-.5.5-.5a1.5 1.5 0 1 0-1.5-1.5.5.5 0 0 1-1 0 2.5 2.5 0 1 1 2.91 2.47Z"/></svg>
+      </button>
+      <div class="nav-avatar" title="Partner Admin">Pa</div>
     </div>
   </nav>
 
@@ -69,13 +77,6 @@
             <button class="opp-tab" data-opp="cloud">Cloud Endpoints</button>
             <button class="opp-tab" data-opp="tenants">Tenants</button>
           </div>
-          <button class="ocv-feedback-trigger" id="globalFeedbackBtn" title="Give Feedback">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/>
-              <path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/>
-            </svg>
-            <span>Give Feedback</span>
-          </button>
         </div>
 
         <!-- KPI Tiles -->
@@ -189,89 +190,109 @@
   <!-- ═══ OCV FEEDBACK MODAL ═══ -->
   <div class="ocv-overlay hidden" id="ocvOverlay"></div>
   <div class="ocv-modal hidden" id="ocvModal">
-    <div class="ocv-header">
-      <div class="ocv-header-left">
-        <svg class="ocv-header-icon" width="24" height="24" viewBox="0 0 20 20" fill="#0078d4">
-          <path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/>
-          <path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/>
-        </svg>
-        <h3>Give Feedback</h3>
+    <!-- Step 1: Classification -->
+    <div class="ocv-step" id="ocvStep1">
+      <div class="ocv-header">
+        <h2 class="ocv-title">Submit feedback to Microsoft</h2>
+        <button class="ocv-close" id="ocvClose">✕</button>
       </div>
-      <button class="ocv-close" id="ocvClose">✕</button>
-    </div>
-    <div class="ocv-body">
-      <!-- OCV Sentiment Rating -->
-      <div class="ocv-section ocv-sentiment-section" id="ocvSentimentSection">
-        <label class="ocv-label">How would you rate your experience?</label>
-        <div class="ocv-sentiment-row">
-          <button class="ocv-sentiment-btn" data-sentiment="very-unhappy" title="Very dissatisfied">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#c62828" stroke-width="1.5"/><circle cx="11" cy="13" r="1.5" fill="#c62828"/><circle cx="21" cy="13" r="1.5" fill="#c62828"/><path d="M10 23c1.5-2.5 3.5-4 6-4s4.5 1.5 6 4" stroke="#c62828" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="ocv-body">
+        <p class="ocv-classify-label">Classify your feedback</p>
+        <div class="ocv-classify-options">
+          <button class="ocv-classify-btn" data-type="compliment">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M9.72 3.18a.3.3 0 0 1 .56 0l1.26 2.9a.3.3 0 0 0 .24.18l3.09.32a.3.3 0 0 1 .17.53L12.72 9.3a.3.3 0 0 0-.1.28l.62 3.04a.3.3 0 0 1-.45.33L10.12 11.4a.3.3 0 0 0-.3 0l-2.67 1.54a.3.3 0 0 1-.44-.32l.62-3.05a.3.3 0 0 0-.09-.28L4.96 7.11a.3.3 0 0 1 .17-.53l3.09-.32a.3.3 0 0 0 .24-.18l1.26-2.9Z"/></svg>
+            <span>Give a compliment</span>
           </button>
-          <button class="ocv-sentiment-btn" data-sentiment="unhappy" title="Dissatisfied">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#e65100" stroke-width="1.5"/><circle cx="11" cy="13" r="1.5" fill="#e65100"/><circle cx="21" cy="13" r="1.5" fill="#e65100"/><path d="M11 22c1.5-1.5 3-2.5 5-2.5s3.5 1 5 2.5" stroke="#e65100" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <button class="ocv-classify-btn" data-type="problem">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h9A2.5 2.5 0 0 1 17 5.5v5a2.5 2.5 0 0 1-2.5 2.5H12l-3.55 2.66A.5.5 0 0 1 7.67 15.41V13H5.5A2.5 2.5 0 0 1 3 10.5v-5Zm3 1a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H6Zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1H6Z"/></svg>
+            <span>Report a problem</span>
           </button>
-          <button class="ocv-sentiment-btn" data-sentiment="neutral" title="Neutral">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#9a6700" stroke-width="1.5"/><circle cx="11" cy="13" r="1.5" fill="#9a6700"/><circle cx="21" cy="13" r="1.5" fill="#9a6700"/><line x1="11" y1="21" x2="21" y2="21" stroke="#9a6700" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <button class="ocv-sentiment-btn" data-sentiment="happy" title="Satisfied">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#107c10" stroke-width="1.5"/><circle cx="11" cy="13" r="1.5" fill="#107c10"/><circle cx="21" cy="13" r="1.5" fill="#107c10"/><path d="M11 19c1.5 1.5 3 2.5 5 2.5s3.5-1 5-2.5" stroke="#107c10" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <button class="ocv-sentiment-btn" data-sentiment="very-happy" title="Very satisfied">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#0078d4" stroke-width="1.5"/><circle cx="11" cy="13" r="1.5" fill="#0078d4"/><circle cx="21" cy="13" r="1.5" fill="#0078d4"/><path d="M10 18c1.5 2.5 3.5 4 6 4s4.5-1.5 6-4" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <button class="ocv-classify-btn" data-type="suggestion">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a5.5 5.5 0 0 0-2 10.63V14a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-1.37A5.5 5.5 0 0 0 10 2ZM8.5 16a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3Z"/></svg>
+            <span>Make a suggestion</span>
           </button>
         </div>
-        <div class="ocv-sentiment-labels">
-          <span>Very dissatisfied</span>
-          <span>Very satisfied</span>
-        </div>
       </div>
-
-      <!-- Context section (pre-filled) -->
-      <div class="ocv-section ocv-context" id="ocvContext">
-        <div class="ocv-context-label">Feedback context (auto-captured)</div>
-        <div class="ocv-context-details" id="ocvContextDetails"></div>
+      <div class="ocv-footer-text">
+        Signed in as partner@microsoft.com. <a href="#" class="ocv-link">Learn more</a> about how this data is used and your rights. By pressing Submit, your feedback will be used to improve Microsoft products and services. <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank" class="ocv-link">Privacy statement.</a>
       </div>
-
-      <!-- Feedback reason -->
-      <div class="ocv-section">
-        <label class="ocv-label">Feedback category</label>
-        <div class="ocv-reason-badge" id="ocvReasonBadge">Incorrect data</div>
-      </div>
-
-      <!-- Pre-captured columns -->
-      <div class="ocv-section" id="ocvColumnsSection">
-        <label class="ocv-label">Data captured from selected row</label>
-        <div class="ocv-columns-grid" id="ocvColumnsGrid"></div>
-        <div class="ocv-columns-note">
-          <svg width="12" height="12" viewBox="0 0 16 16" fill="#107c10"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm-.75 10.15l-3-3 1.06-1.06L7.25 9.03l3.44-3.44 1.06 1.06-4.5 4.5z"/></svg>
-          You don't need to re-enter this data — it's automatically attached to your feedback.
-        </div>
-      </div>
-
-      <!-- User feedback input -->
-      <div class="ocv-section">
-        <label class="ocv-label" for="ocvComments">Tell us more (optional)</label>
-        <textarea class="ocv-textarea" id="ocvComments" rows="4" placeholder="Describe the issue in more detail. For example: 'The Copilot PAU shows 245 but our actual paid seats are 310...'"></textarea>
-      </div>
-
-      <!-- Contact consent -->
-      <div class="ocv-section ocv-consent">
-        <label class="ocv-checkbox-label">
-          <input type="checkbox" id="ocvScreenshot">
-          Include a screenshot with my feedback
-        </label>
-        <label class="ocv-checkbox-label" style="margin-top: 8px;">
-          <input type="checkbox" id="ocvConsent" checked>
-          Microsoft can email me about this feedback
-        </label>
-        <div class="ocv-privacy-link">
-          <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank">Microsoft Privacy Statement</a>
-        </div>
+      <div class="ocv-footer">
+        <button class="ocv-btn-secondary" id="ocvCancelStep1">Cancel</button>
+        <button class="ocv-btn-primary disabled" disabled>Submit</button>
       </div>
     </div>
-    <div class="ocv-footer">
-      <button class="ocv-btn-secondary" id="ocvCancel">Cancel</button>
-      <button class="ocv-btn-primary" id="ocvSubmit">Submit Feedback</button>
+
+    <!-- Step 2: Feedback form -->
+    <div class="ocv-step hidden" id="ocvStep2">
+      <div class="ocv-header">
+        <div class="ocv-header-left">
+          <button class="ocv-back-btn" id="ocvBackBtn">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M12.35 4.15a.5.5 0 0 1 0 .7L7.71 9.5h8.79a.5.5 0 0 1 0 1H7.71l4.64 4.65a.5.5 0 0 1-.7.7l-5.5-5.5a.5.5 0 0 1 0-.7l5.5-5.5a.5.5 0 0 1 .7 0Z"/></svg>
+          </button>
+          <h2 class="ocv-title">Submit feedback to Microsoft</h2>
+        </div>
+        <button class="ocv-close" id="ocvClose2">✕</button>
+      </div>
+      <div class="ocv-body">
+        <div class="ocv-section">
+          <label class="ocv-label-required" id="ocvQuestionLabel">What did you like? <span class="required">*</span></label>
+          <textarea class="ocv-textarea" id="ocvComments" rows="5" placeholder="Do not include any private or sensitive information."></textarea>
+        </div>
+
+        <!-- Context section (for table/flyout feedback) -->
+        <div class="ocv-section ocv-context hidden" id="ocvContext">
+          <div class="ocv-context-label">Feedback context (auto-captured)</div>
+          <div class="ocv-context-details" id="ocvContextDetails"></div>
+        </div>
+
+        <!-- Pre-captured columns (for table feedback) -->
+        <div class="ocv-section hidden" id="ocvColumnsSection">
+          <label class="ocv-label">Data captured from selected row</label>
+          <div class="ocv-columns-grid" id="ocvColumnsGrid"></div>
+          <div class="ocv-columns-note">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="#107c10"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm-.75 10.15l-3-3 1.06-1.06L7.25 9.03l3.44-3.44 1.06 1.06-4.5 4.5z"/></svg>
+            You don't need to re-enter this data — it's automatically attached to your feedback.
+          </div>
+        </div>
+
+        <div class="ocv-section">
+          <label class="ocv-label-bold">Add more details</label>
+          <p class="ocv-hint">Drag and drop files here or paste an image from your clipboard</p>
+          <div class="ocv-attach-row">
+            <button class="ocv-attach-btn">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H6Z"/></svg>
+              Capture screenshot
+            </button>
+            <button class="ocv-attach-btn">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5Zm7.5 1.5a.75.75 0 0 0-1.28-.53l-2.5 2.5a.75.75 0 1 0 1.06 1.06l1.22-1.22V13a.75.75 0 0 0 1.5 0V8.31l1.22 1.22a.75.75 0 1 0 1.06-1.06l-2.5-2.5A.75.75 0 0 0 9.5 6Z"/></svg>
+              Record screen
+            </button>
+            <button class="ocv-attach-btn">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M11.75 2A2.25 2.25 0 0 1 14 4.25v.46l.78-.78a2.25 2.25 0 0 1 3.18 3.18l-7.5 7.5c-.3.3-.67.52-1.08.64l-2.83.81a.75.75 0 0 1-.93-.93l.81-2.83c.12-.41.34-.78.64-1.08l4.68-4.68V4.25a.75.75 0 0 0-.75-.75H4.25a.75.75 0 0 0-.75.75v11.5c0 .41.34.75.75.75h7.5a.75.75 0 0 0 .75-.75V14a.75.75 0 0 1 1.5 0v1.75A2.25 2.25 0 0 1 11.75 18h-7.5A2.25 2.25 0 0 1 2 15.75V4.25A2.25 2.25 0 0 1 4.25 2h7.5Z"/></svg>
+              Attach file
+            </button>
+          </div>
+        </div>
+
+        <div class="ocv-section">
+          <label class="ocv-label-required">May we contact you about your feedback? <span class="required">*</span></label>
+          <div class="ocv-radio-group">
+            <label class="ocv-radio-label">
+              <input type="radio" name="ocvContact" value="yes"> Yes, you may contact me
+            </label>
+            <label class="ocv-radio-label">
+              <input type="radio" name="ocvContact" value="no"> No, don't contact me
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="ocv-footer-text">
+        Signed in as partner@microsoft.com. <a href="#" class="ocv-link">Learn more</a> about how this data is used and your rights. By pressing Submit, your feedback will be used to improve Microsoft products and services. <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank" class="ocv-link">Privacy statement.</a>
+      </div>
+      <div class="ocv-footer">
+        <button class="ocv-btn-secondary" id="ocvCancelStep2">Cancel</button>
+        <button class="ocv-btn-primary" id="ocvSubmit">Submit</button>
+      </div>
     </div>
   </div>
 
