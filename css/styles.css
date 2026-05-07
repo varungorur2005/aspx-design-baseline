@@ -100,14 +100,14 @@ body {
 .opp-tabs-bar .opp-tab:hover { color: #242424; }
 .opp-tabs-bar .opp-tab.active { color: #0078d4; border-bottom-color: #0078d4; }
 
-/* Give Feedback trigger (tab bar, right-aligned) */
+/* Give Feedback trigger (tab bar, right-aligned, no box) */
 .ocv-feedback-trigger {
   display: flex; align-items: center; gap: 6px;
-  padding: 8px 14px; margin-bottom: -2px;
+  padding: 8px 0; margin-bottom: -2px; margin-left: auto;
   font-size: 13px; font-weight: 600; font-family: inherit;
   color: #616161; background: none;
-  border: none; border-bottom: 2px solid transparent;
-  cursor: pointer; transition: all 0.15s;
+  border: none;
+  cursor: pointer; transition: color 0.15s;
   white-space: nowrap;
 }
 .ocv-feedback-trigger:hover { color: #0078d4; }
