@@ -21,7 +21,9 @@ body {
   z-index: 100;
 }
 .nav-left { display: flex; align-items: center; gap: 10px; }
-.nav-title { font-size: 14px; font-weight: 600; color: #fff; }
+.nav-title { font-size: 14px; color: #fff; }
+.nav-platform-name { font-weight: 600; }
+.nav-page-name { font-weight: 400; }
 .nav-separator { color: rgba(255,255,255,0.4); font-weight: 300; }
 .nav-right { display: flex; align-items: center; gap: 6px; }
 
