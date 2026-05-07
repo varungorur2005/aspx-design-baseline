@@ -224,7 +224,7 @@ function renderOppView(opp) {
 
   // Table header
   const head = document.getElementById('tableHead');
-  head.innerHTML = '<th class="col-checkbox"><input type="checkbox" class="row-select-all" title="Select all"></th>' + data.columns.map(c => `<th>${c}</th>`).join('');
+  head.innerHTML = '<th class="col-radio"></th>' + data.columns.map(c => `<th>${c}</th>`).join('');
 
   // Table body
   const body = document.getElementById('tableBody');
@@ -251,7 +251,7 @@ function renderOppView(opp) {
       }
       return `<td>${val}</td>`;
     }).join('');
-    return `<tr data-row="${idx}"><td class="col-checkbox"><input type="checkbox" class="row-checkbox" data-row="${idx}"></td>${cells}</tr>`;
+    return `<tr data-row="${idx}"><td class="col-radio"><input type="radio" name="rowSelect" class="row-radio" data-row="${idx}"></td>${cells}</tr>`;
   }).join('');
 
   clearSelection();
@@ -265,46 +265,24 @@ function initTableSelection() {
   const table = document.getElementById('dataTable');
   if (!table) return;
 
-  // Checkbox-based row selection
+  // Radio button row selection
   table.addEventListener('change', (e) => {
-    if (e.target.classList.contains('row-checkbox')) {
-      const tr = e.target.closest('tr');
+    if (e.target.classList.contains('row-radio')) {
       const rowIdx = parseInt(e.target.dataset.row);
-
-      if (e.target.checked) {
-        // Uncheck all other checkboxes (single selection)
-        document.querySelectorAll('.row-checkbox').forEach(cb => {
-          if (cb !== e.target) {
-            cb.checked = false;
-            cb.closest('tr').classList.remove('selected');
-          }
-        });
-        document.querySelector('.row-select-all').checked = false;
-        tr.classList.add('selected');
-        selectedRow = rowIdx;
-        selectedRowData = oppData[currentTab].rows[selectedRow];
-        enableFeedbackButton();
-      } else {
-        tr.classList.remove('selected');
-        clearSelection();
-      }
-    } else if (e.target.classList.contains('row-select-all')) {
-      // Select-all not applicable for feedback (single select only), just toggle visuals
-      const checked = e.target.checked;
-      document.querySelectorAll('.row-checkbox').forEach(cb => {
-        cb.checked = checked;
-        cb.closest('tr').classList.toggle('selected', checked);
-      });
-      if (!checked) clearSelection();
+      // Clear previous highlight
+      document.querySelectorAll('.tenant-table tbody tr.selected').forEach(r => r.classList.remove('selected'));
+      // Highlight selected row
+      e.target.closest('tr').classList.add('selected');
+      selectedRow = rowIdx;
+      selectedRowData = oppData[currentTab].rows[selectedRow];
+      enableFeedbackButton();
     }
   });
 }
 
 function clearSelection() {
   document.querySelectorAll('.tenant-table tbody tr.selected').forEach(r => r.classList.remove('selected'));
-  document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = false);
-  const selectAll = document.querySelector('.row-select-all');
-  if (selectAll) selectAll.checked = false;
+  document.querySelectorAll('.row-radio').forEach(r => r.checked = false);
   selectedRow = null;
   selectedRowData = null;
   disableFeedbackButton();
