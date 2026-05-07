@@ -87,6 +87,90 @@ const copilotData = [
     'Free Copilot Chat MAU (Unlicensed)': '6,923', 'All Copilot MAU': '9,112',
     'Free to Paid Whitespace': '4590', 'All Agents MAU': '25',
     'Copilot Opportunity': 'Monetize', 'CSP Promos': 'View'
+  },
+  {
+    'Tenant Name': 'Fabrikam 123-CDD-C65', 'Tenant ID': 'D12E2A30-309C-4671-A6F8-5B28C58782FF',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'Enterprise',
+    'Customer Sub-Segment': 'Not Available', 'Industry / Vertical': 'Not Available',
+    'Customer TPID': '-5608676', 'Customer Name': 'Contoso 82FF4338',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': 'Not Available',
+    'Dominant SKU Group': 'Not Available',
+    'Copilot Eligible M365 Seats': '89,724', 'Copilot Seats Whitespace': '87,822',
+    'Copilot MAU (Licensed)': '1,980', 'Copilot PAU': '1,902', 'Copilot Utilization': '100%',
+    'Adoption Status': 'Healthy',
+    'Free Copilot Chat MAU (Unlicensed)': '8,380', 'All Copilot MAU': '10,360',
+    'Free to Paid Whitespace': '6478', 'All Agents MAU': '152',
+    'Copilot Opportunity': 'Monetize', 'CSP Promos': 'View'
+  },
+  {
+    'Tenant Name': 'Fabrikam 123-9DF-E5E', 'Tenant ID': 'D12E2A30-7A82-4E90-B345-1234ABCD5678',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'Enterprise',
+    'Customer Sub-Segment': 'Not Available', 'Industry / Vertical': 'Not Available',
+    'Customer TPID': '-1284106', 'Customer Name': 'Contoso DDA52053',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': 'Not Available',
+    'Dominant SKU Group': 'Not Available',
+    'Copilot Eligible M365 Seats': '85,077', 'Copilot Seats Whitespace': '85,052',
+    'Copilot MAU (Licensed)': '16', 'Copilot PAU': '25', 'Copilot Utilization': '64%',
+    'Adoption Status': 'Healthy',
+    'Free Copilot Chat MAU (Unlicensed)': '5,806', 'All Copilot MAU': '5,822',
+    'Free to Paid Whitespace': '5781', 'All Agents MAU': '1',
+    'Copilot Opportunity': 'Monetize', 'CSP Promos': 'View'
+  },
+  {
+    'Tenant Name': 'Fabrikam 123-A1B-2C3', 'Tenant ID': 'D12E2A30-5F6E-4D7C-8B9A-0A1B2C3D4E5F',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'Enterprise',
+    'Customer Sub-Segment': 'Not Available', 'Industry / Vertical': 'Not Available',
+    'Customer TPID': '-2045873', 'Customer Name': 'Contoso 7E8F9012',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': 'Not Available',
+    'Dominant SKU Group': 'Not Available',
+    'Copilot Eligible M365 Seats': '74,320', 'Copilot Seats Whitespace': '73,890',
+    'Copilot MAU (Licensed)': '410', 'Copilot PAU': '430', 'Copilot Utilization': '95%',
+    'Adoption Status': 'Failure to Thrive/Adopt',
+    'Free Copilot Chat MAU (Unlicensed)': '4,215', 'All Copilot MAU': '4,625',
+    'Free to Paid Whitespace': '3805', 'All Agents MAU': '88',
+    'Copilot Opportunity': 'Acquire', 'CSP Promos': 'View'
+  },
+  {
+    'Tenant Name': 'Fabrikam 123-D4E-5F6', 'Tenant ID': 'D12E2A30-1A2B-4C3D-5E6F-7A8B9C0D1E2F',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'Enterprise',
+    'Customer Sub-Segment': 'Not Available', 'Industry / Vertical': 'Not Available',
+    'Customer TPID': '-3156984', 'Customer Name': 'Contoso 3A4B5C6D',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': 'Not Available',
+    'Dominant SKU Group': 'Not Available',
+    'Copilot Eligible M365 Seats': '65,890', 'Copilot Seats Whitespace': '64,120',
+    'Copilot MAU (Licensed)': '1,720', 'Copilot PAU': '1,770', 'Copilot Utilization': '97%',
+    'Adoption Status': 'Healthy',
+    'Free Copilot Chat MAU (Unlicensed)': '7,450', 'All Copilot MAU': '9,170',
+    'Free to Paid Whitespace': '5730', 'All Agents MAU': '234',
+    'Copilot Opportunity': 'Grow', 'CSP Promos': 'View'
+  },
+  {
+    'Tenant Name': 'Fabrikam 123-7G8-H9I', 'Tenant ID': 'D12E2A30-2B3C-4D5E-6F7G-8H9I0J1K2L3M',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'Enterprise',
+    'Customer Sub-Segment': 'Not Available', 'Industry / Vertical': 'Not Available',
+    'Customer TPID': '-4267095', 'Customer Name': 'Contoso 5E6F7G8H',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': 'Not Available',
+    'Dominant SKU Group': 'Not Available',
+    'Copilot Eligible M365 Seats': '52,340', 'Copilot Seats Whitespace': '51,890',
+    'Copilot MAU (Licensed)': '425', 'Copilot PAU': '450', 'Copilot Utilization': '94%',
+    'Adoption Status': 'Failure to Thrive/Adopt',
+    'Free Copilot Chat MAU (Unlicensed)': '3,120', 'All Copilot MAU': '3,545',
+    'Free to Paid Whitespace': '2695', 'All Agents MAU': '47',
+    'Copilot Opportunity': 'Acquire', 'CSP Promos': 'View'
+  },
+  {
+    'Tenant Name': 'Fabrikam 123-J0K-L1M', 'Tenant ID': 'D12E2A30-3C4D-4E5F-6G7H-8I9J0K1L2M3N',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'Enterprise',
+    'Customer Sub-Segment': 'Not Available', 'Industry / Vertical': 'Not Available',
+    'Customer TPID': '-5378106', 'Customer Name': 'Contoso 9A0B1C2D',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': 'Not Available',
+    'Dominant SKU Group': 'Not Available',
+    'Copilot Eligible M365 Seats': '43,210', 'Copilot Seats Whitespace': '42,780',
+    'Copilot MAU (Licensed)': '390', 'Copilot PAU': '430', 'Copilot Utilization': '91%',
+    'Adoption Status': 'Healthy',
+    'Free Copilot Chat MAU (Unlicensed)': '2,890', 'All Copilot MAU': '3,280',
+    'Free to Paid Whitespace': '2460', 'All Agents MAU': '19',
+    'Copilot Opportunity': 'Monetize', 'CSP Promos': 'View'
   }
 ];
 
@@ -132,6 +216,90 @@ const e3Data = [
     'Utilization': '81%', 'Usage Whitespace': '27',
     'Usage Threshold': 'Above', 'Workload Health': 'Healthy',
     'Workload Recommendation': 'Upsell ready'
+  },
+  {
+    'Tenant Name': 'Wide World Importers', 'Tenant ID': 'E4F55C40-FF04-4H8I-94DD-55667788AABB',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'SMC',
+    'Customer Sub-Segment': 'Corporate', 'Industry / Vertical': 'Manufacturing',
+    'TPID': '-1267543', 'Customer Name': 'Wide World Importers LLC',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': '12/2026',
+    'Dominant SKU Group': 'OE3',
+    'Total M365 Seat Count': '680', 'Tenant Health': 'Healthy',
+    'Tenant Recommendation': 'Microsoft 365 E5',
+    'Workload Name': 'Microsoft Teams', 'MAU': '620', 'PAU': '680',
+    'Utilization': '91%', 'Usage Whitespace': '60',
+    'Usage Threshold': 'Above', 'Workload Health': 'Healthy',
+    'Workload Recommendation': 'Upsell ready'
+  },
+  {
+    'Tenant Name': 'Tailspin Toys', 'Tenant ID': 'F5G66D50-GG05-4I9J-A5EE-66778899BBCC',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'SMC',
+    'Customer Sub-Segment': 'Small Business', 'Industry / Vertical': 'Retail',
+    'TPID': '-1378654', 'Customer Name': 'Tailspin Toys Inc.',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': '03/2027',
+    'Dominant SKU Group': 'BB',
+    'Total M365 Seat Count': '210', 'Tenant Health': 'Unhealthy',
+    'Tenant Recommendation': 'Drive usage',
+    'Workload Name': 'Exchange Online', 'MAU': '98', 'PAU': '210',
+    'Utilization': '47%', 'Usage Whitespace': '112',
+    'Usage Threshold': 'Below', 'Workload Health': 'Unhealthy',
+    'Workload Recommendation': 'Drive Exchange adoption'
+  },
+  {
+    'Tenant Name': 'Wingtip Toys', 'Tenant ID': 'G6H77E60-HH06-4J0K-B6FF-778899AABBDD',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'SMC',
+    'Customer Sub-Segment': 'Corporate', 'Industry / Vertical': 'Entertainment',
+    'TPID': '-1489765', 'Customer Name': 'Wingtip Toys Corp.',
+    'EA Renewal': '06/2027', 'Largest Seat CSP Renewal': 'Not Available',
+    'Dominant SKU Group': 'OE3',
+    'Total M365 Seat Count': '950', 'Tenant Health': 'Healthy',
+    'Tenant Recommendation': 'Microsoft 365 E5 Security',
+    'Workload Name': 'SharePoint Online', 'MAU': '780', 'PAU': '950',
+    'Utilization': '82%', 'Usage Whitespace': '170',
+    'Usage Threshold': 'Above', 'Workload Health': 'Healthy',
+    'Workload Recommendation': 'Cross-sell security'
+  },
+  {
+    'Tenant Name': 'Litware Inc.', 'Tenant ID': 'H7I88F70-II07-4K1L-C7GG-8899AABBCCEE',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'SMC',
+    'Customer Sub-Segment': 'Corporate', 'Industry / Vertical': 'Technology',
+    'TPID': '-1590876', 'Customer Name': 'Litware Inc.',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': '09/2026',
+    'Dominant SKU Group': 'OE1',
+    'Total M365 Seat Count': '410', 'Tenant Health': 'Unhealthy',
+    'Tenant Recommendation': 'Drive usage before upsell',
+    'Workload Name': 'Microsoft Teams', 'MAU': '156', 'PAU': '410',
+    'Utilization': '38%', 'Usage Whitespace': '254',
+    'Usage Threshold': 'Below', 'Workload Health': 'Unhealthy',
+    'Workload Recommendation': 'Drive Teams adoption'
+  },
+  {
+    'Tenant Name': 'Adventure Works', 'Tenant ID': 'I8J99G80-JJ08-4L2M-D8HH-99AABBCCDDFF',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'SMC',
+    'Customer Sub-Segment': 'Corporate', 'Industry / Vertical': 'Outdoor Recreation',
+    'TPID': '-1601987', 'Customer Name': 'Adventure Works Cycles',
+    'EA Renewal': '03/2028', 'Largest Seat CSP Renewal': 'Not Available',
+    'Dominant SKU Group': 'OE3',
+    'Total M365 Seat Count': '1,250', 'Tenant Health': 'Healthy',
+    'Tenant Recommendation': 'Microsoft 365 E5',
+    'Workload Name': 'Exchange Online', 'MAU': '1,100', 'PAU': '1,250',
+    'Utilization': '88%', 'Usage Whitespace': '150',
+    'Usage Threshold': 'Above', 'Workload Health': 'Healthy',
+    'Workload Recommendation': 'Upsell ready'
+  },
+  {
+    'Tenant Name': 'Proseware Inc.', 'Tenant ID': 'J9K00H90-KK09-4M3N-E9II-AABBCCDDEEFF',
+    'Tenant Country/Region': 'United States', 'Tenant Segment': 'SMC',
+    'Customer Sub-Segment': 'Small Business', 'Industry / Vertical': 'Software',
+    'TPID': '-1712098', 'Customer Name': 'Proseware Inc.',
+    'EA Renewal': 'Not Available', 'Largest Seat CSP Renewal': '06/2027',
+    'Dominant SKU Group': 'BB',
+    'Total M365 Seat Count': '175', 'Tenant Health': 'Healthy',
+    'Tenant Recommendation': 'Business Premium',
+    'Workload Name': 'Microsoft Teams', 'MAU': '160', 'PAU': '175',
+    'Utilization': '91%', 'Usage Whitespace': '15',
+    'Usage Threshold': 'Above', 'Workload Health': 'Healthy',
+    'Workload Recommendation': 'Cross-sell Copilot'
   }
 ];
 
@@ -219,7 +387,11 @@ function renderOppView(opp) {
   // KPIs
   const kpiRow = document.getElementById('kpiRow');
   kpiRow.innerHTML = data.kpis.map(k =>
-    `<div class="kpi-tile"><span class="kpi-value">${k.value}</span><span class="kpi-label">${k.label}</span></div>`
+    `<div class="kpi-tile">
+      <svg class="kpi-info-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1Zm.75 10.5h-1.5V7h1.5v4.5ZM8 6a.75.75 0 1 1 0-1.5A.75.75 0 0 1 8 6Z"/></svg>
+      <span class="kpi-value">${k.value}</span>
+      <span class="kpi-label">${k.label}</span>
+    </div>`
   ).join('');
 
   // Table header — "Give Feedback" as first column
@@ -254,6 +426,122 @@ function renderOppView(opp) {
     const feedbackCell = `<td class="col-feedback"><div class="row-feedback-wrapper"><button class="row-feedback-btn" data-row="${idx}"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/><path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/></svg><svg class="row-feedback-chevron" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2.5 3.5L5 6l2.5-2.5"/></svg></button><div class="row-feedback-dropdown hidden"><div class="feedback-dropdown-header">What feedback do you have?</div><button class="feedback-option" data-reason="incorrect" data-row="${idx}">Incorrect data</button><button class="feedback-option" data-reason="missing" data-row="${idx}">Missing data</button><button class="feedback-option" data-reason="outdated" data-row="${idx}">Outdated data</button><button class="feedback-option" data-reason="mismatch" data-row="${idx}">Data doesn't match my records</button><button class="feedback-option" data-reason="other" data-row="${idx}">Other</button></div></div></td>`;
     return `<tr data-row="${idx}">${feedbackCell}${cells}</tr>`;
   }).join('');
+
+  renderCharts(opp);
+}
+
+// ═══════════════════════════════════════════════
+// CHARTS (Chart.js)
+// ═══════════════════════════════════════════════
+
+function renderCharts(opp) {
+  const container = document.getElementById('chartsRow');
+  if (!container) return;
+
+  if (opp !== 'copilot') {
+    container.innerHTML = '';
+    return;
+  }
+
+  // Destroy existing charts to prevent memory leaks
+  Object.keys(Chart.instances).forEach(key => {
+    Chart.instances[key].destroy();
+  });
+
+  container.innerHTML = `
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">Copilot Tenant Penetration</div><div class="chart-card-subtitle">As of 2026-05-07, 01:42 p.m.</div></div>
+        <button class="chart-card-filter"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg> Filter</button>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="chartTenantPen"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">Copilot Opportunities</div><div class="chart-card-subtitle">As of 2026-05-07, 01:42 p.m.</div></div>
+        <button class="chart-card-filter"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg> Filter</button>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="chartOpportunities"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">Copilot Adoption by State</div><div class="chart-card-subtitle">As of 2026-05-07, 01:42 p.m.</div></div>
+        <button class="chart-card-filter"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg> Filter</button>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="chartAdoption"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">Copilot Usage by License</div><div class="chart-card-subtitle">As of 2026-05-07, 01:42 p.m.</div></div>
+        <button class="chart-card-filter"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg> Filter</button>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="chartUsage"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">MCI Potential Earnings</div><div class="chart-card-subtitle">As of 2026-05-07, 01:42 p.m.</div></div>
+        <button class="chart-card-filter"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg> Filter</button>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="chartMci"></canvas></div>
+    </div>
+  `;
+
+  new Chart(document.getElementById('chartTenantPen'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Has Copilot Licenses', 'No Copilot Licenses'],
+      datasets: [{ data: [3487, 3138], backgroundColor: ['#0078d4', '#f7941d'], borderWidth: 0 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
+  });
+
+  new Chart(document.getElementById('chartOpportunities'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Acquire', 'Monetize', 'Grow', 'Other'],
+      datasets: [{ data: [2235, 1781, 868, 1710], backgroundColor: ['#1b3a5c', '#0078d4', '#107c10', '#f7941d'], borderWidth: 0 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
+  });
+
+  new Chart(document.getElementById('chartAdoption'), {
+    type: 'bar',
+    data: {
+      labels: ['Other', 'Failure to\nThrive/Adopt', 'Healthy', 'Starting'],
+      datasets: [{ data: [3200, 2800, 2500, 1200], backgroundColor: '#0078d4', borderRadius: 2, barThickness: 40 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: 'x',
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { font: { size: 9 } }, grid: { color: '#f0f0f0' } }, x: { ticks: { font: { size: 9 }, maxRotation: 45, minRotation: 45 }, grid: { display: false } } }
+    }
+  });
+
+  new Chart(document.getElementById('chartUsage'), {
+    type: 'line',
+    data: {
+      labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'],
+      datasets: [
+        { label: 'Unlicensed MAU', data: [2800, 2900, 3000, 3100, 3200, 3300, 3350, 3400, 3450, 3480, 3490, 3500], borderColor: '#c62828', backgroundColor: '#c62828', borderWidth: 1.5, pointRadius: 2, tension: 0.3 },
+        { label: 'AI MAU', data: [600, 650, 700, 750, 800, 850, 900, 920, 950, 980, 1000, 1050], borderColor: '#0078d4', backgroundColor: '#0078d4', borderWidth: 1.5, pointRadius: 2, tension: 0.3 },
+        { label: 'Licensed MAU', data: [300, 320, 340, 360, 380, 400, 420, 440, 460, 480, 500, 520], borderColor: '#107c10', backgroundColor: '#107c10', borderWidth: 1.5, pointRadius: 2, tension: 0.3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } } },
+      scales: { y: { beginAtZero: true, ticks: { font: { size: 9 } }, grid: { color: '#f0f0f0' } }, x: { ticks: { font: { size: 9 } }, grid: { display: false } } }
+    }
+  });
+
+  new Chart(document.getElementById('chartMci'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Copilot + Power Platform', 'Copilot + Deployment Accelerator (S)', 'Copilot + Deployment Accelerator (XS)', 'Copilot + PoC', 'Other'],
+      datasets: [{ data: [35, 19, 14, 13, 19], backgroundColor: ['#1b3a5c', '#0078d4', '#4fc3f7', '#107c10', '#f7941d'], borderWidth: 0 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 8 } } } } }
+  });
 }
 
 // IN-ROW GIVE FEEDBACK (dropdown per row)
