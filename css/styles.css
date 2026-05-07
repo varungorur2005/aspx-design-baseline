@@ -157,17 +157,7 @@ body {
   width: 1px; height: 20px; background: #e0e0e0; margin: 0 4px;
 }
 
-/* Give Feedback button - special styling */
-.feedback-btn {
-  color: #0078d4; font-weight: 600;
-  border: 1px solid transparent; position: relative;
-}
-.feedback-btn:not(:disabled):hover {
-  background: #f0f6ff; border-color: #c7dbf5;
-}
-.feedback-btn:not(:disabled) { opacity: 1; cursor: pointer; }
-.feedback-chevron { margin-left: 2px; transition: transform 0.15s; }
-.feedback-btn.active .feedback-chevron { transform: rotate(180deg); }
+/* Give Feedback button - removed from toolbar, now in table */
 
 .toolbar-btn-icon {
   display: flex; align-items: center; gap: 5px;
@@ -189,13 +179,25 @@ body {
 }
 .table-search-input::placeholder { color: #999; }
 
-/* ── Feedback Dropdown ── */
-.give-feedback-wrapper { position: relative; }
-.feedback-dropdown {
-  position: absolute; top: calc(100% + 6px); left: 0;
+/* ── In-Row Feedback Dropdown ── */
+.row-feedback-wrapper { position: relative; display: inline-block; }
+.row-feedback-btn {
+  display: flex; align-items: center; gap: 4px;
+  padding: 4px 8px; font-size: 12px; font-family: inherit;
+  color: #0078d4; background: none;
+  border: 1px solid transparent; border-radius: 4px;
+  cursor: pointer; transition: all 0.15s;
+}
+.row-feedback-btn:hover { background: #f0f6ff; border-color: #c7dbf5; }
+.row-feedback-btn.active { background: #e8f0fe; border-color: #0078d4; }
+.row-feedback-chevron { transition: transform 0.15s; }
+.row-feedback-btn.active .row-feedback-chevron { transform: rotate(180deg); }
+
+.row-feedback-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0;
   background: #fff; border: 1px solid #e0e0e0;
   border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  width: 280px; z-index: 200; overflow: hidden;
+  width: 260px; z-index: 200; overflow: hidden;
   animation: dropdownIn 0.15s ease;
 }
 @keyframes dropdownIn {
@@ -203,18 +205,19 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .feedback-dropdown-header {
-  padding: 12px 16px 8px; font-size: 12px; font-weight: 600;
+  padding: 10px 14px 6px; font-size: 11px; font-weight: 600;
   color: #616161; text-transform: uppercase; letter-spacing: 0.3px;
 }
 .feedback-option {
   display: flex; align-items: center; gap: 10px;
-  width: 100%; padding: 10px 16px; font-size: 13px;
+  width: 100%; padding: 9px 14px; font-size: 13px;
   font-family: inherit; color: #242424; background: none;
   border: none; cursor: pointer; text-align: left;
   transition: background 0.1s;
 }
 .feedback-option:hover { background: #f5f5f5; }
 .feedback-option:last-child { border-radius: 0 0 8px 8px; }
+.col-feedback { width: 50px; text-align: center; white-space: nowrap; }
 
 /* ── Data Table (ASPX-faithful) ── */
 .table-scroll-wrapper {
@@ -238,10 +241,6 @@ body {
 .tenant-table tr { transition: background 0.1s; }
 .tenant-table tbody tr:hover td { background: #f8f9fa; }
 .tenant-table tbody tr.selected td { background: #e8f0fe; }
-.col-radio { width: 36px; text-align: center; }
-.col-radio input[type="radio"] {
-  width: 16px; height: 16px; accent-color: #0078d4; cursor: pointer;
-}
 .tenant-table .tenant-link {
   color: #0078d4; text-decoration: none; font-weight: 500;
 }
@@ -258,16 +257,6 @@ body {
 .status-badge.unhealthy { background: #fff4ce; color: #9a6700; }
 .status-badge.at-risk { background: #fce4ec; color: #c62828; }
 .status-badge.ready { background: #e6f4ea; color: #107c10; }
-
-/* Selected row hint */
-.selected-row-hint {
-  display: flex; align-items: center; gap: 6px;
-  padding: 8px 12px; margin-top: 8px;
-  font-size: 12px; color: #0078d4; font-weight: 500;
-  background: #f0f6ff; border-radius: 6px;
-  animation: fadeIn 0.2s ease;
-}
-.selected-row-hint.hidden { display: none; }
 
 /* ── Hidden ── */
 .hidden { display: none !important; }

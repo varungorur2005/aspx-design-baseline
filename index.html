@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASPX - AI Business Solutions & Security Insights</title>
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=4">
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -98,38 +98,6 @@
               <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
               Add UPOR Association
             </button>
-            <div class="toolbar-divider"></div>
-            <div class="give-feedback-wrapper">
-              <button class="toolbar-btn feedback-btn" id="giveFeedbackBtn" disabled>
-                <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/><path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/></svg>
-                Give Feedback
-                <svg class="feedback-chevron" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2.5 3.5L5 6l2.5-2.5"/></svg>
-              </button>
-              <!-- Feedback dropdown -->
-              <div class="feedback-dropdown hidden" id="feedbackDropdown">
-                <div class="feedback-dropdown-header">What feedback do you have?</div>
-                <button class="feedback-option" data-reason="incorrect">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="#c62828"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm3.5 9.44L10.44 11.5 8 9.06 5.56 11.5 4.5 10.44 6.94 8 4.5 5.56 5.56 4.5 8 6.94l2.44-2.44L11.5 5.56 9.06 8l2.44 2.44z"/></svg>
-                  Incorrect data
-                </button>
-                <button class="feedback-option" data-reason="missing">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="#e65100"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm.75 10.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg>
-                  Missing data
-                </button>
-                <button class="feedback-option" data-reason="outdated">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="#9a6700"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 12.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zM8.5 4H7v5l3.5 2.1.75-1.23-2.75-1.63V4z"/></svg>
-                  Outdated data
-                </button>
-                <button class="feedback-option" data-reason="mismatch">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="#5b21b6"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 12.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zM5 7h6v2H5V7z"/></svg>
-                  Data doesn't match my records
-                </button>
-                <button class="feedback-option" data-reason="other">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="#616161"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a1 1 0 0 1 1 1c0 .77-.54 1.08-1.05 1.37-.5.28-.95.5-.95 1.13h1.5c0-.16.11-.3.33-.42.55-.32 1.67-.85 1.67-2.08A2.5 2.5 0 0 0 8 2.5 2.5 2.5 0 0 0 5.5 5H7a1 1 0 0 1 1-1zm-.75 7h1.5v1.5h-1.5V11z"/></svg>
-                  Other
-                </button>
-              </div>
-            </div>
           </div>
           <div class="toolbar-right">
             <button class="toolbar-btn-icon" title="Change columns">
@@ -155,10 +123,6 @@
             </thead>
             <tbody id="tableBody"></tbody>
           </table>
-        </div>
-        <div class="selected-row-hint hidden" id="selectedRowHint">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="#0078d4"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm-.75 10.15l-3-3 1.06-1.06L7.25 9.03l3.44-3.44 1.06 1.06-4.5 4.5z"/></svg>
-          Row selected — "Give Feedback" is now enabled
         </div>
       </div>
 
@@ -303,6 +267,6 @@
     <span>Thank you! Your feedback has been submitted.</span>
   </div>
 
-  <script src="js/app.js?v=3"></script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>

@@ -222,15 +222,15 @@ function renderOppView(opp) {
     `<div class="kpi-tile"><span class="kpi-value">${k.value}</span><span class="kpi-label">${k.label}</span></div>`
   ).join('');
 
-  // Table header
+  // Table header — "Give Feedback" as first column
   const head = document.getElementById('tableHead');
-  head.innerHTML = '<th class="col-radio"></th>' + data.columns.map(c => `<th>${c}</th>`).join('');
+  head.innerHTML = '<th class="col-feedback">Give Feedback</th>' + data.columns.map(c => `<th>${c}</th>`).join('');
 
-  // Table body
+  // Table body — each row gets a Give Feedback dropdown
   const body = document.getElementById('tableBody');
   body.innerHTML = data.rows.map((row, idx) => {
     const cells = data.columns.map(col => {
-      let val = row[col] || '—';
+      let val = row[col] || '\u2014';
       if (col === 'Tenant Name') {
         val = `<a href="#" class="tenant-link" data-row="${idx}" data-flyout="tenant-details">${val}</a>`;
       } else if (col === 'Copilot Opportunity') {
@@ -242,104 +242,68 @@ function renderOppView(opp) {
       } else if (col === 'Tenant Health' || col === 'Workload Health') {
         const cls = val.toLowerCase().replace(/\s/g, '-');
         val = `<span class="status-badge ${cls}">${val}</span>`;
-      } else if (col === 'All Copilot MAU' && val !== 'Not Available' && val !== '—') {
+      } else if (col === 'All Copilot MAU' && val !== 'Not Available' && val !== '\u2014') {
         val = `<a href="#" class="tenant-link" data-row="${idx}" data-flyout="copilot-mau">${val}</a>`;
-      } else if (col === 'All Agents MAU' && val !== 'Not Available' && val !== '—') {
+      } else if (col === 'All Agents MAU' && val !== 'Not Available' && val !== '\u2014') {
         val = `<a href="#" class="tenant-link" data-row="${idx}" data-flyout="agents-mau">${val}</a>`;
       } else if (col === 'CSP Promos' && val === 'View') {
         val = `<a href="#" class="tenant-link" data-row="${idx}" data-flyout="csp-promos">View</a>`;
       }
       return `<td>${val}</td>`;
     }).join('');
-    return `<tr data-row="${idx}"><td class="col-radio"><input type="radio" name="rowSelect" class="row-radio" data-row="${idx}"></td>${cells}</tr>`;
+    const feedbackCell = `<td class="col-feedback"><div class="row-feedback-wrapper"><button class="row-feedback-btn" data-row="${idx}"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/><path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/></svg><svg class="row-feedback-chevron" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2.5 3.5L5 6l2.5-2.5"/></svg></button><div class="row-feedback-dropdown hidden"><div class="feedback-dropdown-header">What feedback do you have?</div><button class="feedback-option" data-reason="incorrect" data-row="${idx}">Incorrect data</button><button class="feedback-option" data-reason="missing" data-row="${idx}">Missing data</button><button class="feedback-option" data-reason="outdated" data-row="${idx}">Outdated data</button><button class="feedback-option" data-reason="mismatch" data-row="${idx}">Data doesn't match my records</button><button class="feedback-option" data-reason="other" data-row="${idx}">Other</button></div></div></td>`;
+    return `<tr data-row="${idx}">${feedbackCell}${cells}</tr>`;
   }).join('');
-
-  clearSelection();
 }
 
-// ═══════════════════════════════════════════════
-// TABLE ROW SELECTION (event delegation - bound once)
-// ═══════════════════════════════════════════════
-
-function initTableSelection() {
-  const table = document.getElementById('dataTable');
-  if (!table) return;
-
-  // Radio button row selection
-  table.addEventListener('change', (e) => {
-    if (e.target.classList.contains('row-radio')) {
-      const rowIdx = parseInt(e.target.dataset.row);
-      // Clear previous highlight
-      document.querySelectorAll('.tenant-table tbody tr.selected').forEach(r => r.classList.remove('selected'));
-      // Highlight selected row
-      e.target.closest('tr').classList.add('selected');
-      selectedRow = rowIdx;
-      selectedRowData = oppData[currentTab].rows[selectedRow];
-      enableFeedbackButton();
-    }
-  });
-}
-
-function clearSelection() {
-  document.querySelectorAll('.tenant-table tbody tr.selected').forEach(r => r.classList.remove('selected'));
-  document.querySelectorAll('.row-radio').forEach(r => r.checked = false);
-  selectedRow = null;
-  selectedRowData = null;
-  disableFeedbackButton();
-}
-
-function enableFeedbackButton() {
-  const btn = document.getElementById('giveFeedbackBtn');
-  btn.disabled = false;
-  document.getElementById('selectedRowHint').classList.remove('hidden');
-}
-
-function disableFeedbackButton() {
-  const btn = document.getElementById('giveFeedbackBtn');
-  btn.disabled = true;
-  btn.classList.remove('active');
-  document.getElementById('feedbackDropdown').classList.add('hidden');
-  document.getElementById('selectedRowHint').classList.add('hidden');
-}
-
-// ═══════════════════════════════════════════════
-// GIVE FEEDBACK BUTTON & DROPDOWN
+// IN-ROW GIVE FEEDBACK (dropdown per row)
 // ═══════════════════════════════════════════════
 
 function initFeedbackButton() {
-  const btn = document.getElementById('giveFeedbackBtn');
-  const dropdown = document.getElementById('feedbackDropdown');
+  const table = document.getElementById('dataTable');
+  if (!table) return;
 
-  btn.addEventListener('click', () => {
-    if (btn.disabled) return;
-    const isOpen = !dropdown.classList.contains('hidden');
-    if (isOpen) {
-      dropdown.classList.add('hidden');
-      btn.classList.remove('active');
-    } else {
-      dropdown.classList.remove('hidden');
-      btn.classList.add('active');
-    }
-  });
+  // Toggle dropdown on feedback button click (event delegation)
+  table.addEventListener('click', (e) => {
+    const btn = e.target.closest('.row-feedback-btn');
+    const opt = e.target.closest('.feedback-option');
 
-  // Feedback option selection
-  dropdown.querySelectorAll('.feedback-option').forEach(opt => {
-    opt.addEventListener('click', () => {
+    if (btn) {
+      e.stopPropagation();
+      const wrapper = btn.closest('.row-feedback-wrapper');
+      const dd = wrapper.querySelector('.row-feedback-dropdown');
+      const wasOpen = !dd.classList.contains('hidden');
+
+      // Close all other dropdowns first
+      document.querySelectorAll('.row-feedback-dropdown').forEach(d => d.classList.add('hidden'));
+      document.querySelectorAll('.row-feedback-btn').forEach(b => b.classList.remove('active'));
+
+      if (!wasOpen) {
+        dd.classList.remove('hidden');
+        btn.classList.add('active');
+      }
+    } else if (opt) {
+      e.stopPropagation();
       const reason = opt.dataset.reason;
-      dropdown.classList.add('hidden');
-      btn.classList.remove('active');
-      openOcvModal(reason, selectedRowData, 'table');
-    });
+      const rowIdx = parseInt(opt.dataset.row);
+      const rowData = oppData[currentTab].rows[rowIdx];
+
+      // Close dropdown
+      document.querySelectorAll('.row-feedback-dropdown').forEach(d => d.classList.add('hidden'));
+      document.querySelectorAll('.row-feedback-btn').forEach(b => b.classList.remove('active'));
+
+      openOcvModal(reason, rowData, 'table');
+    }
   });
 
-  // Close dropdown on outside click
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.give-feedback-wrapper')) {
-      dropdown.classList.add('hidden');
-      btn.classList.remove('active');
-    }
+  // Close dropdowns on outside click
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.row-feedback-dropdown').forEach(d => d.classList.add('hidden'));
+    document.querySelectorAll('.row-feedback-btn').forEach(b => b.classList.remove('active'));
   });
 }
+
+function initTableSelection() {}
 
 // ═══════════════════════════════════════════════
 // FLYOUT PANEL (5 types from screenshots 2-6)
