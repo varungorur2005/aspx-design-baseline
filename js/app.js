@@ -1445,11 +1445,11 @@ function renderOppView(opp) {
   const visibleRows = getDisplayRows(opp);
 
   const head = document.getElementById('tableHead');
-  head.innerHTML = '<th class="col-feedback">Give Feedback</th>' + visibleColumns.map(c => `<th>${c}</th>`).join('');
+  head.innerHTML = visibleColumns.map(c => `<th>${c}</th>`).join('');
 
   const body = document.getElementById('tableBody');
   if (!visibleRows.length) {
-    body.innerHTML = `<tr><td colspan="${visibleColumns.length + 1}" style="padding: 20px; text-align: center; color: #616161;">No rows match the current search and filters.</td></tr>`;
+    body.innerHTML = `<tr><td colspan="${visibleColumns.length}" style="padding: 20px; text-align: center; color: #616161;">No rows match the current search and filters.</td></tr>`;
     renderCharts(opp);
     return;
   }
@@ -1478,8 +1478,7 @@ function renderOppView(opp) {
       return `<td>${val}</td>`;
     }).join('');
 
-    const feedbackCell = `<td class="col-feedback"><div class="row-feedback-wrapper"><button class="row-feedback-btn" data-row="${originalIndex}"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/><path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/></svg><svg class="row-feedback-chevron" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2.5 3.5L5 6l2.5-2.5"/></svg></button><div class="row-feedback-dropdown hidden"><div class="feedback-dropdown-header">What feedback do you have?</div><button class="feedback-option" data-reason="incorrect" data-row="${originalIndex}">Incorrect data</button><button class="feedback-option" data-reason="missing" data-row="${originalIndex}">Missing data</button><button class="feedback-option" data-reason="outdated" data-row="${originalIndex}">Outdated data</button><button class="feedback-option" data-reason="mismatch" data-row="${originalIndex}">Data doesn't match my records</button><button class="feedback-option" data-reason="other" data-row="${originalIndex}">Other</button></div></div></td>`;
-    return `<tr data-row="${originalIndex}">${feedbackCell}${cells}</tr>`;
+    return `<tr data-row="${originalIndex}">${cells}</tr>`;
   }).join('');
 
   renderCharts(opp);
