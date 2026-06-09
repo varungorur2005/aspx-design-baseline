@@ -938,6 +938,22 @@ body {
 }
 .ft-filter-select:hover { border-color: #999; }
 .ft-filter-select:focus { outline: none; border-color: #0078d4; }
+.ocv-template-hint {
+  background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 6px;
+  padding: 12px 16px; margin: 8px 0 12px; font-size: 12px; line-height: 1.6; color: #424242;
+}
+.ocv-template-hint .template-title {
+  font-weight: 600; margin-bottom: 6px; color: #242424; font-size: 12px;
+}
+.ocv-template-hint .template-list {
+  margin: 0; padding-left: 18px; list-style: disc;
+}
+.ocv-template-hint .template-list li {
+  margin-bottom: 4px;
+}
+.ocv-template-hint .template-list li strong {
+  color: #1b3a5c;
+}
 .sortable { cursor: pointer; }
 .sort-arrow { font-size: 12px; color: #616161; }
 

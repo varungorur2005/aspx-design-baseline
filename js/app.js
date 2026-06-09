@@ -2515,18 +2515,43 @@ function showOcvStep2(type, rowData, source) {
   document.getElementById('ocvStep2').classList.remove('hidden');
 
   const questionLabel = document.getElementById('ocvQuestionLabel');
+  const templateHint = document.getElementById('ocvTemplateHint');
   const contextSection = document.getElementById('ocvContext');
   const contextDetails = document.getElementById('ocvContextDetails');
   const columnsSection = document.getElementById('ocvColumnsSection');
   const columnsGrid = document.getElementById('ocvColumnsGrid');
 
-  // Set question based on type
+  // Set question and template based on type
   if (type === 'compliment') {
     questionLabel.innerHTML = 'What did you like? <span class="required">*</span>';
+    templateHint.classList.add('hidden');
+    templateHint.innerHTML = '';
   } else if (type === 'problem') {
     questionLabel.innerHTML = 'What went wrong? <span class="required">*</span>';
+    templateHint.classList.remove('hidden');
+    templateHint.innerHTML = `
+      <div class="template-title">Please include the following to help us triage faster:</div>
+      <ul class="template-list">
+        <li><strong>Page/Tab:</strong> Which page or tab were you on?</li>
+        <li><strong>What happened:</strong> Describe the issue (e.g., incorrect data, missing info, error)</li>
+        <li><strong>Expected behavior:</strong> What did you expect to see instead?</li>
+        <li><strong>Frequency:</strong> Does this happen every time or intermittently?</li>
+        <li><strong>Impact:</strong> How does this affect your workflow? (blocking, slowing down, minor)</li>
+      </ul>
+    `;
   } else if (type === 'suggestion') {
     questionLabel.innerHTML = 'What would you like to see improved? <span class="required">*</span>';
+    templateHint.classList.remove('hidden');
+    templateHint.innerHTML = `
+      <div class="template-title">Help us understand your suggestion:</div>
+      <ul class="template-list">
+        <li><strong>Feature/Area:</strong> Which part of the tool does this relate to?</li>
+        <li><strong>Current experience:</strong> What are you doing today and what is the pain point?</li>
+        <li><strong>Desired experience:</strong> What would the ideal outcome look like?</li>
+        <li><strong>Business impact:</strong> How would this improvement help you or your team?</li>
+        <li><strong>Priority:</strong> Nice-to-have or critical for your workflow?</li>
+      </ul>
+    `;
   }
 
   // Use stored context if not passed directly
