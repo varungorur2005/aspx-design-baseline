@@ -93,6 +93,7 @@ body {
   margin-top: 16px; margin-bottom: 20px;
 }
 .opp-tabs-left { display: flex; gap: 0; }
+.opp-tabs-right, .mci-tabs-right, .ft-tabs-right { display: flex; align-items: center; }
 .opp-tabs-bar .opp-tab {
   padding: 12px 20px; font-size: 13px; font-weight: 600;
   font-family: inherit; color: #616161; background: none;
@@ -916,6 +917,12 @@ body {
 }
 
 /* ═══ FASTTRACK REFERRALS ═══ */
+.ft-tabs-bar {
+  display: flex; align-items: center; justify-content: flex-end;
+  border-bottom: 2px solid #e0e0e0;
+  margin-top: 16px; margin-bottom: 20px;
+  min-height: 42px;
+}
 .ft-name-link { color: #0078d4; text-decoration: none; font-weight: 500; }
 .ft-name-link:hover { text-decoration: underline; }
 .ft-badge {
@@ -956,17 +963,6 @@ body {
 }
 .sortable { cursor: pointer; }
 .sort-arrow { font-size: 12px; color: #616161; }
-
-/* ── Feedback column (MCI & FastTrack) ── */
-.col-feedback { width: 110px; text-align: center; }
-.feedback-cell { text-align: center; position: relative; }
-.feedback-dropdown { display: inline-block; position: relative; }
-.feedback-btn { background: none; border: 1px solid #e0e0e0; border-radius: 4px; padding: 4px 8px; cursor: pointer; display: inline-flex; align-items: center; }
-.feedback-btn:hover { background: #f3f2f1; border-color: #0078d4; }
-.feedback-menu { display: none; position: absolute; right: 0; top: 100%; min-width: 200px; background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,.12); z-index: 100; padding: 4px 0; }
-.feedback-menu.show { display: block; }
-.feedback-option { padding: 8px 14px; cursor: pointer; font-size: 13px; color: #323130; }
-.feedback-option:hover { background: #f3f2f1; }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {

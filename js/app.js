@@ -1578,7 +1578,7 @@ function renderMciView(tab) {
   const summary = document.getElementById('mciResultsSummary');
 
   if (head) {
-    head.innerHTML = visibleColumns.map(column => `<th>${escapeHtml(column)}</th>`).join('') + '<th class="col-feedback">Give Feedback</th>';
+    head.innerHTML = '<th class="col-feedback">Give Feedback</th>' + visibleColumns.map(column => `<th>${escapeHtml(column)}</th>`).join('');
   }
 
   if (!body) return;
@@ -1586,31 +1586,19 @@ function renderMciView(tab) {
   if (!visibleRows.length) {
     body.innerHTML = `<tr><td colspan="${visibleColumns.length + 1}" style="padding: 20px; text-align: center; color: #616161;">No rows match the current search and filters.</td></tr>`;
   } else {
-    body.innerHTML = visibleRows.map(({ row }) => `
-      <tr>
-        ${visibleColumns.map(column => {
-          let value = getRowValue(row, column) || '—';
-          if (column === 'Performance Status') {
-            value = getMciPerformanceStatusMarkup(value);
-          } else {
-            value = escapeHtml(value);
-          }
-          return `<td>${value}</td>`;
-        }).join('')}
-        <td class="feedback-cell">
-          <div class="feedback-dropdown">
-            <button class="feedback-btn" title="Give Feedback"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1Zm0 10.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM8.75 8a.75.75 0 0 1-1.5 0V5a.75.75 0 0 1 1.5 0v3Z" fill="#616161"/></svg></button>
-            <div class="feedback-menu">
-              <div class="feedback-option" data-reason="Incorrect data">Incorrect data</div>
-              <div class="feedback-option" data-reason="Missing data">Missing data</div>
-              <div class="feedback-option" data-reason="Outdated data">Outdated data</div>
-              <div class="feedback-option" data-reason="Data doesn't match my records">Data doesn't match my records</div>
-              <div class="feedback-option" data-reason="Other">Other</div>
-            </div>
-          </div>
-        </td>
-      </tr>
-    `).join('');
+    body.innerHTML = visibleRows.map(({ row, originalIndex }) => {
+      const cells = visibleColumns.map(column => {
+        let value = getRowValue(row, column) || '—';
+        if (column === 'Performance Status') {
+          value = getMciPerformanceStatusMarkup(value);
+        } else {
+          value = escapeHtml(value);
+        }
+        return `<td>${value}</td>`;
+      }).join('');
+      const feedbackCell = `<td class="col-feedback"><div class="row-feedback-wrapper"><button class="row-feedback-btn" data-row="${originalIndex}"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/><path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/></svg><svg class="row-feedback-chevron" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2.5 3.5L5 6l2.5-2.5"/></svg></button><div class="row-feedback-dropdown hidden"><div class="feedback-dropdown-header">What feedback do you have?</div><button class="feedback-option" data-reason="incorrect" data-row="${originalIndex}">Incorrect data</button><button class="feedback-option" data-reason="missing" data-row="${originalIndex}">Missing data</button><button class="feedback-option" data-reason="outdated" data-row="${originalIndex}">Outdated data</button><button class="feedback-option" data-reason="mismatch" data-row="${originalIndex}">Data doesn't match my records</button><button class="feedback-option" data-reason="other" data-row="${originalIndex}">Other</button></div></div></td>`;
+      return `<tr data-row="${originalIndex}">${feedbackCell}${cells}</tr>`;
+    }).join('');
   }
 
   if (summary) {
@@ -2370,29 +2358,40 @@ function initTableSelection() {}
 
 // Event delegation for Give Feedback column on MCI and FastTrack tables
 function initGlobalFeedbackDelegation() {
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.feedback-btn');
-    const opt = e.target.closest('.feedback-option');
+  // Handle feedback buttons on MCI and FastTrack tables (same pattern as Growth)
+  ['mciTable', 'ftTable'].forEach(tableId => {
+    const table = document.getElementById(tableId);
+    if (!table) return;
 
-    if (btn) {
-      e.stopPropagation();
-      const wrapper = btn.closest('.feedback-dropdown');
-      const menu = wrapper.querySelector('.feedback-menu');
-      const wasOpen = menu.classList.contains('show');
+    table.addEventListener('click', (e) => {
+      const btn = e.target.closest('.row-feedback-btn');
+      const opt = e.target.closest('.feedback-option');
 
-      // Close all open menus
-      document.querySelectorAll('.feedback-menu').forEach(m => m.classList.remove('show'));
-      if (!wasOpen) menu.classList.add('show');
-    } else if (opt) {
-      e.stopPropagation();
-      const reason = opt.dataset.reason;
-      // Close menu
-      document.querySelectorAll('.feedback-menu').forEach(m => m.classList.remove('show'));
-      openOcvModal(reason, null, 'table');
-    } else {
-      // Close all feedback menus on outside click
-      document.querySelectorAll('.feedback-menu').forEach(m => m.classList.remove('show'));
-    }
+      if (btn) {
+        e.stopPropagation();
+        const wrapper = btn.closest('.row-feedback-wrapper');
+        const dd = wrapper.querySelector('.row-feedback-dropdown');
+        const wasOpen = !dd.classList.contains('hidden');
+
+        // Close all other dropdowns first
+        document.querySelectorAll('.row-feedback-dropdown').forEach(d => d.classList.add('hidden'));
+        document.querySelectorAll('.row-feedback-btn').forEach(b => b.classList.remove('active'));
+
+        if (!wasOpen) {
+          dd.classList.remove('hidden');
+          btn.classList.add('active');
+        }
+      } else if (opt) {
+        e.stopPropagation();
+        const reason = opt.dataset.reason;
+
+        // Close dropdown
+        document.querySelectorAll('.row-feedback-dropdown').forEach(d => d.classList.add('hidden'));
+        document.querySelectorAll('.row-feedback-btn').forEach(b => b.classList.remove('active'));
+
+        openOcvModal(reason, null, 'table');
+      }
+    });
   });
 }
 
@@ -2795,6 +2794,10 @@ function initGlobalFeedback() {
   document.getElementById('globalFeedbackBtn').addEventListener('click', () => {
     openOcvModal('general', null, 'general');
   });
+  const mciFbBtn = document.getElementById('mciFeedbackBtn');
+  if (mciFbBtn) mciFbBtn.addEventListener('click', () => { openOcvModal('general', null, 'general'); });
+  const ftFbBtn = document.getElementById('ftFeedbackBtn');
+  if (ftFbBtn) ftFbBtn.addEventListener('click', () => { openOcvModal('general', null, 'general'); });
 }
 
 // ═══════════════════════════════════════════════════
@@ -2897,18 +2900,18 @@ function renderFasttrackView() {
 
   // Table head
   const head = document.getElementById('ftTableHead');
-  head.innerHTML = fasttrackColumns.map(c => {
+  head.innerHTML = '<th class="col-feedback">Give Feedback</th>' + fasttrackColumns.map(c => {
     const sortable = c === 'Referral ID' ? ' class="sortable"' : '';
     return `<th${sortable}>${c}${c === 'Referral ID' ? ' <span class="sort-arrow">&#8595;</span>' : ''}</th>`;
-  }).join('') + '<th class="col-feedback">Give Feedback</th>';
+  }).join('');
 
   // Table body
   const body = document.getElementById('ftTableBody');
   if (!pageRows.length) {
     body.innerHTML = `<tr><td colspan="${fasttrackColumns.length + 1}" style="padding:20px;text-align:center;color:#616161;">No referrals match the current search and filters.</td></tr>`;
   } else {
-    body.innerHTML = pageRows.map(row => {
-      return `<tr>${fasttrackColumns.map(col => {
+    body.innerHTML = pageRows.map((row, idx) => {
+      const cells = fasttrackColumns.map(col => {
         let val = row[col] || '';
         if (col === 'Name') {
           val = `<a href="#" class="ft-name-link">${escapeHtml(val)}</a>`;
@@ -2920,7 +2923,9 @@ function renderFasttrackView() {
           val = `<span class="ft-badge ${cls}">${val}</span>`;
         }
         return `<td>${val}</td>`;
-      }).join('')}<td class="feedback-cell"><div class="feedback-dropdown"><button class="feedback-btn" title="Give Feedback"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1Zm0 10.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM8.75 8a.75.75 0 0 1-1.5 0V5a.75.75 0 0 1 1.5 0v3Z" fill="#616161"/></svg></button><div class="feedback-menu"><div class="feedback-option" data-reason="Incorrect data">Incorrect data</div><div class="feedback-option" data-reason="Missing data">Missing data</div><div class="feedback-option" data-reason="Outdated data">Outdated data</div><div class="feedback-option" data-reason="Data doesn't match my records">Data doesn't match my records</div><div class="feedback-option" data-reason="Other">Other</div></div></div></td></tr>`;
+      }).join('');
+      const feedbackCell = `<td class="col-feedback"><div class="row-feedback-wrapper"><button class="row-feedback-btn" data-row="${idx}"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M7 5.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm2.5-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM5.5 10A1.5 1.5 0 0 0 4 11.5v.5c0 2.39 2.33 4 5.5 4 .88 0 1.69-.1 2.4-.3a3.48 3.48 0 0 1-.4-.74c-.6.16-1.28.24-2 .24-2.78 0-4.5-1.36-4.5-3.2v-.5a.5.5 0 0 1 .5-.5h6.14c.16-.36.37-.7.62-1H5.5Z"/><path d="M14.5 11a2.5 2.5 0 0 0-2.08 3.88l-.37 1.42a.4.4 0 0 0 .54.47l1.56-.65A2.5 2.5 0 1 0 14.5 11Zm-1.5 2.5a1.5 1.5 0 1 1 1.65 1.49.5.5 0 0 0-.38.13l-.69.29.17-.65a.5.5 0 0 0-.06-.38A1.49 1.49 0 0 1 13 13.5Z"/></svg><svg class="row-feedback-chevron" width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2.5 3.5L5 6l2.5-2.5"/></svg></button><div class="row-feedback-dropdown hidden"><div class="feedback-dropdown-header">What feedback do you have?</div><button class="feedback-option" data-reason="incorrect" data-row="${idx}">Incorrect data</button><button class="feedback-option" data-reason="missing" data-row="${idx}">Missing data</button><button class="feedback-option" data-reason="outdated" data-row="${idx}">Outdated data</button><button class="feedback-option" data-reason="mismatch" data-row="${idx}">Data doesn't match my records</button><button class="feedback-option" data-reason="other" data-row="${idx}">Other</button></div></div></td>`;
+      return `<tr>${feedbackCell}${cells}</tr>`;
     }).join('');
   }
 
