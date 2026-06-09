@@ -2742,6 +2742,24 @@ function initFasttrackControls() {
     });
   }
 
+  const statusFilter = document.getElementById('ftFilterStatus');
+  if (statusFilter) {
+    statusFilter.addEventListener('change', () => {
+      ftFilterStatus = statusFilter.value;
+      ftCurrentPage = 1;
+      renderFasttrackView();
+    });
+  }
+
+  const acceptFilter = document.getElementById('ftFilterAcceptance');
+  if (acceptFilter) {
+    acceptFilter.addEventListener('change', () => {
+      ftFilterAcceptance = acceptFilter.value;
+      ftCurrentPage = 1;
+      renderFasttrackView();
+    });
+  }
+
   document.getElementById('ftPrevPage').addEventListener('click', () => {
     if (ftCurrentPage > 1) { ftCurrentPage--; renderFasttrackView(); }
   });
@@ -2762,6 +2780,9 @@ function initFasttrackControls() {
       if (ftFilterStatus === filter) { ftFilterStatus = 'all'; }
       else { ftFilterStatus = filter; ftFilterAcceptance = 'all'; }
     }
+    // Sync dropdowns
+    document.getElementById('ftFilterStatus').value = ftFilterStatus;
+    document.getElementById('ftFilterAcceptance').value = ftFilterAcceptance;
     ftCurrentPage = 1;
     renderFasttrackView();
   });

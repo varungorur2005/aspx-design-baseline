@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASPX - AI Business Solutions & Security Insights</title>
-  <link rel="stylesheet" href="css/styles.css?v=15">
+  <link rel="stylesheet" href="css/styles.css?v=16">
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
@@ -125,11 +125,6 @@
 
       <!-- MCI Performance View -->
       <div class="aspx-view hidden" id="mciView">
-        <div class="mci-page-header">
-          <div class="mci-page-eyebrow">Insights</div>
-          <h1 class="mci-page-title">MCI MW Performance Measurement</h1>
-          <p class="mci-page-subtitle">AI Business Solutions &amp; Security</p>
-        </div>
 
         <div class="mci-tabs-bar">
           <div class="mci-tabs-left">
@@ -190,11 +185,6 @@
 
       <!-- FastTrack Referrals View -->
       <div class="aspx-view hidden" id="fasttrackView">
-        <div class="mci-page-header">
-          <div class="mci-page-eyebrow">Insights</div>
-          <h1 class="mci-page-title">FastTrack Referrals</h1>
-          <p class="mci-page-subtitle">AI Business Solutions &amp; Security</p>
-        </div>
 
         <!-- KPI Tiles -->
         <div class="kpi-row" id="ftKpiRow"></div>
@@ -207,10 +197,19 @@
             </button>
           </div>
           <div class="toolbar-right">
-            <button class="toolbar-btn-icon" id="ftFilterBtn" title="Filter">
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg>
-              <span id="ftFilterBtnLabel">Filter</span>
-            </button>
+            <select class="ft-filter-select" id="ftFilterStatus">
+              <option value="all">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+              <option value="Expired">Expired</option>
+            </select>
+            <select class="ft-filter-select" id="ftFilterAcceptance">
+              <option value="all">All Acceptance</option>
+              <option value="Accept">Accept</option>
+              <option value="Pending">Pending</option>
+              <option value="Decline">Decline</option>
+            </select>
             <div class="table-search-wrap">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="#999"><path d="M6.5 1a5.5 5.5 0 0 1 4.38 8.82l3.65 3.65a.75.75 0 0 1-1.06 1.06l-3.65-3.65A5.5 5.5 0 1 1 6.5 1zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
               <input type="text" class="table-search-input" placeholder="Search referrals" id="ftSearch" />
@@ -390,6 +389,6 @@
     <span>Thank you! Your feedback has been submitted.</span>
   </div>
 
-  <script src="js/app.js?v=11"></script>
+  <script src="js/app.js?v=12"></script>
 </body>
 </html>
