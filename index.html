@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASPX - AI Business Solutions & Security Insights</title>
-  <link rel="stylesheet" href="css/styles.css?v=14">
+  <link rel="stylesheet" href="css/styles.css?v=15">
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
@@ -46,9 +46,8 @@
        <a href="#" class="sidebar-link" id="navMci">
          <span>MCI Performance</span>
        </a>
-       <a href="#" class="sidebar-link disabled coming-soon">
+       <a href="#" class="sidebar-link" id="navFasttrack">
          <span>FastTrack Referrals</span>
-         <span class="badge-soon">Soon</span>
        </a>
      </nav>
    </aside>
@@ -185,6 +184,56 @@
             <button class="pagination-btn active" type="button">1</button>
             <button class="pagination-btn" type="button" aria-label="Next page">›</button>
             <button class="pagination-size" type="button">25 results ▾</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FastTrack Referrals View -->
+      <div class="aspx-view hidden" id="fasttrackView">
+        <div class="mci-page-header">
+          <div class="mci-page-eyebrow">Insights</div>
+          <h1 class="mci-page-title">FastTrack Referrals</h1>
+          <p class="mci-page-subtitle">AI Business Solutions &amp; Security</p>
+        </div>
+
+        <!-- KPI Tiles -->
+        <div class="kpi-row" id="ftKpiRow"></div>
+
+        <div class="table-toolbar-aspx">
+          <div class="toolbar-left">
+            <button class="toolbar-btn" id="ftDownloadBtn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v9.5m0 0L5 7.5m3 3L11 7.5M3 13h10"/><path d="M8 1v9m0 0l-3-3m3 3l3-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Download
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <button class="toolbar-btn-icon" id="ftFilterBtn" title="Filter">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg>
+              <span id="ftFilterBtnLabel">Filter</span>
+            </button>
+            <div class="table-search-wrap">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="#999"><path d="M6.5 1a5.5 5.5 0 0 1 4.38 8.82l3.65 3.65a.75.75 0 0 1-1.06 1.06l-3.65-3.65A5.5 5.5 0 1 1 6.5 1zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+              <input type="text" class="table-search-input" placeholder="Search referrals" id="ftSearch" />
+            </div>
+          </div>
+        </div>
+
+        <div class="table-scroll-wrapper">
+          <table class="tenant-table" id="ftTable">
+            <thead>
+              <tr id="ftTableHead"></tr>
+            </thead>
+            <tbody id="ftTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="table-pagination" id="ftPagination">
+          <div class="table-pagination-summary" id="ftResultsSummary"></div>
+          <div class="table-pagination-controls">
+            <button class="pagination-btn" type="button" id="ftPrevPage" aria-label="Previous page">&#8249;</button>
+            <span id="ftPageIndicator" class="pagination-btn active">1</span>
+            <button class="pagination-btn" type="button" id="ftNextPage" aria-label="Next page">&#8250;</button>
+            <button class="pagination-size" type="button" id="ftPageSize">25 results &#9662;</button>
           </div>
         </div>
       </div>
@@ -341,6 +390,6 @@
     <span>Thank you! Your feedback has been submitted.</span>
   </div>
 
-  <script src="js/app.js?v=10"></script>
+  <script src="js/app.js?v=11"></script>
 </body>
 </html>

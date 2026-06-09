@@ -8,6 +8,7 @@
   initFlyout();
   initOcvModal();
   initGlobalFeedback();
+  initFasttrackControls();
   renderCurrentPage();
 });
 
@@ -1254,6 +1255,7 @@ const searchTermsByMciTab = {
 function initSidebarNavigation() {
   const navGrowth = document.getElementById('navGrowth');
   const navMci = document.getElementById('navMci');
+  const navFasttrack = document.getElementById('navFasttrack');
 
   if (navGrowth) {
     navGrowth.addEventListener('click', event => {
@@ -1266,6 +1268,13 @@ function initSidebarNavigation() {
     navMci.addEventListener('click', event => {
       event.preventDefault();
       switchPage('mci');
+    });
+  }
+
+  if (navFasttrack) {
+    navFasttrack.addEventListener('click', event => {
+      event.preventDefault();
+      switchPage('fasttrack');
     });
   }
 }
@@ -1405,15 +1414,23 @@ function switchPage(page) {
 
   const aspxView = document.getElementById('aspxView');
   const mciView = document.getElementById('mciView');
+  const fasttrackView = document.getElementById('fasttrackView');
   const navGrowth = document.getElementById('navGrowth');
   const navMci = document.getElementById('navMci');
+  const navFasttrack = document.getElementById('navFasttrack');
   const navPageName = document.querySelector('.nav-page-name');
 
   if (aspxView) aspxView.classList.toggle('hidden', page !== 'growth');
   if (mciView) mciView.classList.toggle('hidden', page !== 'mci');
+  if (fasttrackView) fasttrackView.classList.toggle('hidden', page !== 'fasttrack');
   if (navGrowth) navGrowth.classList.toggle('active', page === 'growth');
   if (navMci) navMci.classList.toggle('active', page === 'mci');
-  if (navPageName) navPageName.textContent = page === 'growth' ? 'Growth Opportunities' : 'MCI Performance';
+  if (navFasttrack) navFasttrack.classList.toggle('active', page === 'fasttrack');
+  if (navPageName) {
+    if (page === 'growth') navPageName.textContent = 'Growth Opportunities';
+    else if (page === 'mci') navPageName.textContent = 'MCI Performance';
+    else navPageName.textContent = 'FastTrack Referrals';
+  }
 
   renderCurrentPage();
 }
@@ -1421,6 +1438,8 @@ function switchPage(page) {
 function renderCurrentPage() {
   if (currentPage === 'mci') {
     renderMciView(currentMciTab);
+  } else if (currentPage === 'fasttrack') {
+    renderFasttrackView();
   } else {
     renderOppView(currentTab);
   }
@@ -2574,5 +2593,177 @@ function initGlobalFeedback() {
   });
 }
 
+// ═══════════════════════════════════════════════════
+// FASTTRACK REFERRALS PAGE
+// ═══════════════════════════════════════════════════
 
+const fasttrackColumns = ['Name', 'Referral Source', 'Referral ID', 'Acceptance', 'Referral Status', 'Date'];
+
+const fasttrackData = [
+  { 'Name': 'Fabrikam Holdings CEE', 'Referral Source': 'Partner Campaign', 'Referral ID': '002123', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Tarnyba LT', 'Referral Source': 'Partner Campaign', 'Referral ID': '002124', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Legal Services', 'Referral Source': 'Partner Campaign', 'Referral ID': '002121', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Bank BG', 'Referral Source': 'Partner Campaign', 'Referral ID': '002122', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Property Mgmt', 'Referral Source': 'Partner Campaign', 'Referral ID': '002120', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Telco Group', 'Referral Source': 'Partner Campaign', 'Referral ID': '002116', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Energy BG', 'Referral Source': 'Partner Campaign', 'Referral ID': '002117', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Forestry OYJ', 'Referral Source': 'Partner Campaign', 'Referral ID': '002114', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Transit ZRT', 'Referral Source': 'Partner Campaign', 'Referral ID': '002115', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Retail Baltic', 'Referral Source': 'Partner Campaign', 'Referral ID': '002112', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Ventures Group', 'Referral Source': 'Partner Campaign', 'Referral ID': '002113', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Software SE', 'Referral Source': 'Partner Campaign', 'Referral ID': '002111', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Bank D.D.', 'Referral Source': 'Partner Campaign', 'Referral ID': '002109', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Pharmaceuticals PLC', 'Referral Source': 'Partner Campaign', 'Referral ID': '002107', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam University HU', 'Referral Source': 'Partner Campaign', 'Referral ID': '002108', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Finance Bulgaria', 'Referral Source': 'Partner Campaign', 'Referral ID': '002105', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam IT Services ZRT', 'Referral Source': 'Partner Campaign', 'Referral ID': '002106', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Gov Services HU', 'Referral Source': 'Partner Campaign', 'Referral ID': '002103', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Financial Romania S.A.', 'Referral Source': 'Partner Campaign', 'Referral ID': '001946', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 24, 2026' },
+  { 'Name': 'Fabrikam Retail SP Z.O.O.', 'Referral Source': 'Partner Campaign', 'Referral ID': '001945', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 12, 2026' },
+  { 'Name': 'Fabrikam Logistics SA', 'Referral Source': 'Partner Campaign', 'Referral ID': '001944', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 12, 2026' },
+  { 'Name': 'Fabrikam Transilvania S.A.', 'Referral Source': 'Partner Campaign', 'Referral ID': '001890', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 12, 2026' },
+  { 'Name': 'Fabrikam Politehnica University', 'Referral Source': 'Partner Campaign', 'Referral ID': '001875', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 12, 2026' },
+  { 'Name': 'Fabrikam Medical University', 'Referral Source': 'Partner Campaign', 'Referral ID': '001873', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 12, 2026' },
+  { 'Name': 'Fabrikam University RO', 'Referral Source': 'Partner Campaign', 'Referral ID': '001874', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 12, 2026' },
+  { 'Name': 'Fabrikam Oil & Gas Group', 'Referral Source': 'Partner Campaign', 'Referral ID': '001860', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 5, 2026' },
+  { 'Name': 'Fabrikam Airlines PLC', 'Referral Source': 'Partner Campaign', 'Referral ID': '001855', 'Acceptance': 'Pending', 'Referral Status': 'Pending', 'Date': 'March 5, 2026' },
+  { 'Name': 'Fabrikam Marketplace PL', 'Referral Source': 'Partner Campaign', 'Referral ID': '001850', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'March 5, 2026' },
+  { 'Name': 'Fabrikam Aerospace Corp', 'Referral Source': 'Direct Referral', 'Referral ID': '001845', 'Acceptance': 'Decline', 'Referral Status': 'Expired', 'Date': 'February 28, 2026' },
+  { 'Name': 'Fabrikam Telecom AB', 'Referral Source': 'Direct Referral', 'Referral ID': '001840', 'Acceptance': 'Accept', 'Referral Status': 'Completed', 'Date': 'February 28, 2026' },
+  { 'Name': 'Fabrikam Nordic Bank', 'Referral Source': 'Partner Campaign', 'Referral ID': '001835', 'Acceptance': 'Accept', 'Referral Status': 'Completed', 'Date': 'February 20, 2026' },
+  { 'Name': 'Fabrikam Appliances AB', 'Referral Source': 'Direct Referral', 'Referral ID': '001830', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'February 20, 2026' },
+  { 'Name': 'Fabrikam Vehicles AB', 'Referral Source': 'Partner Campaign', 'Referral ID': '001825', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'February 15, 2026' },
+  { 'Name': 'Fabrikam Broadcasting FI', 'Referral Source': 'Partner Campaign', 'Referral ID': '001820', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'February 15, 2026' },
+  { 'Name': 'Fabrikam Petrochemicals S.A.', 'Referral Source': 'Direct Referral', 'Referral ID': '001815', 'Acceptance': 'Pending', 'Referral Status': 'Pending', 'Date': 'February 10, 2026' },
+  { 'Name': 'Fabrikam Telekom HU', 'Referral Source': 'Partner Campaign', 'Referral ID': '001810', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'February 10, 2026' },
+  { 'Name': 'Fabrikam Discount Retail', 'Referral Source': 'Partner Campaign', 'Referral ID': '001805', 'Acceptance': 'Accept', 'Referral Status': 'Completed', 'Date': 'February 5, 2026' },
+  { 'Name': 'Fabrikam International Banking', 'Referral Source': 'Direct Referral', 'Referral ID': '001800', 'Acceptance': 'Decline', 'Referral Status': 'Expired', 'Date': 'January 28, 2026' },
+  { 'Name': 'Fabrikam Communications AB', 'Referral Source': 'Partner Campaign', 'Referral ID': '001795', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'January 28, 2026' },
+  { 'Name': 'Fabrikam Savings Bank CZ', 'Referral Source': 'Partner Campaign', 'Referral ID': '001790', 'Acceptance': 'Accept', 'Referral Status': 'Active', 'Date': 'January 20, 2026' },
+];
+
+let ftSearchTerm = '';
+let ftCurrentPage = 1;
+let ftPageSize = 25;
+let ftFilterStatus = 'all';
+let ftFilterAcceptance = 'all';
+
+function getFilteredFtData() {
+  return fasttrackData.filter(row => {
+    if (ftSearchTerm) {
+      const term = ftSearchTerm.toLowerCase();
+      const match = row['Name'].toLowerCase().includes(term) ||
+                    row['Referral ID'].toLowerCase().includes(term);
+      if (!match) return false;
+    }
+    if (ftFilterStatus !== 'all' && row['Referral Status'] !== ftFilterStatus) return false;
+    if (ftFilterAcceptance !== 'all' && row['Acceptance'] !== ftFilterAcceptance) return false;
+    return true;
+  });
+}
+
+function renderFasttrackView() {
+  const filtered = getFilteredFtData();
+  const total = filtered.length;
+  const totalPages = Math.ceil(total / ftPageSize);
+  if (ftCurrentPage > totalPages) ftCurrentPage = 1;
+  const start = (ftCurrentPage - 1) * ftPageSize;
+  const pageRows = filtered.slice(start, start + ftPageSize);
+
+  // KPIs
+  const kpiRow = document.getElementById('ftKpiRow');
+  const totalReferrals = fasttrackData.length;
+  const activeCount = fasttrackData.filter(r => r['Referral Status'] === 'Active').length;
+  const pendingCount = fasttrackData.filter(r => r['Referral Status'] === 'Pending').length;
+  const completedCount = fasttrackData.filter(r => r['Referral Status'] === 'Completed').length;
+  const expiredCount = fasttrackData.filter(r => r['Referral Status'] === 'Expired').length;
+  const acceptRate = Math.round((fasttrackData.filter(r => r['Acceptance'] === 'Accept').length / totalReferrals) * 100);
+
+  kpiRow.innerHTML = [
+    { value: totalReferrals, label: 'Total Referrals' },
+    { value: activeCount, label: 'Active', color: '#107c10' },
+    { value: pendingCount, label: 'Pending', color: '#f7941d' },
+    { value: completedCount, label: 'Completed', color: '#0078d4' },
+    { value: expiredCount, label: 'Expired', color: '#d13438' },
+    { value: acceptRate + '%', label: 'Acceptance Rate' },
+  ].map(k => `<div class="kpi-tile ft-kpi-tile" data-filter="${k.label}">
+    <span class="kpi-value"${k.color ? ` style="color:${k.color}"` : ''}>${k.value}</span>
+    <span class="kpi-label">${k.label}</span>
+  </div>`).join('');
+
+  // Table head
+  const head = document.getElementById('ftTableHead');
+  head.innerHTML = fasttrackColumns.map(c => {
+    const sortable = c === 'Referral ID' ? ' class="sortable"' : '';
+    return `<th${sortable}>${c}${c === 'Referral ID' ? ' <span class="sort-arrow">&#8595;</span>' : ''}</th>`;
+  }).join('');
+
+  // Table body
+  const body = document.getElementById('ftTableBody');
+  if (!pageRows.length) {
+    body.innerHTML = `<tr><td colspan="${fasttrackColumns.length}" style="padding:20px;text-align:center;color:#616161;">No referrals match the current search and filters.</td></tr>`;
+  } else {
+    body.innerHTML = pageRows.map(row => {
+      return `<tr>${fasttrackColumns.map(col => {
+        let val = row[col] || '';
+        if (col === 'Name') {
+          val = `<a href="#" class="ft-name-link">${escapeHtml(val)}</a>`;
+        } else if (col === 'Acceptance') {
+          const cls = val === 'Accept' ? 'ft-accept' : val === 'Decline' ? 'ft-decline' : 'ft-pending';
+          val = `<span class="ft-badge ${cls}">${val}</span>`;
+        } else if (col === 'Referral Status') {
+          const cls = val === 'Active' ? 'ft-status-active' : val === 'Completed' ? 'ft-status-completed' : val === 'Expired' ? 'ft-status-expired' : 'ft-status-pending';
+          val = `<span class="ft-badge ${cls}">${val}</span>`;
+        }
+        return `<td>${val}</td>`;
+      }).join('')}</tr>`;
+    }).join('');
+  }
+
+  // Pagination
+  const summary = document.getElementById('ftResultsSummary');
+  const showing = Math.min(start + ftPageSize, total);
+  summary.textContent = `${start + 1} - ${showing} of ${total} results`;
+
+  const pageIndicator = document.getElementById('ftPageIndicator');
+  pageIndicator.textContent = ftCurrentPage;
+
+  document.getElementById('ftPrevPage').disabled = ftCurrentPage <= 1;
+  document.getElementById('ftNextPage').disabled = ftCurrentPage >= totalPages;
+}
+
+function initFasttrackControls() {
+  const searchInput = document.getElementById('ftSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      ftSearchTerm = searchInput.value.trim();
+      ftCurrentPage = 1;
+      renderFasttrackView();
+    });
+  }
+
+  document.getElementById('ftPrevPage').addEventListener('click', () => {
+    if (ftCurrentPage > 1) { ftCurrentPage--; renderFasttrackView(); }
+  });
+  document.getElementById('ftNextPage').addEventListener('click', () => {
+    const total = getFilteredFtData().length;
+    if (ftCurrentPage < Math.ceil(total / ftPageSize)) { ftCurrentPage++; renderFasttrackView(); }
+  });
+
+  // KPI tile click filtering
+  document.getElementById('ftKpiRow').addEventListener('click', (e) => {
+    const tile = e.target.closest('.ft-kpi-tile');
+    if (!tile) return;
+    const filter = tile.dataset.filter;
+    if (filter === 'Total Referrals' || filter === 'Acceptance Rate') {
+      ftFilterStatus = 'all';
+      ftFilterAcceptance = 'all';
+    } else if (filter === 'Active' || filter === 'Completed' || filter === 'Pending' || filter === 'Expired') {
+      if (ftFilterStatus === filter) { ftFilterStatus = 'all'; }
+      else { ftFilterStatus = filter; ftFilterAcceptance = 'all'; }
+    }
+    ftCurrentPage = 1;
+    renderFasttrackView();
+  });
+}
 
