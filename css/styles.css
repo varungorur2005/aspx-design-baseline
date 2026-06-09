@@ -747,7 +747,7 @@ body {
   animation: modalIn 0.2s ease;
   overflow: hidden;
 }
-.ocv-step { display: flex; flex-direction: column; height: 100%; }
+.ocv-step { display: flex; flex-direction: column; max-height: 85vh; overflow-y: auto; }
 .ocv-step.hidden { display: none; }
 @keyframes modalIn {
   from { opacity: 0; transform: translate(-50%, -48%); }

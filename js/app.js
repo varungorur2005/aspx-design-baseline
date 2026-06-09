@@ -2484,7 +2484,8 @@ function openOcvModal(reason, rowData, source) {
     document.getElementById('ocvStep1').classList.remove('hidden');
     document.getElementById('ocvStep2').classList.add('hidden');
   } else {
-    // For table/flyout feedback, go directly to step 2
+    // For table/flyout feedback, go directly to step 2 (hide back button)
+    document.getElementById('ocvBackBtn').classList.add('hidden');
     const typeLabel = reason === 'positive' ? 'compliment' : 'problem';
     showOcvStep2(typeLabel, rowData, source);
   }
@@ -2548,6 +2549,7 @@ function closeOcvModal() {
   // Reset to step 1
   document.getElementById('ocvStep1').classList.remove('hidden');
   document.getElementById('ocvStep2').classList.add('hidden');
+  document.getElementById('ocvBackBtn').classList.remove('hidden');
   ocvFeedbackContext = null;
 }
 
