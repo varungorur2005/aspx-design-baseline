@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASPX - AI Business Solutions & Security Insights</title>
-  <link rel="stylesheet" href="css/styles.css?v=17">
+  <link rel="stylesheet" href="css/styles.css?v=18">
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
@@ -136,6 +136,9 @@
 
         <div class="kpi-row mci-kpi-row" id="mciKpiRow"></div>
 
+        <!-- Charts Row -->
+        <div class="charts-row" id="mciChartsRow"></div>
+
         <div class="table-toolbar-aspx">
           <div class="toolbar-left">
             <button class="toolbar-btn" id="mciDownloadBtn">
@@ -187,7 +190,10 @@
       <div class="aspx-view hidden" id="fasttrackView">
 
         <!-- KPI Tiles -->
-        <div class="kpi-row" id="ftKpiRow"></div>
+        <div class="kpi-row" id="ftKpiRow" style="margin-top: 20px;"></div>
+
+        <!-- Charts Row -->
+        <div class="charts-row" id="ftChartsRow"></div>
 
         <div class="table-toolbar-aspx">
           <div class="toolbar-left">
@@ -390,6 +396,6 @@
     <span>Thank you! Your feedback has been submitted.</span>
   </div>
 
-  <script src="js/app.js?v=13"></script>
+  <script src="js/app.js?v=14"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   initSidebarNavigation();
   initOppTabs();
   initMciTabs();
@@ -9,6 +9,7 @@
   initOcvModal();
   initGlobalFeedback();
   initFasttrackControls();
+  initGlobalFeedbackDelegation();
   renderCurrentPage();
 });
 
@@ -1152,6 +1153,11 @@ const mciData = {
       { 'Engagement Name': 'Copilot + Power Deployment Accelerator (XS)', 'Claim ID': '3338188', 'TPID': '6407423', 'Tenant Name': 'Fabrikam 123-7ac-4d8', 'Tenant ID': 'D12E2A30-0037-47AC-B4D8-7AC4D8E7FB07', 'Partner Area': 'ANZ', 'Date Initiated': '8/15/2025', 'Date POE Completed': '10/8/2025', 'Months Since Completion': '7', 'Performance Status': 'Failing', 'Milestone': 'M2', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '72%', 'Repeat Customer': 'No', 'M365 Copilot Revenue Goal': '$25,000', 'M365 Copilot Revenue Attainment': '18%', 'Copilot Chat MAU Goal': '250', 'Copilot Chat MAU Attained': '54%' },
       { 'Engagement Name': 'Copilot + Power Envisioning & PoC (S)', 'Claim ID': '3340426', 'TPID': '7518534', 'Tenant Name': 'Fabrikam 123-8bd-6e9', 'Tenant ID': 'D12E2A30-0038-48BD-A6E9-8BD6E9F8AC08', 'Partner Area': 'Japan', 'Date Initiated': '8/20/2025', 'Date POE Completed': '11/19/2025', 'Months Since Completion': '6', 'Performance Status': 'Passing', 'Milestone': 'M2', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '356%', 'Repeat Customer': 'Yes', 'M365 Copilot Revenue Goal': '$50,000', 'M365 Copilot Revenue Attainment': '122%', 'Copilot Chat MAU Goal': '500', 'Copilot Chat MAU Attained': '234%' },
       { 'Engagement Name': 'Copilot + Power Deployment Accelerator (M)', 'Claim ID': '3342871', 'TPID': '8629645', 'Tenant Name': 'Fabrikam 123-afd-5b7', 'Tenant ID': 'D12E2A30-0040-4AFD-A5B7-AFD5B7C0DE10', 'Partner Area': 'LATAM', 'Date Initiated': '8/26/2025', 'Date POE Completed': '11/28/2025', 'Months Since Completion': '6', 'Performance Status': 'Passing', 'Milestone': 'M2', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '141%', 'Repeat Customer': 'No', 'M365 Copilot Revenue Goal': '$125,000', 'M365 Copilot Revenue Attainment': '31%', 'Copilot Chat MAU Goal': '1250', 'Copilot Chat MAU Attained': '110%' }
+      { 'Engagement Name': 'Copilot + Power Envisioning & PoC (S)', 'Claim ID': '3345100', 'TPID': '9740756', 'Tenant Name': 'Fabrikam 123-c9d-8e0', 'Tenant ID': 'D12E2A30-7788-4c9d-e8e0-0d1e2f3a4b5c', 'Partner Area': 'North Europe', 'Date Initiated': '9/1/2025', 'Date POE Completed': '11/15/2025', 'Months Since Completion': '6', 'Performance Status': 'Passing', 'Milestone': 'M2', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '275%', 'Repeat Customer': 'Yes', 'M365 Copilot Revenue Goal': '$50,000', 'M365 Copilot Revenue Attainment': '150%', 'Copilot Chat MAU Goal': '500', 'Copilot Chat MAU Attained': '125%' },
+      { 'Engagement Name': 'Copilot + Power Deployment Accelerator (XS)', 'Claim ID': '3347200', 'TPID': '1085867', 'Tenant Name': 'Fabrikam 123-d0e-9f1', 'Tenant ID': 'D12E2A30-8899-4d0e-f9f1-1e2f3a4b5c6d', 'Partner Area': 'UKI', 'Date Initiated': '9/5/2025', 'Date POE Completed': '11/22/2025', 'Months Since Completion': '6', 'Performance Status': 'Failing', 'Milestone': 'M2', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '45%', 'Repeat Customer': 'No', 'M365 Copilot Revenue Goal': '$25,000', 'M365 Copilot Revenue Attainment': '12%', 'Copilot Chat MAU Goal': '250', 'Copilot Chat MAU Attained': '33%' },
+      { 'Engagement Name': 'Copilot + Power Envisioning & PoC (M)', 'Claim ID': '3349300', 'TPID': '2196978', 'Tenant Name': 'Fabrikam 123-e1f-0a2', 'Tenant ID': 'D12E2A30-9900-4e1f-a0a2-2f3a4b5c6d7e', 'Partner Area': 'India', 'Date Initiated': '9/10/2025', 'Date POE Completed': '12/1/2025', 'Months Since Completion': '5', 'Performance Status': 'Pre-Milestone', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '0%', 'Repeat Customer': 'No', 'M365 Copilot Revenue Goal': '$125,000', 'M365 Copilot Revenue Attainment': '0%', 'Copilot Chat MAU Goal': '1250', 'Copilot Chat MAU Attained': '0%' },
+      { 'Engagement Name': 'Copilot + Power Deployment Accelerator (S)', 'Claim ID': '3351400', 'TPID': '3308089', 'Tenant Name': 'Fabrikam 123-f2a-1b3', 'Tenant ID': 'D12E2A30-0011-4f2a-b1b3-3a4b5c6d7e8f', 'Partner Area': 'LATAM', 'Date Initiated': '9/15/2025', 'Date POE Completed': '12/10/2025', 'Months Since Completion': '5', 'Performance Status': 'Passing', 'Milestone': 'M2', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '156%', 'Repeat Customer': 'Yes', 'M365 Copilot Revenue Goal': '$50,000', 'M365 Copilot Revenue Attainment': '88%', 'Copilot Chat MAU Goal': '500', 'Copilot Chat MAU Attained': '68%' },
+      { 'Engagement Name': 'Copilot + Power Envisioning & PoC (XS)', 'Claim ID': '3353500', 'TPID': '4419190', 'Tenant Name': 'Fabrikam 123-a3b-2c4', 'Tenant ID': 'D12E2A30-0022-4a3b-c2c4-4b5c6d7e8f9a', 'Partner Area': 'Korea', 'Date Initiated': '9/20/2025', 'Date POE Completed': '12/18/2025', 'Months Since Completion': '5', 'Performance Status': 'Passing', 'Milestone': 'M2', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '410%', 'Repeat Customer': 'No', 'M365 Copilot Revenue Goal': '$25,000', 'M365 Copilot Revenue Attainment': '210%', 'Copilot Chat MAU Goal': '250', 'Copilot Chat MAU Attained': '200%' }
     ]
   },
   secureProductivity: {
@@ -1175,6 +1181,11 @@ const mciData = {
       { 'Engagement Name': 'Secure AI Productivity Envisioning & PoC (S)', 'Claim ID': '3412054', 'TPID': '6847326', 'Tenant Name': 'Fabrikam 123-6fb-2c5', 'Tenant ID': 'D12E2A30-0036-46FB-A2C5-6FB2C5D6EA06', 'Partner Area': 'South Europe', 'Date Initiated': '2/3/2026', 'Date POE Completed': '5/2/2026', 'Months Since Completion': '0', 'Performance Status': 'Pre-Milestone', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '0%', 'Revenue Goal': '$12,500', 'Revenue Attained': '0%' },
       { 'Engagement Name': 'Secure AI Productivity Envisioning & PoC (S)', 'Claim ID': '3413848', 'TPID': '7958437', 'Tenant Name': 'Fabrikam 123-9ce-1a4', 'Tenant ID': 'D12E2A30-0039-49CE-B1A4-9CE1A4B9CD09', 'Partner Area': 'India', 'Date Initiated': '2/6/2026', 'Date POE Completed': '5/8/2026', 'Months Since Completion': '0', 'Performance Status': 'Passing', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': 'Not available', 'Revenue Goal': 'Not available', 'Revenue Attained': 'Not available' },
       { 'Engagement Name': 'Secure AI Productivity Envisioning & PoC (M)', 'Claim ID': '3415579', 'TPID': '8069548', 'Tenant Name': 'Fabrikam 123-1af-3c2', 'Tenant ID': 'D12E2A30-0031-41AF-B3C2-1AF3C2D4E501', 'Partner Area': 'United States', 'Date Initiated': '2/10/2026', 'Date POE Completed': '5/14/2026', 'Months Since Completion': '0', 'Performance Status': 'Failing', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '0%', 'Revenue Goal': '$25,000', 'Revenue Attained': '0%' }
+      { 'Engagement Name': 'Secure AI Productivity Envisioning & PoC (S)', 'Claim ID': '3420100', 'TPID': '4063201', 'Tenant Name': 'Fabrikam 123-b4c-3d5', 'Tenant ID': 'D12E2A30-AA01-4b4c-a3d5-b4c3d5e6f701', 'Partner Area': 'Korea', 'Date Initiated': '2/15/2026', 'Date POE Completed': '5/14/2026', 'Months Since Completion': '0', 'Performance Status': 'Pre-Milestone', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '0%', 'Revenue Goal': '$12,500', 'Revenue Attained': '0%' },
+      { 'Engagement Name': 'Secure AI Productivity Envisioning & PoC (M)', 'Claim ID': '3422200', 'TPID': '5174312', 'Tenant Name': 'Fabrikam 123-c5d-4e6', 'Tenant ID': 'D12E2A30-BB02-4c5d-b4e6-c5d4e6f7a802', 'Partner Area': 'United States', 'Date Initiated': '2/20/2026', 'Date POE Completed': '5/20/2026', 'Months Since Completion': '0', 'Performance Status': 'Passing', 'Milestone': 'M1', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '185%', 'Revenue Goal': '$25,000', 'Revenue Attained': '185%' },
+      { 'Engagement Name': 'Secure AI Productivity Envisioning & PoC (S)', 'Claim ID': '3424300', 'TPID': '6285423', 'Tenant Name': 'Fabrikam 123-d6e-5f7', 'Tenant ID': 'D12E2A30-CC03-4d6e-c5f7-d6e5f7a8b903', 'Partner Area': 'ANZ', 'Date Initiated': '2/25/2026', 'Date POE Completed': '5/25/2026', 'Months Since Completion': '0', 'Performance Status': 'Failing', 'Milestone': 'M1', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '42%', 'Revenue Goal': '$12,500', 'Revenue Attained': '42%' },
+      { 'Engagement Name': 'Secure AI Productivity Envisioning & PoC (M)', 'Claim ID': '3426400', 'TPID': '7396534', 'Tenant Name': 'Fabrikam 123-e7f-6a8', 'Tenant ID': 'D12E2A30-DD04-4e7f-d6a8-e7f6a8b9c004', 'Partner Area': 'MEA', 'Date Initiated': '3/1/2026', 'Date POE Completed': '5/28/2026', 'Months Since Completion': '0', 'Performance Status': 'Passing', 'Milestone': 'M1', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '320%', 'Revenue Goal': '$25,000', 'Revenue Attained': '320%' },
+      { 'Engagement Name': 'Secure AI Productivity Envisioning & PoC (S)', 'Claim ID': '3428500', 'TPID': '8407645', 'Tenant Name': 'Fabrikam 123-f8a-7b9', 'Tenant ID': 'D12E2A30-EE05-4f8a-e7b9-f8a7b9c0d105', 'Partner Area': 'Japan', 'Date Initiated': '3/5/2026', 'Date POE Completed': '5/30/2026', 'Months Since Completion': '0', 'Performance Status': 'Pre-Milestone', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '0%', 'Revenue Goal': '$12,500', 'Revenue Attained': '0%' }
     ]
   },
   cloudEndpoints: {
@@ -1198,6 +1209,11 @@ const mciData = {
       { 'Engagement Name': 'Cloud Endpoints Envisioning & PoC (S)', 'Claim ID': '3416884', 'TPID': '1841978', 'Tenant Name': 'Fabrikam 123-1af-3c2', 'Tenant ID': 'D12E2A30-0031-41AF-B3C2-1AF3C2D4E501', 'Partner Area': 'United States', 'Date Initiated': '2/13/2026', 'Date POE Completed': '5/20/2026', 'Months Since Completion': '0', 'Performance Status': 'Passing', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': 'Not available', 'Revenue Goal': '$18,750', 'Revenue Attained': 'Not available' },
       { 'Engagement Name': 'Cloud Endpoints Envisioning & PoC (S)', 'Claim ID': '3418709', 'TPID': '2952089', 'Tenant Name': 'Fabrikam 123-2b4-5d6', 'Tenant ID': 'D12E2A30-0032-42B4-A5D6-2B45D6E7F602', 'Partner Area': 'North Europe', 'Date Initiated': '2/18/2026', 'Date POE Completed': '5/23/2026', 'Months Since Completion': '0', 'Performance Status': 'Passing', 'Milestone': 'M1', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '142%', 'Revenue Goal': '$18,750', 'Revenue Attained': '142%' },
       { 'Engagement Name': 'Cloud Endpoints Envisioning & PoC (M)', 'Claim ID': '3420583', 'TPID': '3063190', 'Tenant Name': 'Fabrikam 123-4d9-1f2', 'Tenant ID': 'D12E2A30-0034-44D9-A1F2-4D91F2A3B804', 'Partner Area': 'Korea', 'Date Initiated': '2/24/2026', 'Date POE Completed': '5/28/2026', 'Months Since Completion': '0', 'Performance Status': 'Pre-Milestone', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '0%', 'Revenue Goal': '$37,500', 'Revenue Attained': '0%' }
+      { 'Engagement Name': 'Cloud Endpoints Envisioning & PoC (S)', 'Claim ID': '3422100', 'TPID': '1074301', 'Tenant Name': 'Fabrikam 123-a9b-8c0', 'Tenant ID': 'D12E2A30-FF06-4a9b-f8c0-a9b8c0d1e206', 'Partner Area': 'LATAM', 'Date Initiated': '2/28/2026', 'Date POE Completed': '5/26/2026', 'Months Since Completion': '0', 'Performance Status': 'Passing', 'Milestone': 'M1', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '167%', 'Revenue Goal': '$18,750', 'Revenue Attained': '167%' },
+      { 'Engagement Name': 'Cloud Endpoints Envisioning & PoC (M)', 'Claim ID': '3424200', 'TPID': '2185412', 'Tenant Name': 'Fabrikam 123-b0c-9d1', 'Tenant ID': 'D12E2A30-0107-4b0c-a9d1-b0c9d1e2f307', 'Partner Area': 'United States', 'Date Initiated': '3/3/2026', 'Date POE Completed': '5/29/2026', 'Months Since Completion': '0', 'Performance Status': 'Pre-Milestone', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '0%', 'Revenue Goal': '$37,500', 'Revenue Attained': '0%' },
+      { 'Engagement Name': 'Cloud Endpoints Envisioning & PoC (S)', 'Claim ID': '3426300', 'TPID': '3296523', 'Tenant Name': 'Fabrikam 123-c1d-0e2', 'Tenant ID': 'D12E2A30-0208-4c1d-b0e2-c1d0e2f3a408', 'Partner Area': 'North Europe', 'Date Initiated': '3/7/2026', 'Date POE Completed': '5/31/2026', 'Months Since Completion': '0', 'Performance Status': 'Failing', 'Milestone': 'M1', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '55%', 'Revenue Goal': '$18,750', 'Revenue Attained': '55%' },
+      { 'Engagement Name': 'Cloud Endpoints Envisioning & PoC (M)', 'Claim ID': '3428400', 'TPID': '4407634', 'Tenant Name': 'Fabrikam 123-d2e-1f3', 'Tenant ID': 'D12E2A30-0309-4d2e-c1f3-d2e1f3a4b509', 'Partner Area': 'India', 'Date Initiated': '3/10/2026', 'Date POE Completed': '6/2/2026', 'Months Since Completion': '0', 'Performance Status': 'Passing', 'Milestone': 'M1', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '203%', 'Revenue Goal': '$37,500', 'Revenue Attained': '203%' },
+      { 'Engagement Name': 'Cloud Endpoints Envisioning & PoC (S)', 'Claim ID': '3430500', 'TPID': '5518745', 'Tenant Name': 'Fabrikam 123-e3f-2a4', 'Tenant ID': 'D12E2A30-0410-4e3f-d2a4-e3f2a4b5c610', 'Partner Area': 'ASEAN', 'Date Initiated': '3/14/2026', 'Date POE Completed': '6/5/2026', 'Months Since Completion': '0', 'Performance Status': 'Pre-Milestone', 'Milestone': 'Pre-Milestone', 'Goal Type': 'Individual', 'Attainment Goal': '100%', 'Total Attainment': '0%', 'Revenue Goal': '$18,750', 'Revenue Attained': '0%' }
     ]
   }
 };
@@ -1516,9 +1532,26 @@ function renderMciView(tab) {
 
   updateToolbarState();
 
+  // Enhanced KPIs - compute from data
+  const rows = data.rows;
+  const totalEngagements = rows.length;
+  const passingCount = rows.filter(r => r['Performance Status'] === 'Passing').length;
+  const failingCount = rows.filter(r => r['Performance Status'] === 'Failing').length;
+  const preMilestoneCount = rows.filter(r => r['Performance Status'] === 'Pre-Milestone').length;
+  const passRate = totalEngagements ? Math.round((passingCount / totalEngagements) * 100) : 0;
+  const repeatCustomers = rows.filter(r => r['Repeat Customer'] === 'Yes').length;
+
+  const enhancedKpis = [
+    ...data.kpis,
+    { title: 'Total Engagements', value: String(totalEngagements), badge: 'All', tone: 'neutral' },
+    { title: 'Passing', value: String(passingCount), badge: passRate + '% pass rate', tone: 'passing' },
+    { title: 'Failing', value: String(failingCount), badge: 'Needs attention', tone: 'failing' },
+    { title: 'Pre-Milestone', value: String(preMilestoneCount), badge: 'Early stage', tone: 'pending' },
+  ];
+
   const kpiRow = document.getElementById('mciKpiRow');
   if (kpiRow) {
-    kpiRow.innerHTML = data.kpis.map(kpi => `
+    kpiRow.innerHTML = enhancedKpis.map(kpi => `
       <div class="mci-kpi-tile">
         <div class="mci-kpi-actions">
           <button class="icon-btn" type="button" aria-label="Filter KPI">
@@ -1535,6 +1568,9 @@ function renderMciView(tab) {
     `).join('');
   }
 
+  // Charts
+  renderMciCharts(tab, rows);
+
   const visibleColumns = getMciVisibleColumns(tab);
   const visibleRows = getMciDisplayRows(tab);
   const head = document.getElementById('mciTableHead');
@@ -1542,13 +1578,13 @@ function renderMciView(tab) {
   const summary = document.getElementById('mciResultsSummary');
 
   if (head) {
-    head.innerHTML = visibleColumns.map(column => `<th>${escapeHtml(column)}</th>`).join('');
+    head.innerHTML = visibleColumns.map(column => `<th>${escapeHtml(column)}</th>`).join('') + '<th class="col-feedback">Give Feedback</th>';
   }
 
   if (!body) return;
 
   if (!visibleRows.length) {
-    body.innerHTML = `<tr><td colspan="${visibleColumns.length}" style="padding: 20px; text-align: center; color: #616161;">No rows match the current search and filters.</td></tr>`;
+    body.innerHTML = `<tr><td colspan="${visibleColumns.length + 1}" style="padding: 20px; text-align: center; color: #616161;">No rows match the current search and filters.</td></tr>`;
   } else {
     body.innerHTML = visibleRows.map(({ row }) => `
       <tr>
@@ -1561,6 +1597,18 @@ function renderMciView(tab) {
           }
           return `<td>${value}</td>`;
         }).join('')}
+        <td class="feedback-cell">
+          <div class="feedback-dropdown">
+            <button class="feedback-btn" title="Give Feedback"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1Zm0 10.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM8.75 8a.75.75 0 0 1-1.5 0V5a.75.75 0 0 1 1.5 0v3Z" fill="#616161"/></svg></button>
+            <div class="feedback-menu">
+              <div class="feedback-option" data-reason="Incorrect data">Incorrect data</div>
+              <div class="feedback-option" data-reason="Missing data">Missing data</div>
+              <div class="feedback-option" data-reason="Outdated data">Outdated data</div>
+              <div class="feedback-option" data-reason="Data doesn't match my records">Data doesn't match my records</div>
+              <div class="feedback-option" data-reason="Other">Other</div>
+            </div>
+          </div>
+        </td>
       </tr>
     `).join('');
   }
@@ -1569,11 +1617,114 @@ function renderMciView(tab) {
     const total = visibleRows.length;
     summary.textContent = total ? `Showing 1 - ${Math.min(total, 10)} of ${total} results` : 'Showing 0 - 0 of 0 results';
   }
+
+  // Render MCI charts
+  renderMciCharts(tab, visibleRows.map(r => r.row));
 }
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CHARTS (Chart.js)
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
+
+let mciChartInstances = [];
+
+function renderMciCharts(tab, rows) {
+  const container = document.getElementById('mciChartsRow');
+  if (!container) return;
+
+  mciChartInstances.forEach(c => c.destroy());
+  mciChartInstances = [];
+
+  const statusCounts = {};
+  const areaCounts = {};
+  rows.forEach(row => {
+    const status = row['Performance Status'] || 'Unknown';
+    statusCounts[status] = (statusCounts[status] || 0) + 1;
+    const area = row['Partner Area'] || 'Unknown';
+    areaCounts[area] = (areaCounts[area] || 0) + 1;
+  });
+
+  const statusColors = { 'Passing': '#107c10', 'Failing': '#d13438', 'Pre-Milestone': '#f7941d' };
+
+  container.innerHTML = `
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">By Performance Status</div><div class="chart-card-subtitle">${chartSubtitle}</div></div>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="mciChartStatus"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">By Partner Area</div><div class="chart-card-subtitle">${chartSubtitle}</div></div>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="mciChartArea"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">Attainment Distribution</div><div class="chart-card-subtitle">${chartSubtitle}</div></div>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="mciChartAttainment"></canvas></div>
+    </div>
+  `;
+
+  const statusLabels = Object.keys(statusCounts);
+  mciChartInstances.push(new Chart(document.getElementById('mciChartStatus'), {
+    type: 'doughnut',
+    data: {
+      labels: statusLabels,
+      datasets: [{ data: statusLabels.map(l => statusCounts[l]), backgroundColor: statusLabels.map(l => statusColors[l] || '#999') }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 10 }, padding: 12 } } }
+    }
+  }));
+
+  const areaLabels = Object.keys(areaCounts).sort((a, b) => areaCounts[b] - areaCounts[a]);
+  mciChartInstances.push(new Chart(document.getElementById('mciChartArea'), {
+    type: 'bar',
+    data: {
+      labels: areaLabels,
+      datasets: [{ data: areaLabels.map(l => areaCounts[l]), backgroundColor: '#1b3a5c', borderRadius: 4 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { beginAtZero: true, grid: { color: '#e8e8e8', drawBorder: false }, ticks: { font: { size: 10 } } },
+        y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+      }
+    }
+  }));
+
+  const attainmentBuckets = { '0%': 0, '1-50%': 0, '51-100%': 0, '101-200%': 0, '200%+': 0 };
+  rows.forEach(row => {
+    const val = parseInt(row['Total Attainment']);
+    if (isNaN(val)) return;
+    if (val === 0) attainmentBuckets['0%']++;
+    else if (val <= 50) attainmentBuckets['1-50%']++;
+    else if (val <= 100) attainmentBuckets['51-100%']++;
+    else if (val <= 200) attainmentBuckets['101-200%']++;
+    else attainmentBuckets['200%+']++;
+  });
+  const attLabels = Object.keys(attainmentBuckets);
+  const attColors = ['#d13438', '#f7941d', '#fff4ce', '#107c10', '#0078d4'];
+  mciChartInstances.push(new Chart(document.getElementById('mciChartAttainment'), {
+    type: 'bar',
+    data: {
+      labels: attLabels,
+      datasets: [{ data: attLabels.map(l => attainmentBuckets[l]), backgroundColor: attColors, borderRadius: 4 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#e8e8e8', drawBorder: false }, ticks: { font: { size: 10 }, stepSize: 1 } },
+        x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+      }
+    }
+  }));
+}
 function chartCardMarkup(title, id) {
   return `
     <div class="chart-card">
@@ -2217,6 +2368,34 @@ function initFeedbackButton() {
 
 function initTableSelection() {}
 
+// Event delegation for Give Feedback column on MCI and FastTrack tables
+function initGlobalFeedbackDelegation() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.feedback-btn');
+    const opt = e.target.closest('.feedback-option');
+
+    if (btn) {
+      e.stopPropagation();
+      const wrapper = btn.closest('.feedback-dropdown');
+      const menu = wrapper.querySelector('.feedback-menu');
+      const wasOpen = menu.classList.contains('show');
+
+      // Close all open menus
+      document.querySelectorAll('.feedback-menu').forEach(m => m.classList.remove('show'));
+      if (!wasOpen) menu.classList.add('show');
+    } else if (opt) {
+      e.stopPropagation();
+      const reason = opt.dataset.reason;
+      // Close menu
+      document.querySelectorAll('.feedback-menu').forEach(m => m.classList.remove('show'));
+      openOcvModal(reason, null, 'table');
+    } else {
+      // Close all feedback menus on outside click
+      document.querySelectorAll('.feedback-menu').forEach(m => m.classList.remove('show'));
+    }
+  });
+}
+
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // FLYOUT PANEL (5 types from screenshots 2-6)
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -2721,12 +2900,12 @@ function renderFasttrackView() {
   head.innerHTML = fasttrackColumns.map(c => {
     const sortable = c === 'Referral ID' ? ' class="sortable"' : '';
     return `<th${sortable}>${c}${c === 'Referral ID' ? ' <span class="sort-arrow">&#8595;</span>' : ''}</th>`;
-  }).join('');
+  }).join('') + '<th class="col-feedback">Give Feedback</th>';
 
   // Table body
   const body = document.getElementById('ftTableBody');
   if (!pageRows.length) {
-    body.innerHTML = `<tr><td colspan="${fasttrackColumns.length}" style="padding:20px;text-align:center;color:#616161;">No referrals match the current search and filters.</td></tr>`;
+    body.innerHTML = `<tr><td colspan="${fasttrackColumns.length + 1}" style="padding:20px;text-align:center;color:#616161;">No referrals match the current search and filters.</td></tr>`;
   } else {
     body.innerHTML = pageRows.map(row => {
       return `<tr>${fasttrackColumns.map(col => {
@@ -2741,7 +2920,7 @@ function renderFasttrackView() {
           val = `<span class="ft-badge ${cls}">${val}</span>`;
         }
         return `<td>${val}</td>`;
-      }).join('')}</tr>`;
+      }).join('')}<td class="feedback-cell"><div class="feedback-dropdown"><button class="feedback-btn" title="Give Feedback"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1Zm0 10.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM8.75 8a.75.75 0 0 1-1.5 0V5a.75.75 0 0 1 1.5 0v3Z" fill="#616161"/></svg></button><div class="feedback-menu"><div class="feedback-option" data-reason="Incorrect data">Incorrect data</div><div class="feedback-option" data-reason="Missing data">Missing data</div><div class="feedback-option" data-reason="Outdated data">Outdated data</div><div class="feedback-option" data-reason="Data doesn't match my records">Data doesn't match my records</div><div class="feedback-option" data-reason="Other">Other</div></div></div></td></tr>`;
     }).join('');
   }
 
@@ -2755,6 +2934,114 @@ function renderFasttrackView() {
 
   document.getElementById('ftPrevPage').disabled = ftCurrentPage <= 1;
   document.getElementById('ftNextPage').disabled = ftCurrentPage >= totalPages;
+
+  // Charts
+  renderFtCharts();
+}
+
+let ftChartInstances = [];
+
+function renderFtCharts() {
+  const container = document.getElementById('ftChartsRow');
+  if (!container) return;
+
+  // Destroy existing charts
+  ftChartInstances.forEach(c => c.destroy());
+  ftChartInstances = [];
+
+  // Calculate data for charts
+  const statusCounts = {};
+  const sourceCounts = {};
+  const monthCounts = {};
+
+  fasttrackData.forEach(row => {
+    const status = row['Referral Status'];
+    statusCounts[status] = (statusCounts[status] || 0) + 1;
+
+    const source = row['Referral Source'];
+    sourceCounts[source] = (sourceCounts[source] || 0) + 1;
+
+    const dateStr = row['Date'];
+    const month = dateStr.split(' ').slice(0, 2).join(' ').replace(',', '');
+    monthCounts[month] = (monthCounts[month] || 0) + 1;
+  });
+
+  const statusColors = { 'Active': '#107c10', 'Pending': '#f7941d', 'Completed': '#0078d4', 'Expired': '#d13438' };
+  const sourceColors = ['#0078d4', '#1b3a5c', '#4fc3f7'];
+
+  container.innerHTML = `
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">By Status</div><div class="chart-card-subtitle">${chartSubtitle}</div></div>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="ftChartStatus"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">By Source</div><div class="chart-card-subtitle">${chartSubtitle}</div></div>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="ftChartSource"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">By Month</div><div class="chart-card-subtitle">${chartSubtitle}</div></div>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="ftChartMonth"></canvas></div>
+    </div>
+  `;
+
+  // Status pie chart
+  const statusLabels = Object.keys(statusCounts);
+  const statusData = Object.values(statusCounts);
+  ftChartInstances.push(new Chart(document.getElementById('ftChartStatus'), {
+    type: 'doughnut',
+    data: {
+      labels: statusLabels,
+      datasets: [{ data: statusData, backgroundColor: statusLabels.map(l => statusColors[l] || '#999') }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 10 }, padding: 12 } } }
+    }
+  }));
+
+  // Source bar chart
+  const sourceLabels = Object.keys(sourceCounts);
+  const sourceData = Object.values(sourceCounts);
+  ftChartInstances.push(new Chart(document.getElementById('ftChartSource'), {
+    type: 'bar',
+    data: {
+      labels: sourceLabels,
+      datasets: [{ data: sourceData, backgroundColor: sourceColors.slice(0, sourceLabels.length), borderRadius: 4 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: 'x',
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#e8e8e8', drawBorder: false }, ticks: { font: { size: 10 } } },
+        x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+      }
+    }
+  }));
+
+  // Monthly bar chart
+  const monthLabels = Object.keys(monthCounts).reverse();
+  const monthData = monthLabels.map(m => monthCounts[m]);
+  ftChartInstances.push(new Chart(document.getElementById('ftChartMonth'), {
+    type: 'bar',
+    data: {
+      labels: monthLabels,
+      datasets: [{ data: monthData, backgroundColor: '#0078d4', borderRadius: 4 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#e8e8e8', drawBorder: false }, ticks: { font: { size: 10 } } },
+        x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 45 } }
+      }
+    }
+  }));
 }
 
 function initFasttrackControls() {
