@@ -271,15 +271,16 @@
   <aside class="flyout-panel hidden" id="flyoutPanel">
     <div class="flyout-header">
       <h2 class="flyout-title" id="flyoutTitle">Tenant Details</h2>
-      <div class="flyout-header-feedback" id="flyoutHeaderFeedback">
-        <button class="flyout-thumb" data-vote="up" title="Thumbs up">
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M4 9h2v8H4V9zm5.5-5.5c.28 0 .5.22.5.5v3h5.5a1.5 1.5 0 0 1 1.49 1.67l-.75 5.5A1.5 1.5 0 0 1 14.75 15.5H8V9l1.96-4.9c.1-.25.3-.45.54-.55V3.5z"/></svg>
-        </button>
-        <button class="flyout-thumb" data-vote="down" title="Thumbs down">
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M16 11h-2V3h2v8zm-5.5 5.5a.5.5 0 0 1-.5-.5v-3H4.5A1.5 1.5 0 0 1 3.01 11.33l.75-5.5A1.5 1.5 0 0 1 5.25 4.5H12V11l-1.96 4.9c-.1.25-.3.45-.54.55v.05z"/></svg>
-        </button>
-      </div>
       <button class="flyout-close" id="flyoutClose">✕</button>
+    </div>
+    <div class="flyout-feedback-strip" id="flyoutHeaderFeedback">
+      <span class="flyout-feedback-strip-label">Was this information useful?</span>
+      <button class="flyout-thumb" data-vote="up" title="Thumbs up">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M4 9h2v8H4V9zm5.5-5.5c.28 0 .5.22.5.5v3h5.5a1.5 1.5 0 0 1 1.49 1.67l-.75 5.5A1.5 1.5 0 0 1 14.75 15.5H8V9l1.96-4.9c.1-.25.3-.45.54-.55V3.5z"/></svg>
+      </button>
+      <button class="flyout-thumb" data-vote="down" title="Thumbs down">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M16 11h-2V3h2v8zm-5.5 5.5a.5.5 0 0 1-.5-.5v-3H4.5A1.5 1.5 0 0 1 3.01 11.33l.75-5.5A1.5 1.5 0 0 1 5.25 4.5H12V11l-1.96 4.9c-.1.25-.3.45-.54.55v.05z"/></svg>
+      </button>
     </div>
     <div class="flyout-body" id="flyoutBody">
       <!-- Dynamic content -->
