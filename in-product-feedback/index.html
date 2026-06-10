@@ -4,11 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASPX - AI Business Solutions & Security Insights</title>
-  <link rel="stylesheet" href="css/styles.css?v=20">
+  <link rel="stylesheet" href="css/styles.css?v=21">
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
+  <!-- Variant Toggle Banner -->
+  <div class="variant-toggle-banner">
+    <span class="variant-label">Flyout feedback position:</span>
+    <button class="variant-btn active" data-variant="header">Variant A: Header (always visible)</button>
+    <button class="variant-btn" data-variant="sticky">Variant B: Sticky footer</button>
+  </div>
   <!-- Top navigation bar -->
   <nav class="top-nav">
     <div class="nav-left">
@@ -271,12 +277,21 @@
   <aside class="flyout-panel hidden" id="flyoutPanel">
     <div class="flyout-header">
       <h2 class="flyout-title" id="flyoutTitle">Tenant Details</h2>
+      <div class="flyout-header-feedback" id="flyoutHeaderFeedback">
+        <span class="flyout-feedback-label">Helpful?</span>
+        <button class="flyout-thumb" data-vote="up" title="Thumbs up">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M4 9h2v8H4V9zm5.5-5.5c.28 0 .5.22.5.5v3h5.5a1.5 1.5 0 0 1 1.49 1.67l-.75 5.5A1.5 1.5 0 0 1 14.75 15.5H8V9l1.96-4.9c.1-.25.3-.45.54-.55V3.5z"/></svg>
+        </button>
+        <button class="flyout-thumb" data-vote="down" title="Thumbs down">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M16 11h-2V3h2v8zm-5.5 5.5a.5.5 0 0 1-.5-.5v-3H4.5A1.5 1.5 0 0 1 3.01 11.33l.75-5.5A1.5 1.5 0 0 1 5.25 4.5H12V11l-1.96 4.9c-.1.25-.3.45-.54.55v.05z"/></svg>
+        </button>
+      </div>
       <button class="flyout-close" id="flyoutClose">✕</button>
     </div>
     <div class="flyout-body" id="flyoutBody">
       <!-- Dynamic content -->
     </div>
-    <div class="flyout-feedback-bar">
+    <div class="flyout-feedback-bar flyout-feedback-sticky" id="flyoutStickyFeedback">
       <span class="flyout-feedback-label">Was this information helpful?</span>
       <button class="flyout-thumb" data-vote="up" title="Thumbs up">
         <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M4 9h2v8H4V9zm5.5-5.5c.28 0 .5.22.5.5v3h5.5a1.5 1.5 0 0 1 1.49 1.67l-.75 5.5A1.5 1.5 0 0 1 14.75 15.5H8V9l1.96-4.9c.1-.25.3-.45.54-.55V3.5z"/></svg>
@@ -414,6 +429,45 @@
     <span>Thank you! Your feedback has been submitted.</span>
   </div>
 
-  <script src="js/app.js?v=16"></script>
+  <script src="js/app.js?v=17"></script>
+  <script>
+    // Variant toggle logic
+    document.body.classList.add('variant-header');
+    document.querySelectorAll('.variant-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const variant = btn.dataset.variant;
+        document.body.classList.remove('variant-header', 'variant-sticky');
+        document.body.classList.add('variant-' + variant);
+      });
+    });
+
+    // Wire up header feedback thumbs
+    document.getElementById('flyoutHeaderFeedback').querySelectorAll('.flyout-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const vote = thumb.dataset.vote;
+        document.getElementById('flyoutHeaderFeedback').querySelectorAll('.flyout-thumb').forEach(t => t.classList.remove('voted'));
+        thumb.classList.add('voted');
+        setTimeout(() => {
+          const reason = vote === 'up' ? 'positive' : 'negative';
+          openOcvModal(reason, currentFlyoutData, 'flyout');
+        }, 300);
+      });
+    });
+
+    // Wire up sticky footer feedback thumbs
+    document.getElementById('flyoutStickyFeedback').querySelectorAll('.flyout-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const vote = thumb.dataset.vote;
+        document.getElementById('flyoutStickyFeedback').querySelectorAll('.flyout-thumb').forEach(t => t.classList.remove('voted'));
+        thumb.classList.add('voted');
+        setTimeout(() => {
+          const reason = vote === 'up' ? 'positive' : 'negative';
+          openOcvModal(reason, currentFlyoutData, 'flyout');
+        }, 300);
+      });
+    });
+  </script>
 </body>
 </html>
