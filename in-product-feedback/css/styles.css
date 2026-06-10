@@ -974,32 +974,9 @@ body {
   .flyout-panel { width: 100%; }
 }
 
-/* ═══ VARIANT TOGGLE BANNER ═══ */
-.variant-toggle-banner {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
-  display: flex; align-items: center; gap: 12px;
-  padding: 8px 20px; background: #1b1b1b; color: #fff;
-  font-size: 12px; font-family: 'Segoe UI', sans-serif;
-}
-.variant-label { font-weight: 600; color: #ccc; }
-.variant-btn {
-  padding: 4px 12px; border-radius: 4px; border: 1px solid #555;
-  background: transparent; color: #ccc; cursor: pointer; font-size: 12px;
-  transition: all 0.15s;
-}
-.variant-btn:hover { border-color: #0078d4; color: #fff; }
-.variant-btn.active { background: #0078d4; border-color: #0078d4; color: #fff; font-weight: 600; }
-
-/* Shift entire page down for the banner */
-.top-nav { top: 36px !important; }
-.app-layout { margin-top: 36px; }
-
-/* ═══ FLYOUT HEADER FEEDBACK (Variant A) ═══ */
+/* ═══ FLYOUT HEADER FEEDBACK ═══ */
 .flyout-header-feedback {
-  display: flex; align-items: center; gap: 8px; margin-left: auto; margin-right: 12px;
-}
-.flyout-header-feedback .flyout-feedback-label {
-  font-size: 11px; color: #616161; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px; margin-left: auto; margin-right: 12px;
 }
 .flyout-header-feedback .flyout-thumb {
   width: 28px; height: 28px; border-radius: 4px;
@@ -1010,14 +987,3 @@ body {
 }
 .flyout-header-feedback .flyout-thumb:hover { border-color: #0078d4; color: #0078d4; background: #f0f6ff; }
 .flyout-header-feedback .flyout-thumb.voted { border-color: #0078d4; color: #fff; background: #0078d4; }
-
-/* ═══ FLYOUT STICKY FOOTER (Variant B) ═══ */
-.flyout-feedback-sticky {
-  position: sticky; bottom: 0;
-  border-top: 1px solid #e0e0e0; background: #fafafa;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
-}
-
-/* Variant visibility control */
-body.variant-header .flyout-feedback-sticky { display: none; }
-body.variant-sticky .flyout-header-feedback { display: none; }
