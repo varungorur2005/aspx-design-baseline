@@ -9,13 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initOcvModal();
   initGlobalFeedback();
   initFasttrackControls();
+  initFasttrackTabs();
   initGlobalFeedbackDelegation();
   renderCurrentPage();
 });
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 // DATA (realistic ASPX columns from Excel export)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 
 const copilotColumns = [
   'Tenant Name', 'Tenant ID', 'Tenant Country/Region', 'Tenant Segment',
@@ -34,6 +35,12 @@ const e3Columns = [
   'Total M365 Seat Count', 'Tenant Health', 'Tenant Recommendation',
   'Workload Name', 'MAU', 'PAU', 'Utilization', 'Whitespace',
   'Usage Threshold', 'Tipping Point', 'Workload Health', 'Usage Opportunity'
+];
+
+const cloudColumns = [
+  'Tenant Name', 'Tenant ID', 'Tenant Country/Region', 'Tenant Segment',
+  'Windows 365 Seats', 'W365 PAU', 'W365 Utilization', 'W365 Whitespace',
+  'W365 CPOR Eligibility', 'MCI Eligibility', 'Potential Earnings'
 ];
 
 const allCopilotColumns = [
@@ -76,13 +83,15 @@ const tabDisplayNames = {
   copilot: 'Copilot Opportunities',
   e3: 'E3 Opportunities',
   e5: 'E5 Opportunities',
-  e5exp: 'E5 Expansion'
+  e5exp: 'E5 Expansion',
+  cloud: 'Cloud Endpoints'
 };
 
 const mciTabDisplayNames = {
-  copilotPower: 'Copilot + Power',
-  secureProductivity: 'Secure Productivity',
-  cloudEndpoints: 'Cloud Endpoints'
+  copilot: 'Copilot',
+  security: 'Security',
+  aiReadyProductivity: 'AI-Ready Productivity',
+  bizProcesses: 'Biz Processes'
 };
 
 const chartPalette = ['#0078d4', '#1b3a5c', '#107c10', '#f7941d', '#4fc3f7', '#9c27b0'];
@@ -116,6 +125,12 @@ const filterConfig = {
     { field: 'Tenant Health', options: ['Healthy', 'Unhealthy', 'At Risk'] },
     { field: 'Workload Health', options: ['Healthy', 'Unhealthy', 'At Risk'] },
     { field: 'Workload Name' }
+  ],
+  cloud: [
+    { field: 'Tenant Country/Region' },
+    { field: 'Tenant Segment' },
+    { field: 'W365 CPOR Eligibility', options: ['Eligible', 'Not Eligible'] },
+    { field: 'MCI Eligibility', options: ['Eligible', 'Not Eligible'] }
   ]
 };
 
@@ -1086,6 +1101,21 @@ const oppData = {
     ],
     columns: e3Columns,
     rows: e5expData
+  },
+  cloud: {
+    kpis: [
+      { value: '1,284', label: 'Tenants' },
+      { value: '18%', label: 'W365 Penetration' },
+      { value: '74%', label: 'W365 Utilization' },
+      { value: '426', label: 'Incentive Eligible', color: '#107c10' },
+      { value: '$182,500', label: 'Potential Earnings' }
+    ],
+    columns: cloudColumns,
+    rows: [
+      { 'Tenant Name': 'Fabrikam Financial Services', 'Tenant ID': 'D12E2A30-1010-4A01-B101-101010101010', 'Tenant Country/Region': 'United States', 'Tenant Segment': 'Enterprise', 'Windows 365 Seats': '1,240', 'W365 PAU': '984', 'W365 Utilization': '79%', 'W365 Whitespace': '256', 'W365 CPOR Eligibility': 'Eligible', 'MCI Eligibility': 'Eligible', 'Potential Earnings': '$37,500' },
+      { 'Tenant Name': 'Fabrikam Manufacturing Europe', 'Tenant ID': 'D12E2A30-2020-4B02-B202-202020202020', 'Tenant Country/Region': 'Germany', 'Tenant Segment': 'SMME Corporate', 'Windows 365 Seats': '620', 'W365 PAU': '412', 'W365 Utilization': '66%', 'W365 Whitespace': '208', 'W365 CPOR Eligibility': 'Eligible', 'MCI Eligibility': 'Eligible', 'Potential Earnings': '$18,750' },
+      { 'Tenant Name': 'Fabrikam Retail Asia', 'Tenant ID': 'D12E2A30-3030-4C03-B303-303030303030', 'Tenant Country/Region': 'Japan', 'Tenant Segment': 'SME&C SMB', 'Windows 365 Seats': '180', 'W365 PAU': '94', 'W365 Utilization': '52%', 'W365 Whitespace': '86', 'W365 CPOR Eligibility': 'Not Eligible', 'MCI Eligibility': 'Not Eligible', 'Potential Earnings': 'Not Available' }
+    ]
   }
 };
 
@@ -1220,7 +1250,7 @@ const mciData = {
 
 let currentPage = 'growth';
 let currentTab = 'copilot';
-let currentMciTab = 'copilotPower';
+let currentMciTab = 'copilot';
 let selectedRow = null;
 let selectedRowData = null;
 let currentUtilityPanel = null;
@@ -1229,70 +1259,89 @@ const activeColumnsByTab = {
   copilot: [...copilotColumns],
   e3: [...e3Columns],
   e5: [...e3Columns],
-  e5exp: [...e3Columns]
+  e5exp: [...e3Columns],
+  cloud: [...cloudColumns]
 };
 
 const activeColumnsByMciTab = {
-  copilotPower: [...mciColumns.copilotPower],
-  secureProductivity: [...mciColumns.secureProductivity],
-  cloudEndpoints: [...mciColumns.cloudEndpoints]
+  copilot: [...mciColumns.copilotPower]
 };
 
 const activeFiltersByTab = {
   copilot: {},
   e3: {},
   e5: {},
-  e5exp: {}
+  e5exp: {},
+  cloud: {}
 };
 
 const activeFiltersByMciTab = {
-  copilotPower: {},
-  secureProductivity: {},
-  cloudEndpoints: {}
+  copilot: {}
 };
 
 const searchTermsByTab = {
   copilot: '',
   e3: '',
   e5: '',
-  e5exp: ''
+  e5exp: '',
+  cloud: ''
 };
 
 const searchTermsByMciTab = {
-  copilotPower: '',
-  secureProductivity: '',
-  cloudEndpoints: ''
+  copilot: ''
 };
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 // OPPORTUNITY TABS
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 
 function initSidebarNavigation() {
-  const navGrowth = document.getElementById('navGrowth');
-  const navMci = document.getElementById('navMci');
-  const navFasttrack = document.getElementById('navFasttrack');
+  const menuButton = document.getElementById('pageMenuBtn');
+  const flyout = document.getElementById('pageSelectFlyout');
+  const overlay = document.getElementById('pageSelectOverlay');
+  const closeMenu = () => {
+    flyout?.classList.add('hidden');
+    overlay?.classList.add('hidden');
+    menuButton?.setAttribute('aria-expanded', 'false');
+  };
 
-  if (navGrowth) {
-    navGrowth.addEventListener('click', event => {
-      event.preventDefault();
-      switchPage('growth');
-    });
-  }
+  menuButton?.addEventListener('click', () => {
+    const shouldOpen = flyout?.classList.contains('hidden');
+    flyout?.classList.toggle('hidden', !shouldOpen);
+    overlay?.classList.toggle('hidden', !shouldOpen);
+    menuButton.setAttribute('aria-expanded', String(shouldOpen));
+  });
+  overlay?.addEventListener('click', closeMenu);
 
-  if (navMci) {
-    navMci.addEventListener('click', event => {
-      event.preventDefault();
-      switchPage('mci');
+  document.querySelectorAll('.page-select-item').forEach(item => {
+    item.addEventListener('click', () => {
+      switchPage(item.dataset.page);
+      closeMenu();
     });
-  }
+  });
 
-  if (navFasttrack) {
-    navFasttrack.addEventListener('click', event => {
-      event.preventDefault();
-      switchPage('fasttrack');
-    });
-  }
+  const idType = document.getElementById('aspxiIdType');
+  const search = document.getElementById('aspxiSearch');
+  const searchButton = document.getElementById('aspxiSearchBtn');
+  const contextBanner = document.getElementById('aspxiContextBanner');
+  const syncPlaceholder = () => {
+    if (!search || !idType) return;
+    search.placeholder = idType.value === 'mpn'
+      ? 'Enter MPN ID'
+      : 'Enter PartnerOne ID (Limit one at a time)';
+  };
+  const submitSearch = () => {
+    const value = search?.value.trim();
+    if (!value || !contextBanner || !idType) return;
+    const label = idType.value === 'mpn' ? 'MPN ID' : 'PartnerOne ID';
+    contextBanner.textContent = `You are currently viewing ${label}: ${value}.`;
+    contextBanner.classList.remove('hidden');
+  };
+  idType?.addEventListener('change', syncPlaceholder);
+  searchButton?.addEventListener('click', submitSearch);
+  search?.addEventListener('keydown', event => {
+    if (event.key === 'Enter') submitSearch();
+  });
 }
 
 function initOppTabs() {
@@ -1316,9 +1365,7 @@ function initMciTabs() {
       tab.classList.add('active');
       currentMciTab = tab.dataset.mci;
       closeUtilityFlyout();
-      if (mciData[currentMciTab]) {
-        renderMciView(currentMciTab);
-      }
+      renderMciView(currentMciTab);
     });
   });
 }
@@ -1328,7 +1375,9 @@ function canonicalizeColumn(column) {
 }
 
 function getAllColumnsForTab(tab) {
-  return tab === 'copilot' ? allCopilotColumns : allE3Columns;
+  if (tab === 'copilot') return allCopilotColumns;
+  if (tab === 'cloud') return cloudColumns;
+  return allE3Columns;
 }
 
 function getVisibleColumns(tab) {
@@ -1380,8 +1429,10 @@ function getMciVisibleColumns(tab) {
 function getMciDisplayRows(tab) {
   const search = (searchTermsByMciTab[tab] || '').trim().toLowerCase();
   const filters = activeFiltersByMciTab[tab] || {};
+  const data = tab === 'copilot' ? mciData.copilotPower : null;
+  if (!data) return [];
 
-  return mciData[tab].rows
+  return data.rows
     .map((row, originalIndex) => ({ row, originalIndex }))
     .filter(({ row }) => {
       const matchesFilters = Object.entries(filters).every(([field, values]) => {
@@ -1392,7 +1443,7 @@ function getMciDisplayRows(tab) {
       if (!matchesFilters) return false;
       if (!search) return true;
 
-      return mciData[tab].columns.some(column => String(getRowValue(row, column) || '').toLowerCase().includes(search));
+      return data.columns.some(column => String(getRowValue(row, column) || '').toLowerCase().includes(search));
     });
 }
 
@@ -1431,21 +1482,26 @@ function switchPage(page) {
   const aspxView = document.getElementById('aspxView');
   const mciView = document.getElementById('mciView');
   const fasttrackView = document.getElementById('fasttrackView');
-  const navGrowth = document.getElementById('navGrowth');
-  const navMci = document.getElementById('navMci');
-  const navFasttrack = document.getElementById('navFasttrack');
-  const navPageName = document.querySelector('.nav-page-name');
+  const pageTitle = document.getElementById('pageTitle');
+  const pageDescription = document.getElementById('pageDescription');
 
   if (aspxView) aspxView.classList.toggle('hidden', page !== 'growth');
   if (mciView) mciView.classList.toggle('hidden', page !== 'mci');
   if (fasttrackView) fasttrackView.classList.toggle('hidden', page !== 'fasttrack');
-  if (navGrowth) navGrowth.classList.toggle('active', page === 'growth');
-  if (navMci) navMci.classList.toggle('active', page === 'mci');
-  if (navFasttrack) navFasttrack.classList.toggle('active', page === 'fasttrack');
-  if (navPageName) {
-    if (page === 'growth') navPageName.textContent = 'Growth Opportunities';
-    else if (page === 'mci') navPageName.textContent = 'MCI Performance';
-    else navPageName.textContent = 'FastTrack Referrals';
+  document.querySelectorAll('.page-select-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.page === page);
+  });
+  if (pageTitle && pageDescription) {
+    if (page === 'growth') {
+      pageTitle.textContent = 'AI Business Solutions & Security Insights';
+      pageDescription.textContent = 'Actionable leads, data insights, and incentive information to drive upsell and cross-sell opportunities.';
+    } else if (page === 'mci') {
+      pageTitle.textContent = 'MCI Performance';
+      pageDescription.textContent = 'Track engagement performance, milestone attainment, and concurrent claim capacity.';
+    } else {
+      pageTitle.textContent = 'Referrals and Deal Clinics';
+      pageDescription.textContent = 'View and manage referral opportunities from receipt through engagement.';
+    }
   }
 
   renderCurrentPage();
@@ -1491,7 +1547,7 @@ function renderOppView(opp) {
 
   body.innerHTML = visibleRows.map(({ row, originalIndex }) => {
     const cells = visibleColumns.map(col => {
-      let val = getRowValue(row, col) || '—';
+      let val = getRowValue(row, col) || 'â€”';
       if (col === 'Tenant Name') {
         val = `<a href="#" class="tenant-link" data-row="${originalIndex}" data-flyout="tenant-details">${val}</a>`;
       } else if (col === 'Copilot Opportunity') {
@@ -1503,9 +1559,9 @@ function renderOppView(opp) {
       } else if (col === 'Tenant Health' || col === 'Workload Health') {
         const cls = String(val).toLowerCase().replace(/\s/g, '-');
         val = `<span class="status-badge ${cls}">${val}</span>`;
-      } else if (col === 'All Copilot MAU' && val !== 'Not Available' && val !== '—') {
+      } else if (col === 'All Copilot MAU' && val !== 'Not Available' && val !== 'â€”') {
         val = `<a href="#" class="tenant-link" data-row="${originalIndex}" data-flyout="copilot-mau">${val}</a>`;
-      } else if (col === 'All Agents MAU' && val !== 'Not Available' && val !== '—') {
+      } else if (col === 'All Agents MAU' && val !== 'Not Available' && val !== 'â€”') {
         val = `<a href="#" class="tenant-link" data-row="${originalIndex}" data-flyout="agents-mau">${val}</a>`;
       } else if (col === 'CSP Promos' && String(val).includes('Available')) {
         val = `<a href="#" class="tenant-link" data-row="${originalIndex}" data-flyout="csp-promos">${val}</a>`;
@@ -1520,37 +1576,37 @@ function renderOppView(opp) {
 }
 
 function getMciPerformanceStatusMarkup(value) {
-  const label = String(value || '—');
+  const label = String(value || 'â€”');
   const statusClass = label.toLowerCase().replace(/\s+/g, '-');
   return `<span class="performance-status ${statusClass}"><span class="performance-status-dot"></span>${escapeHtml(label)}</span>`;
 }
 
 function renderMciView(tab) {
-  const data = mciData[tab];
-  if (!data) return;
+  const isPlaceholder = tab !== 'copilot';
+  const data = isPlaceholder ? null : mciData.copilotPower;
+  const placeholder = document.getElementById('mciPlaceholder');
+  const toolbar = document.getElementById('mciToolbar');
+  const tableWrapper = document.getElementById('mciTableWrapper');
+  const pagination = document.getElementById('mciPagination');
+  const charts = document.getElementById('mciChartsRow');
 
-  updateToolbarState();
+  placeholder?.classList.toggle('hidden', !isPlaceholder);
+  toolbar?.classList.toggle('hidden', isPlaceholder);
+  tableWrapper?.classList.toggle('hidden', isPlaceholder);
+  pagination?.classList.toggle('hidden', isPlaceholder);
+  charts?.classList.add('hidden');
 
-  // Enhanced KPIs - compute from data
-  const rows = data.rows;
-  const totalEngagements = rows.length;
-  const passingCount = rows.filter(r => r['Performance Status'] === 'Passing').length;
-  const failingCount = rows.filter(r => r['Performance Status'] === 'Failing').length;
-  const preMilestoneCount = rows.filter(r => r['Performance Status'] === 'Pre-Milestone').length;
-  const passRate = totalEngagements ? Math.round((passingCount / totalEngagements) * 100) : 0;
-  const repeatCustomers = rows.filter(r => r['Repeat Customer'] === 'Yes').length;
-
-  const enhancedKpis = [
-    ...data.kpis,
-    { title: 'Total Engagements', value: String(totalEngagements), badge: 'All', tone: 'neutral' },
-    { title: 'Passing', value: String(passingCount), badge: passRate + '% pass rate', tone: 'passing' },
-    { title: 'Failing', value: String(failingCount), badge: 'Needs attention', tone: 'failing' },
-    { title: 'Pre-Milestone', value: String(preMilestoneCount), badge: 'Early stage', tone: 'pending' },
-  ];
+  const concurrentCapKpi = {
+    title: 'Concurrent Cap Status',
+    value: 'Within cap',
+    badge: 'View',
+    tone: 'passing'
+  };
+  const kpiItems = isPlaceholder ? [concurrentCapKpi] : [...data.kpis, concurrentCapKpi];
 
   const kpiRow = document.getElementById('mciKpiRow');
   if (kpiRow) {
-    kpiRow.innerHTML = enhancedKpis.map(kpi => `
+    kpiRow.innerHTML = kpiItems.map(kpi => `
       <div class="mci-kpi-tile">
         <div class="mci-kpi-actions">
           <button class="icon-btn" type="button" aria-label="Filter KPI">
@@ -1567,8 +1623,9 @@ function renderMciView(tab) {
     `).join('');
   }
 
-  // Charts
-  renderMciCharts(tab, rows);
+  if (isPlaceholder || !data) return;
+
+  updateToolbarState();
 
   const visibleColumns = getMciVisibleColumns(tab);
   const visibleRows = getMciDisplayRows(tab);
@@ -1587,7 +1644,7 @@ function renderMciView(tab) {
   } else {
     body.innerHTML = visibleRows.map(({ row, originalIndex }) => {
       const cells = visibleColumns.map(column => {
-        let value = getRowValue(row, column) || '—';
+        let value = getRowValue(row, column) || 'â€”';
         if (column === 'Performance Status') {
           value = getMciPerformanceStatusMarkup(value);
         } else {
@@ -1604,12 +1661,10 @@ function renderMciView(tab) {
     summary.textContent = total ? `Showing 1 - ${Math.min(total, 10)} of ${total} results` : 'Showing 0 - 0 of 0 results';
   }
 
-  // Render MCI charts
-  renderMciCharts(tab, visibleRows.map(r => r.row));
 }
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 // CHARTS (Chart.js)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 
 
 let mciChartInstances = [];
@@ -2306,7 +2361,7 @@ function renderFilterFlyout() {
   });
 }
 // IN-ROW GIVE FEEDBACK (dropdown per row)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 
 function initFeedbackButton() {
   const table = document.getElementById('dataTable');
@@ -2393,9 +2448,9 @@ function initGlobalFeedbackDelegation() {
   });
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 // FLYOUT PANEL (5 types from screenshots 2-6)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 
 function initFlyout() {
   const overlay = document.getElementById('flyoutOverlay');
@@ -2478,16 +2533,16 @@ function closeFlyout() {
 function renderTenantDetailsFlyout(data) {
   return `
     <table class="flyout-info-table">
-      <tr><td>Tenant ID:</td><td>${data['Tenant ID'] || 'â€”'}</td></tr>
-      <tr><td>TPID:</td><td>${data['Customer TPID'] || data['TPID'] || 'â€”'}</td></tr>
-      <tr><td>Claims:</td><td>â€”</td></tr>
-      <tr><td>Claimed workloads:</td><td>â€”</td></tr>
+      <tr><td>Tenant ID:</td><td>${data['Tenant ID'] || 'Ã¢â‚¬â€'}</td></tr>
+      <tr><td>TPID:</td><td>${data['Customer TPID'] || data['TPID'] || 'Ã¢â‚¬â€'}</td></tr>
+      <tr><td>Claims:</td><td>Ã¢â‚¬â€</td></tr>
+      <tr><td>Claimed workloads:</td><td>Ã¢â‚¬â€</td></tr>
     </table>
     <h4 class="flyout-section-title">Subscriptions</h4>
     <div class="flyout-toolbar">
-      <button class="flyout-toolbar-btn">â†“ Download</button>
+      <button class="flyout-toolbar-btn">Ã¢â€ â€œ Download</button>
       <span class="flyout-toolbar-spacer"></span>
-      <button class="flyout-toolbar-btn">âŠž Filter</button>
+      <button class="flyout-toolbar-btn">Ã¢Å Å¾ Filter</button>
       <input class="flyout-search" type="text" placeholder="Search" />
     </div>
     <table class="flyout-info-table flyout-subs-table">
@@ -2511,12 +2566,12 @@ function renderTenantDetailsFlyout(data) {
 // Screenshot 3: All Copilot MAU flyout
 function renderCopilotMauFlyout(data) {
   return `
-    <p style="font-size:13px;color:#616161;margin-bottom:16px;">The total Copilot MAU encompassing licensed and unlicensed users. Additionally, included below is a breakdown of Copilot usage. Unless specified in the metric, MAU can include licensed and unlicensed users. <a href="#" style="color:#0078d4;">Learn more â†—</a></p>
+    <p style="font-size:13px;color:#616161;margin-bottom:16px;">The total Copilot MAU encompassing licensed and unlicensed users. Additionally, included below is a breakdown of Copilot usage. Unless specified in the metric, MAU can include licensed and unlicensed users. <a href="#" style="color:#0078d4;">Learn more Ã¢â€ â€”</a></p>
     <table class="flyout-info-table">
       <tr><td><strong>Metric Name</strong></td><td style="text-align:right;"><strong>MAU</strong></td></tr>
-      <tr><td>All Copilot MAU</td><td style="text-align:right;">${data['All Copilot MAU'] || 'â€”'}</td></tr>
-      <tr><td>Free Copilot MAU (Unlicensed)</td><td style="text-align:right;">${data['Free Copilot Chat MAU (Unlicensed)'] || 'â€”'}</td></tr>
-      <tr><td>Copilot MAU (Licensed)</td><td style="text-align:right;">${data['Copilot MAU (Licensed)'] || 'â€”'}</td></tr>
+      <tr><td>All Copilot MAU</td><td style="text-align:right;">${data['All Copilot MAU'] || 'Ã¢â‚¬â€'}</td></tr>
+      <tr><td>Free Copilot MAU (Unlicensed)</td><td style="text-align:right;">${data['Free Copilot Chat MAU (Unlicensed)'] || 'Ã¢â‚¬â€'}</td></tr>
+      <tr><td>Copilot MAU (Licensed)</td><td style="text-align:right;">${data['Copilot MAU (Licensed)'] || 'Ã¢â‚¬â€'}</td></tr>
       <tr><td>Copilot in Teams</td><td style="text-align:right;">248</td></tr>
       <tr><td>Copilot in Outlook</td><td style="text-align:right;">4,850</td></tr>
       <tr><td>Copilot in Word</td><td style="text-align:right;">88</td></tr>
@@ -2532,7 +2587,7 @@ function renderCopilotMauFlyout(data) {
 // Screenshot 4: All Agents MAU flyout
 function renderAgentsMauFlyout(data) {
   return `
-    <p style="font-size:13px;color:#616161;margin-bottom:16px;">All Agents MAU provides the total usage of agents all up across any application and user. The table below gives a more granular breakdown of licensed, unlicensed, and agent MAU by extension/application type. <a href="#" style="color:#0078d4;">Learn more â†—</a></p>
+    <p style="font-size:13px;color:#616161;margin-bottom:16px;">All Agents MAU provides the total usage of agents all up across any application and user. The table below gives a more granular breakdown of licensed, unlicensed, and agent MAU by extension/application type. <a href="#" style="color:#0078d4;">Learn more Ã¢â€ â€”</a></p>
     <table class="flyout-info-table">
       <tr><td><strong>Agent Extension Type</strong></td><td style="text-align:right;"><strong>Licensed Agent MAU</strong></td><td style="text-align:right;"><strong>Unlicensed Agent MAU</strong></td><td style="text-align:right;"><strong>Total</strong></td></tr>
       <tr><td>All Up</td><td style="text-align:right;">13</td><td style="text-align:right;">401</td><td style="text-align:right;">414</td></tr>
@@ -2553,17 +2608,17 @@ function renderAgentsMauFlyout(data) {
 
 // Screenshot 5: Opportunity Details flyout
 function renderOpportunityDetailsFlyout(data) {
-  const opportunity = data['Copilot Opportunity'] || 'â€”';
-  const eligibleSeats = data['Copilot Eligible M365 Seats'] || 'â€”';
-  const whitespace = data['Copilot Seats Whitespace'] || 'â€”';
+  const opportunity = data['Copilot Opportunity'] || 'Ã¢â‚¬â€';
+  const eligibleSeats = data['Copilot Eligible M365 Seats'] || 'Ã¢â‚¬â€';
+  const whitespace = data['Copilot Seats Whitespace'] || 'Ã¢â‚¬â€';
   const freeMau = data['Free Copilot Chat MAU (Unlicensed)'] || '0';
   const pau = data['Copilot PAU'] || '0';
   const allMau = data['All Copilot MAU'] || '0';
 
   // Calculate penetration percentages
-  const copilotPen = pau !== '0' && eligibleSeats !== 'â€”' ?
+  const copilotPen = pau !== '0' && eligibleSeats !== 'Ã¢â‚¬â€' ?
     Math.round((parseInt(pau.replace(/,/g, '')) / parseInt(eligibleSeats.replace(/,/g, ''))) * 100) + '%' : '0%';
-  const freePen = freeMau !== '0' && eligibleSeats !== 'â€”' ?
+  const freePen = freeMau !== '0' && eligibleSeats !== 'Ã¢â‚¬â€' ?
     Math.round((parseInt(freeMau.replace(/,/g, '')) / parseInt(eligibleSeats.replace(/,/g, ''))) * 100) + '%' : '0%';
   const freeWhitespace = parseInt((freeMau || '0').replace(/,/g, '')) + parseInt(whitespace.replace(/,/g, ''));
 
@@ -2586,7 +2641,7 @@ function renderOpportunityDetailsFlyout(data) {
   }
 
   return `
-    <p style="font-size:13px;color:#616161;margin-bottom:16px;">The Copilot Opportunity value provides direction on what next steps to take with the customer. Included below are key penetration metrics and AI/ML insights that explain why the customer is categorized as acquire, monetize, or grow. <a href="#" style="color:#0078d4;">Learn more â†—</a></p>
+    <p style="font-size:13px;color:#616161;margin-bottom:16px;">The Copilot Opportunity value provides direction on what next steps to take with the customer. Included below are key penetration metrics and AI/ML insights that explain why the customer is categorized as acquire, monetize, or grow. <a href="#" style="color:#0078d4;">Learn more Ã¢â€ â€”</a></p>
     <table class="flyout-info-table">
       <tr><td><strong>Opportunity:</strong></td><td><span class="status-badge ${opportunity.toLowerCase()}">${opportunity}</span></td></tr>
       <tr><td><strong>M365 Copilot Penetration:</strong></td><td>${copilotPen}</td></tr>
@@ -2618,7 +2673,7 @@ function renderOpportunityDetailsFlyout(data) {
 // Screenshot 6: CSP Promotions flyout
 function renderCspPromosFlyout(data) {
   return `
-    <p style="font-size:13px;color:#616161;margin-bottom:16px;">List of all active New Commerce Cloud Solution Provider (CSP) Promotions related to this solution area. Active promotions do not necessarily meet the eligibility criteria for this tenant. Visit the Pricing workspace for a complete list of eligible promotions across products. <a href="#" style="color:#0078d4;">Learn More â†—</a></p>
+    <p style="font-size:13px;color:#616161;margin-bottom:16px;">List of all active New Commerce Cloud Solution Provider (CSP) Promotions related to this solution area. Active promotions do not necessarily meet the eligibility criteria for this tenant. Visit the Pricing workspace for a complete list of eligible promotions across products. <a href="#" style="color:#0078d4;">Learn More Ã¢â€ â€”</a></p>
     <table class="flyout-info-table flyout-promos-table">
       <thead>
         <tr><td><strong>Promotion Name</strong></td><td><strong>Discount Type</strong></td><td><strong>Discount Rate</strong></td><td><strong>End Date</strong></td></tr>
@@ -2629,16 +2684,16 @@ function renderCspPromosFlyout(data) {
         <tr><td>Updated: M365 Purview Suite promo offer for M365 Copilot</td><td>Percent off</td><td>50%</td><td>07/01/2026</td></tr>
         <tr><td>Introductory offer: Up to 15% off Microsoft 365 Copilot Business</td><td>Percent off</td><td>15%</td><td>06/30/2026</td></tr>
         <tr><td>Bundle and save: Up to 35% off Microsoft 365 Business Standard and Microsoft 365 Copilot Business</td><td>Percent off</td><td>35%</td><td>06/30/2026</td></tr>
-        <tr><td>Limited time offer: Microsoft 365 Copilot for Allâ€”40% offer</td><td>Percent off</td><td>40%</td><td>06/30/2026</td></tr>
+        <tr><td>Limited time offer: Microsoft 365 Copilot for AllÃ¢â‚¬â€40% offer</td><td>Percent off</td><td>40%</td><td>06/30/2026</td></tr>
         <tr><td>15% off Microsoft 365 E7 triennial subscription, 300-9,999 licenses</td><td>Percent off</td><td>15%</td><td>12/31/2026</td></tr>
       </tbody>
     </table>
   `;
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// OCV FEEDBACK MODAL (Two-step: classify â†’ form)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// OCV FEEDBACK MODAL (Two-step: classify Ã¢â€ â€™ form)
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 
 function initOcvModal() {
   if (!document.getElementById('ocvClose')) return;
@@ -2741,7 +2796,7 @@ function showOcvStep2(type, rowData, source) {
   // Show context for table/flyout sources
   if (src && src !== 'general' && rd) {
     contextSection.classList.remove('hidden');
-    const tenantName = rd['Tenant Name'] || 'â€”';
+    const tenantName = rd['Tenant Name'] || 'Ã¢â‚¬â€';
     contextDetails.innerHTML = `
       <div class="ctx-item"><span class="ctx-key">Source:</span><span class="ctx-val">${src === 'flyout' ? 'Flyout Panel' : 'Data Table'}</span></div>
       <div class="ctx-item"><span class="ctx-key">Tab:</span><span class="ctx-val">${currentTab.charAt(0).toUpperCase() + currentTab.slice(1)} Opportunities</span></div>
@@ -2753,7 +2808,7 @@ function showOcvStep2(type, rowData, source) {
     const columns = getVisibleColumns(currentTab);
     const displayCols = columns.slice(0, 12);
     columnsGrid.innerHTML = displayCols.map(col => {
-      const val = getRowValue(rd, col) || 'â€”';
+      const val = getRowValue(rd, col) || 'Ã¢â‚¬â€';
       return `<div class="ocv-col-item"><div class="col-label">${col}</div><div class="col-value">${val}</div></div>`;
     }).join('');
   } else {
@@ -2787,9 +2842,9 @@ function showToast() {
   setTimeout(() => toast.classList.add('hidden'), 4000);
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 // GLOBAL FEEDBACK (top-right nav button)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 
 function initGlobalFeedback() {
   if (!document.getElementById('globalFeedbackBtn')) return;
@@ -2802,9 +2857,9 @@ function initGlobalFeedback() {
   if (ftFbBtn) ftFbBtn.addEventListener('click', () => { openOcvModal('general', null, 'general'); });
 }
 
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // FASTTRACK REFERRALS PAGE
-// ═══════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 const fasttrackColumns = ['Name', 'Referral Source', 'Referral ID', 'Acceptance', 'Referral Status', 'Date'];
 
@@ -3106,3 +3161,22 @@ function initFasttrackControls() {
   });
 }
 
+function initFasttrackTabs() {
+  const referralSections = [
+    document.getElementById('ftKpiRow'),
+    document.getElementById('ftChartsRow'),
+    document.getElementById('ftReferralToolbar'),
+    document.getElementById('ftTableWrapper'),
+    document.getElementById('ftPagination')
+  ];
+  const securityClinicView = document.getElementById('securityClinicView');
+
+  document.querySelectorAll('.ft-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const showSecurityClinic = tab.dataset.ftView === 'securityClinic';
+      document.querySelectorAll('.ft-tab').forEach(item => item.classList.toggle('active', item === tab));
+      referralSections.forEach(section => section?.classList.toggle('hidden', showSecurityClinic));
+      securityClinicView?.classList.toggle('hidden', !showSecurityClinic);
+    });
+  });
+}
