@@ -43,6 +43,12 @@ const cloudColumns = [
   'W365 CPOR Eligibility', 'MCI Eligibility', 'Potential Earnings'
 ];
 
+const tenantColumns = [
+  'Tenant Name', 'Tenant ID', 'Tenant Country/Region', 'Tenant Segment',
+  'Customer Sub-Segment', 'Industry Vertical', 'Customer TPID', 'Customer Name',
+  'Dominant SKU Group', 'Copilot Eligible M365 Seats'
+];
+
 const allCopilotColumns = [
   'Tenant Name', 'Tenant ID', 'Tenant Domain', 'Tenant Country/Region', 'Tenant Segment',
   'Customer TPID', 'Customer Name', 'EA Renewal', 'Largest Seat CSP Renewal', 'Earliest CSP Renewal',
@@ -84,7 +90,8 @@ const tabDisplayNames = {
   e3: 'E3 Opportunities',
   e5: 'E5 Opportunities',
   e5exp: 'E5 Expansion',
-  cloud: 'Cloud Endpoints'
+  cloud: 'Cloud Endpoints',
+  tenants: 'Tenants'
 };
 
 const mciTabDisplayNames = {
@@ -131,6 +138,11 @@ const filterConfig = {
     { field: 'Tenant Segment' },
     { field: 'W365 CPOR Eligibility', options: ['Eligible', 'Not Eligible'] },
     { field: 'MCI Eligibility', options: ['Eligible', 'Not Eligible'] }
+  ],
+  tenants: [
+    { field: 'Tenant Country/Region' },
+    { field: 'Tenant Segment' },
+    { field: 'Dominant SKU Group' }
   ]
 };
 
@@ -1116,6 +1128,15 @@ const oppData = {
       { 'Tenant Name': 'Fabrikam Manufacturing Europe', 'Tenant ID': 'D12E2A30-2020-4B02-B202-202020202020', 'Tenant Country/Region': 'Germany', 'Tenant Segment': 'SMME Corporate', 'Windows 365 Seats': '620', 'W365 PAU': '412', 'W365 Utilization': '66%', 'W365 Whitespace': '208', 'W365 CPOR Eligibility': 'Eligible', 'MCI Eligibility': 'Eligible', 'Potential Earnings': '$18,750' },
       { 'Tenant Name': 'Fabrikam Retail Asia', 'Tenant ID': 'D12E2A30-3030-4C03-B303-303030303030', 'Tenant Country/Region': 'Japan', 'Tenant Segment': 'SME&C SMB', 'Windows 365 Seats': '180', 'W365 PAU': '94', 'W365 Utilization': '52%', 'W365 Whitespace': '86', 'W365 CPOR Eligibility': 'Not Eligible', 'MCI Eligibility': 'Not Eligible', 'Potential Earnings': 'Not Available' }
     ]
+  },
+  tenants: {
+    kpis: [
+      { value: '60,560', label: 'Total Tenants' },
+      { value: '42,108', label: 'CSP Associated' },
+      { value: '18,452', label: 'CPOR Associated' }
+    ],
+    columns: tenantColumns,
+    rows: copilotData
   }
 };
 
@@ -1260,7 +1281,8 @@ const activeColumnsByTab = {
   e3: [...e3Columns],
   e5: [...e3Columns],
   e5exp: [...e3Columns],
-  cloud: [...cloudColumns]
+  cloud: [...cloudColumns],
+  tenants: [...tenantColumns]
 };
 
 const activeColumnsByMciTab = {
@@ -1272,7 +1294,8 @@ const activeFiltersByTab = {
   e3: {},
   e5: {},
   e5exp: {},
-  cloud: {}
+  cloud: {},
+  tenants: {}
 };
 
 const activeFiltersByMciTab = {
@@ -1284,7 +1307,8 @@ const searchTermsByTab = {
   e3: '',
   e5: '',
   e5exp: '',
-  cloud: ''
+  cloud: '',
+  tenants: ''
 };
 
 const searchTermsByMciTab = {
@@ -1296,51 +1320,21 @@ const searchTermsByMciTab = {
 // Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 
 function initSidebarNavigation() {
-  const menuButton = document.getElementById('pageMenuBtn');
-  const flyout = document.getElementById('pageSelectFlyout');
-  const overlay = document.getElementById('pageSelectOverlay');
-  const closeMenu = () => {
-    flyout?.classList.add('hidden');
-    overlay?.classList.add('hidden');
-    menuButton?.setAttribute('aria-expanded', 'false');
-  };
+  const navGrowth = document.getElementById('navGrowth');
+  const navMci = document.getElementById('navMci');
+  const navFasttrack = document.getElementById('navFasttrack');
 
-  menuButton?.addEventListener('click', () => {
-    const shouldOpen = flyout?.classList.contains('hidden');
-    flyout?.classList.toggle('hidden', !shouldOpen);
-    overlay?.classList.toggle('hidden', !shouldOpen);
-    menuButton.setAttribute('aria-expanded', String(shouldOpen));
+  navGrowth?.addEventListener('click', event => {
+    event.preventDefault();
+    switchPage('growth');
   });
-  overlay?.addEventListener('click', closeMenu);
-
-  document.querySelectorAll('.page-select-item').forEach(item => {
-    item.addEventListener('click', () => {
-      switchPage(item.dataset.page);
-      closeMenu();
-    });
+  navMci?.addEventListener('click', event => {
+    event.preventDefault();
+    switchPage('mci');
   });
-
-  const idType = document.getElementById('aspxiIdType');
-  const search = document.getElementById('aspxiSearch');
-  const searchButton = document.getElementById('aspxiSearchBtn');
-  const contextBanner = document.getElementById('aspxiContextBanner');
-  const syncPlaceholder = () => {
-    if (!search || !idType) return;
-    search.placeholder = idType.value === 'mpn'
-      ? 'Enter MPN ID'
-      : 'Enter PartnerOne ID (Limit one at a time)';
-  };
-  const submitSearch = () => {
-    const value = search?.value.trim();
-    if (!value || !contextBanner || !idType) return;
-    const label = idType.value === 'mpn' ? 'MPN ID' : 'PartnerOne ID';
-    contextBanner.textContent = `You are currently viewing ${label}: ${value}.`;
-    contextBanner.classList.remove('hidden');
-  };
-  idType?.addEventListener('change', syncPlaceholder);
-  searchButton?.addEventListener('click', submitSearch);
-  search?.addEventListener('keydown', event => {
-    if (event.key === 'Enter') submitSearch();
+  navFasttrack?.addEventListener('click', event => {
+    event.preventDefault();
+    switchPage('fasttrack');
   });
 }
 
@@ -1377,6 +1371,7 @@ function canonicalizeColumn(column) {
 function getAllColumnsForTab(tab) {
   if (tab === 'copilot') return allCopilotColumns;
   if (tab === 'cloud') return cloudColumns;
+  if (tab === 'tenants') return tenantColumns;
   return allE3Columns;
 }
 
@@ -1482,15 +1477,24 @@ function switchPage(page) {
   const aspxView = document.getElementById('aspxView');
   const mciView = document.getElementById('mciView');
   const fasttrackView = document.getElementById('fasttrackView');
+  const navGrowth = document.getElementById('navGrowth');
+  const navMci = document.getElementById('navMci');
+  const navFasttrack = document.getElementById('navFasttrack');
+  const navPageName = document.querySelector('.nav-page-name');
   const pageTitle = document.getElementById('pageTitle');
   const pageDescription = document.getElementById('pageDescription');
 
   if (aspxView) aspxView.classList.toggle('hidden', page !== 'growth');
   if (mciView) mciView.classList.toggle('hidden', page !== 'mci');
   if (fasttrackView) fasttrackView.classList.toggle('hidden', page !== 'fasttrack');
-  document.querySelectorAll('.page-select-item').forEach(item => {
-    item.classList.toggle('active', item.dataset.page === page);
-  });
+  navGrowth?.classList.toggle('active', page === 'growth');
+  navMci?.classList.toggle('active', page === 'mci');
+  navFasttrack?.classList.toggle('active', page === 'fasttrack');
+  if (navPageName) {
+    navPageName.textContent = page === 'growth'
+      ? 'Growth Opportunities'
+      : page === 'mci' ? 'MCI Performance' : 'FastTrack Referrals';
+  }
   if (pageTitle && pageDescription) {
     if (page === 'growth') {
       pageTitle.textContent = 'AI Business Solutions & Security Insights';

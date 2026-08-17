@@ -26,6 +26,7 @@
   --cp-panel-strong: rgba(255, 255, 255, 0.96);
   --cp-sheen: rgba(255, 255, 255, 0.55);
   --cp-highlight: rgba(177, 31, 75, 0.12);
+  --cp-aspx-nav: #1b3a5c;
 }
 html[data-theme="dark"] {
   color-scheme: dark;
@@ -52,6 +53,7 @@ html[data-theme="dark"] {
   --cp-panel-strong: rgba(41, 41, 41, 0.96);
   --cp-sheen: rgba(255, 255, 255, 0.04);
   --cp-highlight: rgba(253, 142, 161, 0.12);
+  --cp-aspx-nav: #1b3a5c;
 }
 
 body {
@@ -66,9 +68,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
-  padding: 0 16px 0 12px;
-  background: var(--cp-text);
+  height: 48px;
+  padding: 0 20px;
+  background: var(--cp-aspx-nav);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -1220,8 +1222,9 @@ body {
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .aspxi-id-prompt, .nav-icon-btn.compact { display: none; }
-  .aspxi-search-wrap { width: 220px; }
+  .sidebar { width: 56px; }
+  .sidebar-link span, .sidebar-section-label, .badge-soon { display: none; }
+  .sidebar-link { justify-content: center; padding: 12px; }
   .main-content-wide { padding: 0 12px 40px; }
   .ocv-modal { width: 95%; }
   .flyout-panel { width: 100%; }
