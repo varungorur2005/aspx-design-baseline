@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ASPX - AI Business Solutions &amp; Security Insights</title>
+  <title>ASPX - AI Business Solutions & Security Insights</title>
   <script>
     (() => {
       const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
@@ -12,80 +12,316 @@
       document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=24">
+  <link rel="stylesheet" href="css/styles.css?v=23">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
-  <header class="pc-header">
-    <div class="brand">
-      <span class="ms-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <span>Microsoft</span><span class="header-divider"></span><strong>Partner Center</strong>
+  <nav class="top-nav">
+    <div class="nav-left">
+      <svg class="microsoft-logo" width="20" height="20" viewBox="0 0 21 21" aria-hidden="true">
+        <rect x="0" y="0" width="10" height="10" fill="#f25022"/>
+        <rect x="11" y="0" width="10" height="10" fill="#7fba00"/>
+        <rect x="0" y="11" width="10" height="10" fill="#00a4ef"/>
+        <rect x="11" y="11" width="10" height="10" fill="#ffb900"/>
+      </svg>
+      <span class="nav-title nav-platform-name">AI Business Solutions &amp; Security</span>
+      <span class="nav-separator">|</span>
+      <span class="nav-title nav-page-name">Growth Opportunities</span>
     </div>
-    <div class="header-actions">
-      <button aria-label="Search">⌕</button><button aria-label="Settings">⚙</button>
-      <button aria-label="Help">?</button><button aria-label="Notifications">♢</button>
-      <span class="avatar">VG</span>
+    <div class="nav-right">
+      <button class="nav-icon-btn" title="Copilot">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.94 2a9.64 9.64 0 0 1 6.84 2.86l.07.07A9.57 9.57 0 0 1 21.5 10.8v.1c.18 1.05.15 2.12-.07 3.17a7.26 7.26 0 0 1-3.46 4.67l-1.4.84c-.08.05-.17.07-.26.07h-1.74a.47.47 0 0 1-.46-.56l.3-1.63a.47.47 0 0 1 .46-.38h.87a.47.47 0 0 0 .24-.07l.94-.55a5.28 5.28 0 0 0 2.52-3.41c.17-.8.19-1.62.05-2.42a7.6 7.6 0 0 0-2.15-4.21l-.05-.05A7.64 7.64 0 0 0 11.94 4a7.64 7.64 0 0 0-5.4 2.27l-.04.05a7.6 7.6 0 0 0-2.15 4.2c-.14.8-.12 1.63.05 2.43a5.28 5.28 0 0 0 2.52 3.41l.94.55c.07.04.15.07.24.07h.87c.22 0 .42.16.46.38l.3 1.63a.47.47 0 0 1-.46.56H7.53a.47.47 0 0 1-.26-.07l-1.4-.84a7.26 7.26 0 0 1-3.46-4.67 9.45 9.45 0 0 1-.07-3.16v-.11A9.57 9.57 0 0 1 5.1 4.93l.06-.07A9.64 9.64 0 0 1 11.94 2ZM9.5 11.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/></svg>
+      </button>
+      <button class="nav-icon-btn" title="Notifications"><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a5.5 5.5 0 0 0-5.5 5.5v3.03l-.88 1.76A1 1 0 0 0 4.5 14h11a1 1 0 0 0 .89-1.45l-.02-.03-.87-1.75V7.5A5.5 5.5 0 0 0 10 2Zm0 16a2.5 2.5 0 0 1-2.45-2h4.9A2.5 2.5 0 0 1 10 18Z"/></svg></button>
+      <button class="nav-icon-btn" title="Help and readiness"><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm0 14.5a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13Zm0-3.5a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Zm.41-1.23a.5.5 0 0 1-.91 0V11.5c0-.28.22-.5.5-.5a1.5 1.5 0 1 0-1.5-1.5.5.5 0 0 1-1 0 2.5 2.5 0 1 1 2.91 2.47Z"/></svg></button>
+      <div class="nav-avatar" title="Varun Gorur">VG</div>
     </div>
-  </header>
+  </nav>
 
-  <div class="shell">
-    <aside class="rail">
-      <div class="rail-heading">AI Business Solutions &amp; Security</div>
-      <nav>
-        <button class="rail-link active" data-page="growth"><span class="rail-icon">⌁</span>Growth opportunities</button>
-        <button class="rail-link" data-page="mci"><span class="rail-icon">▥</span>MCI performance</button>
-        <button class="rail-link" data-page="referrals"><span class="rail-icon">⇄</span>Referrals and deal clinics</button>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active" id="navGrowth"><span>Growth Opportunities</span></a>
+        <a href="#" class="sidebar-link" id="navMci"><span>MCI Performance</span></a>
+        <a href="#" class="sidebar-link" id="navFasttrack"><span>FastTrack Referrals</span></a>
       </nav>
     </aside>
-
-    <main>
-      <div class="breadcrumb">Home <span>›</span> AI Business Solutions &amp; Security</div>
-      <section class="title-block">
+    <main class="main-content main-content-wide">
+      <section class="page-title-block">
         <div>
-          <h1 id="pageTitle">Growth opportunities</h1>
-          <p id="pageSubtitle">AI Business Solutions &amp; Security</p>
+          <h1 id="pageTitle">AI Business Solutions &amp; Security Insights</h1>
+          <p id="pageDescription">Actionable leads, data insights, and incentive information to drive upsell and cross-sell opportunities.</p>
         </div>
-        <button class="insights-button" id="insightsButton"><span>ⓘ</span> Insights</button>
+        <button class="page-info-btn" title="About this experience" aria-label="About this experience">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1Zm.75 10.5h-1.5V7h1.5v4.5ZM8 6a.75.75 0 1 1 0-1.5A.75.75 0 0 1 8 6Z"/></svg>
+        </button>
       </section>
 
-      <section class="page active" id="growthPage">
-        <div class="tabs" role="tablist" aria-label="Growth opportunity categories">
-          <button class="tab active" data-growth="copilot">Copilot</button>
-          <button class="tab" data-growth="e3">E3</button>
-          <button class="tab" data-growth="e5">E5</button>
-          <button class="tab" data-growth="e5exp">E5 Expansion</button>
-          <button class="tab" data-growth="cloud">Cloud Endpoints</button>
-          <button class="tab" data-growth="tenants">Tenants</button>
-        </div>
-        <div id="growthContent"></div>
-      </section>
+      <!-- Growth Opportunities View (main ASPX view) -->
+      <div class="aspx-view" id="aspxView">
 
-      <section class="page" id="mciPage">
-        <div class="tabs" role="tablist" aria-label="MCI solution areas">
-          <button class="tab active" data-mci="copilot">Copilot</button>
-          <button class="tab" data-mci="security">Security</button>
-          <button class="tab" data-mci="ai">AI-Ready Productivity</button>
-          <button class="tab" data-mci="biz">Biz Processes</button>
+        <!-- Opportunity Tabs -->
+        <div class="opp-tabs-bar">
+          <div class="opp-tabs-left">
+            <button class="opp-tab active" data-opp="copilot">Copilot Opportunities</button>
+            <button class="opp-tab" data-opp="e3">E3 Opportunities</button>
+            <button class="opp-tab" data-opp="e5">E5 Opportunities</button>
+            <button class="opp-tab" data-opp="e5exp">E5 Expansion</button>
+            <button class="opp-tab" data-opp="cloud">Cloud Endpoints</button>
+            <button class="opp-tab" data-opp="tenants">Tenants</button>
+          </div>
+          <div class="opp-tabs-right">
+          </div>
         </div>
-        <div id="mciContent"></div>
-      </section>
 
-      <section class="page" id="referralsPage">
-        <div class="tabs" role="tablist" aria-label="Referral experiences">
-          <button class="tab active" data-referral="fasttrack">FastTrack Referrals</button>
-          <button class="tab" data-referral="clinic">Security Deal Clinic</button>
+        <!-- KPI Tiles -->
+        <div class="kpi-row" id="kpiRow"></div>
+
+        <!-- Charts Row -->
+        <div class="charts-row" id="chartsRow"></div>
+
+        <!-- Table Toolbar (matching screenshot 1) -->
+        <div class="table-toolbar-aspx">
+          <div class="toolbar-left">
+            <button class="toolbar-btn" id="downloadBtn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v9.5m0 0L5 7.5m3 3L11 7.5M3 13h10"/><path d="M8 1v9m0 0l-3-3m3 3l3-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Download
+            </button>
+            <button class="toolbar-btn" id="dataDictBtn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/><path d="M6 4h4M6 7h4M6 10h2"/></svg>
+              Data Dictionary
+            </button>
+            <button class="toolbar-btn" id="addUporBtn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+              Add UPOR Association
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <button class="toolbar-btn-icon" id="changeColumnsBtn" title="Change columns">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M2 2v12M6 2v12M10 2v12M14 2v12"/><path d="M2 5h2M6 5h2M10 5h2" stroke-width="2"/></svg>
+              <span id="changeColumnsLabel">Change columns</span>
+            </button>
+            <button class="toolbar-btn-icon" id="filterBtn" title="Filter">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg>
+              <span id="filterBtnLabel">Filter</span>
+            </button>
+            <div class="table-search-wrap">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="#999"><path d="M6.5 1a5.5 5.5 0 0 1 4.38 8.82l3.65 3.65a.75.75 0 0 1-1.06 1.06l-3.65-3.65A5.5 5.5 0 1 1 6.5 1zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+              <input type="text" class="table-search-input" placeholder="Search for Reseller Name" id="tenantSearch" />
+            </div>
+          </div>
         </div>
-        <div id="referralContent"></div>
-      </section>
+
+        <!-- Data Table -->
+        <div class="table-scroll-wrapper">
+          <table class="tenant-table" id="dataTable">
+            <thead>
+              <tr id="tableHead"></tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MCI Performance View -->
+      <div class="aspx-view hidden" id="mciView">
+
+        <div class="mci-tabs-bar">
+          <div class="mci-tabs-left">
+            <button class="mci-tab active" data-mci="copilot">Copilot</button>
+            <button class="mci-tab" data-mci="security">Security</button>
+            <button class="mci-tab" data-mci="aiReadyProductivity">AI-Ready Productivity</button>
+            <button class="mci-tab" data-mci="bizProcesses">Biz Processes</button>
+          </div>
+          <div class="mci-tabs-right">
+          </div>
+          <div class="mci-tabs-right">
+          </div>
+        </div>
+
+        <div class="kpi-row mci-kpi-row" id="mciKpiRow"></div>
+
+        <div class="charts-row" id="mciChartsRow"></div>
+        <div class="mci-placeholder hidden" id="mciPlaceholder">
+          <div class="empty-state-icon" aria-hidden="true">i</div>
+          <h2>Data unavailable</h2>
+          <p>Performance metrics are coming soon for this solution area.</p>
+        </div>
+        <div class="table-toolbar-aspx" id="mciToolbar">
+          <div class="toolbar-left">
+            <button class="toolbar-btn" id="mciDownloadBtn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v9.5m0 0L5 7.5m3 3L11 7.5M3 13h10"/><path d="M8 1v9m0 0l-3-3m3 3l3-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Download
+            </button>
+            <button class="toolbar-btn" id="mciDataDictBtn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/><path d="M6 4h4M6 7h4M6 10h2"/></svg>
+              Data Dictionary
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <button class="toolbar-btn-icon" id="mciChangeColumnsBtn" title="Change columns">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M2 2v12M6 2v12M10 2v12M14 2v12"/><path d="M2 5h2M6 5h2M10 5h2" stroke-width="2"/></svg>
+              <span>Change columns</span>
+            </button>
+            <button class="toolbar-btn-icon" id="mciFilterBtn" title="Filter">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2h13l-5 6v5l-3 2V8L1.5 2z"/></svg>
+              <span id="mciFilterBtnLabel">Filter</span>
+            </button>
+            <div class="table-search-wrap">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="#999"><path d="M6.5 1a5.5 5.5 0 0 1 4.38 8.82l3.65 3.65a.75.75 0 0 1-1.06 1.06l-3.65-3.65A5.5 5.5 0 1 1 6.5 1zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+              <input type="text" class="table-search-input" placeholder="Search" id="mciSearch" />
+            </div>
+          </div>
+        </div>
+
+        <div class="table-scroll-wrapper" id="mciTableWrapper">
+          <table class="tenant-table mci-table" id="mciTable">
+            <thead>
+              <tr id="mciTableHead"></tr>
+            </thead>
+            <tbody id="mciTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="table-pagination" id="mciPagination">
+          <div class="table-pagination-summary" id="mciResultsSummary">Showing 1 - 10 of 10 results</div>
+          <div class="table-pagination-controls">
+            <button class="pagination-btn" type="button" aria-label="Previous page">‹</button>
+            <button class="pagination-btn active" type="button">1</button>
+            <button class="pagination-btn" type="button" aria-label="Next page">›</button>
+            <button class="pagination-size" type="button">25 results ▾</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FastTrack Referrals View -->
+      <div class="aspx-view hidden" id="fasttrackView">
+
+        <div class="ft-tabs-bar">
+          <div class="ft-tabs-left">
+            <button class="ft-tab active" data-ft-view="referrals">FastTrack Referrals</button>
+            <button class="ft-tab" data-ft-view="securityClinic">Security Deal Clinic</button>
+          </div>
+          <div class="ft-tabs-right">
+          </div>
+        </div>
+
+        <!-- KPI Tiles -->
+        <div class="kpi-row" id="ftKpiRow" style="margin-top: 20px;"></div>
+
+        <!-- Charts Row -->
+        <div class="charts-row" id="ftChartsRow"></div>
+
+        <div class="table-toolbar-aspx" id="ftReferralToolbar">
+          <div class="toolbar-left">
+            <button class="toolbar-btn" id="ftDownloadBtn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1v9.5m0 0L5 7.5m3 3L11 7.5M3 13h10"/><path d="M8 1v9m0 0l-3-3m3 3l3-3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Download
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <select class="ft-filter-select" id="ftFilterStatus">
+              <option value="all">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+              <option value="Expired">Expired</option>
+            </select>
+            <select class="ft-filter-select" id="ftFilterAcceptance">
+              <option value="all">All Acceptance</option>
+              <option value="Accept">Accept</option>
+              <option value="Pending">Pending</option>
+              <option value="Decline">Decline</option>
+            </select>
+            <div class="table-search-wrap">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="#999"><path d="M6.5 1a5.5 5.5 0 0 1 4.38 8.82l3.65 3.65a.75.75 0 0 1-1.06 1.06l-3.65-3.65A5.5 5.5 0 1 1 6.5 1zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+              <input type="text" class="table-search-input" placeholder="Search referrals" id="ftSearch" />
+            </div>
+          </div>
+        </div>
+
+        <div class="table-scroll-wrapper" id="ftTableWrapper">
+          <table class="tenant-table" id="ftTable">
+            <thead>
+              <tr id="ftTableHead"></tr>
+            </thead>
+            <tbody id="ftTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="table-pagination" id="ftPagination">
+          <div class="table-pagination-summary" id="ftResultsSummary"></div>
+          <div class="table-pagination-controls">
+            <button class="pagination-btn" type="button" id="ftPrevPage" aria-label="Previous page">&#8249;</button>
+            <span id="ftPageIndicator" class="pagination-btn active">1</span>
+            <button class="pagination-btn" type="button" id="ftNextPage" aria-label="Next page">&#8250;</button>
+            <button class="pagination-size" type="button" id="ftPageSize">25 results &#9662;</button>
+          </div>
+        </div>
+
+        <div class="security-clinic-view hidden" id="securityClinicView">
+            <div class="kpi-row security-clinic-kpis">
+              <div class="kpi-tile"><span class="kpi-value">12</span><span class="kpi-label">New</span></div>
+              <div class="kpi-tile"><span class="kpi-value">24</span><span class="kpi-label">In Progress</span></div>
+              <div class="kpi-tile"><span class="kpi-value">3</span><span class="kpi-label">Blocked</span></div>
+            </div>
+            <div class="charts-row security-clinic-charts">
+              <div class="chart-card">
+                <div class="chart-card-title">Campaigns by State</div>
+                <div class="chart-card-subtitle">Distribution of campaigns by lifecycle state.</div>
+                <div class="clinic-bars"><span style="--bar-size: 72%">In Progress</span><span style="--bar-size: 38%">New</span><span style="--bar-size: 16%">Blocked</span></div>
+              </div>
+              <div class="chart-card">
+                <div class="chart-card-title">Customers by Area</div>
+                <div class="chart-card-subtitle">Distribution of customers by geographic area.</div>
+                <div class="clinic-bars"><span style="--bar-size: 64%">United States</span><span style="--bar-size: 44%">Europe</span><span style="--bar-size: 28%">Asia</span></div>
+              </div>
+            </div>
+            <div class="table-toolbar-aspx">
+              <div class="toolbar-left"><button class="toolbar-btn">Learn More</button></div>
+              <div class="toolbar-right"><button class="toolbar-btn-icon">Change Columns</button><button class="toolbar-btn-icon">Filters</button><div class="table-search-wrap"><input class="table-search-input" placeholder="Search"></div></div>
+            </div>
+            <div class="table-scroll-wrapper">
+              <table class="tenant-table">
+                <thead><tr><th>Campaign ID</th><th>Customer Name</th><th>Customer Area</th><th>Partner Name</th><th>State</th><th>Campaign Status</th><th>Targeted Workloads</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="#" class="tenant-link">SDC-10428</a></td><td>Fabrikam Financial Services</td><td>United States</td><td>Contoso Consulting</td><td>Customer Outreach</td><td><span class="status-badge grow">Committed</span></td><td>Microsoft Defender, Purview</td></tr>
+                  <tr><td><a href="#" class="tenant-link">SDC-10417</a></td><td>Fabrikam Manufacturing</td><td>Europe</td><td>Contoso Consulting</td><td>Partner Engaged</td><td><span class="status-badge acquire">Uncommitted</span></td><td>Sentinel, Defender for Cloud</td></tr>
+                  <tr><td><a href="#" class="tenant-link">SDC-10396</a></td><td>Fabrikam Retail Group</td><td>Asia</td><td>Contoso Consulting</td><td>Solution Validation</td><td><span class="status-badge at-risk">Blocked</span></td><td>Microsoft Entra, Intune</td></tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 
-  <div class="scrim hidden" id="scrim"></div>
-  <aside class="panel hidden" id="panel" aria-label="Panel">
-    <header><h2 id="panelTitle">Panel</h2><button id="panelClose" aria-label="Close">×</button></header>
-    <div id="panelBody"></div>
-    <footer><button class="primary" id="panelApply">Apply</button><button id="panelCancel">Cancel</button></footer>
+  <!-- ═══ FLYOUT PANELS ═══ -->
+
+  <!-- Flyout: Tenant Details (Screenshot 2) -->
+  <div class="flyout-overlay hidden" id="flyoutOverlay"></div>
+  <aside class="flyout-panel hidden" id="flyoutPanel">
+    <div class="flyout-header">
+      <h2 class="flyout-title" id="flyoutTitle">Tenant Details</h2>
+      <button class="flyout-close" id="flyoutClose">✕</button>
+    </div>
+    <div class="flyout-body" id="flyoutBody">
+      <!-- Dynamic content -->
+    </div>
   </aside>
 
-  <script src="js/app.js?v=20"></script>
+  <!-- Flyout: Table customization -->
+  <div class="flyout-overlay hidden" id="utilityFlyoutOverlay"></div>
+  <aside class="flyout-panel utility-flyout hidden" id="utilityFlyout">
+    <div class="flyout-header">
+      <h2 class="flyout-title" id="utilityFlyoutTitle">Customize Columns</h2>
+      <button class="flyout-close" id="utilityFlyoutClose">✕</button>
+    </div>
+    <div class="flyout-body utility-flyout-body" id="utilityFlyoutBody"></div>
+    <div class="utility-flyout-footer" id="utilityFlyoutFooter"></div>
+  </aside>
+
+  <script src="js/app.js?v=19"></script>
 </body>
 </html>
